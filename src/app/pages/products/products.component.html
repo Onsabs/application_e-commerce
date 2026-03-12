@@ -1,0 +1,172 @@
+<section class="collections" id="collections">
+
+    <div class="section-header">
+        <h2 class="section-title">Latest Collections</h2>
+        <p class="section-subtitle">Discover our curated selection</p>
+    </div>
+    <div class="filters-container"
+        style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:30px;">
+
+        <div class="category-tabs">
+            <button class="tab-btn" [class.active]="selectedCategory=='all'" (click)="selectCategory('all')">
+                All
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='women'" (click)="selectCategory('women')">
+                Women
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='men'" (click)="selectCategory('men')">
+                Men
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='kids'" (click)="selectCategory('kids')">
+                kids
+            </button>
+        </div>
+
+    </div>
+
+    <div class="filter-bar">
+        <!-- sort -->
+        <div class="custom-dropdown">
+            <button class="dropdown-toggle" (click)="toggleDropdown()">
+                Sort by
+            </button>
+
+            <div class="dropdown-menu" [class.open]="dropdownOpen">
+                <!-- Sorting options -->
+                <label>
+                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="" (change)="resetSlider()">
+                    Default
+                </label>
+                <label>
+                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceAsc">
+                    Price: Low → High
+                </label>
+                <label>
+                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceDesc">
+                    Price: High → Low
+                </label>
+                <label>
+                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="az">
+                    A → Z
+                </label>
+                <label>
+                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="za">
+                    Z → A
+                </label>
+
+                <hr>
+                <br>
+                <div class="price-range">
+
+                    <p class="range-title">Price Range</p>
+
+                    <div class="range-slider">
+
+                        <div class="slider-track"></div>
+
+                        <div class="price-slider">
+                            <input type="range" [min]="minPrice" [max]="maxPrice" [(ngModel)]="priceFilter.min"
+                                (input)="updateSlider()" class="range-min">
+
+                            <input type="range" [min]="minPrice" [max]="maxPrice" [(ngModel)]="priceFilter.max"
+                                (input)="updateSlider()" class="range-max">
+                            <br>
+                            <br>
+                            <p>Price: {{ priceFilter.min }} $ - {{ priceFilter.max }} $</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="input-wrapper">
+
+            <input #searchInput class="input" type="text" placeholder="Search products..." [(ngModel)]="searchTerm">
+
+            <button class="icon" (click)="searchInput.focus()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25" width="25">
+                    <path stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" />
+                    <path stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M22 22L20 20" />
+                </svg>
+            </button>
+
+        </div>
+    </div>
+    <div class="grid">
+
+        <div class="collection-card" *ngFor="let product of paginatedProducts">
+
+            <div class="collection-thumbnail">
+
+                <img [src]="product.image" [alt]="product.name">
+
+            </div>
+
+            <div class="card-content">
+
+                <!-- BADGES -->
+
+                <span class="card-badge sale" *ngIf="product.badge=='sale'">
+                    SALE
+                </span>
+
+                <span class="card-badge new" *ngIf="product.badge=='new'">
+                    NEW
+                </span>
+
+                <span class="card-badge best" *ngIf="product.badge=='bestseller'">
+                    BESTSELLER
+                </span>
+
+                <span class="card-badge trend" *ngIf="product.badge=='trending'">
+                    TRENDING
+                </span>
+
+                <span class="card-badge stock" *ngIf="product.stock==0">
+                    OUT OF STOCK
+                </span>
+
+                <span class="card-badge warning" *ngIf="product.stock>0 && product.stock<5">
+                    Only {{product.stock}} left
+                </span>
+
+                <h3 class="card-title" [routerLink]="['/product-details', product.id]">
+                    {{product.name}}
+                </h3>
+
+                <p class="card-subtitle">
+                    {{product.category}}
+                </p>
+
+                <p class="card-price">
+                    {{product.price}} $
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="pagination">
+
+        <button (click)="prevPage()" [disabled]="currentPage === 1">‹</button>
+
+        <button *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage"
+            [disabled]="page==='...'">
+
+            {{page}}
+
+        </button>
+
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">›</button>
+
+    </div>
+
+</section>
