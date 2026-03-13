@@ -8,35 +8,32 @@
 
     <!-- Menu -->
     <ul class="nav-links">
-      <li><a href="#home" class="nav-link active">Home</a></li>
-      <li><a href="#collections" class="nav-link">Collections</a></li>
-      <li><a href="#featured" class="nav-link">Featured</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Collections</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active">Featured</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
     </ul>
 
     <!-- Icons -->
     <div class="nav-icons">
 
-      <!-- Search -->
-      <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class="fa fa-search"></i>
-      </div>
-
       <!-- Wishlist -->
       <div class="icon-btn">
-        <i class="fa fa-heart"></i>
+        <a a routerLink="/favorites" >
+        <i class="fa fa-heart"></i></a>
       </div>
 
       <!-- Cart -->
       <div class="icon-btn cart">
+        <a a routerLink="/cart" >
         <i class="fa fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
+        <span class="cart-count">0</span></a>
       </div>
 
       <!-- Account -->
       <div class="icon-btn">
-        <i class="fa fa-user"></i>
+        <a a routerLink="/profile" >
+        <i class="fa fa-user"></i></a>
       </div>
 
     </div>
@@ -54,9 +51,9 @@
 
     <div class="mobile-nav" id="mobileNav">
         <ul class="mobile-nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#collections">Collections</a></li>
-            <li><a href="#featured">Featured</a></li>
-            <li><a href="#contact">Contact</a></li>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Collections</a></li>
+      <li><a routerLink="/profile"  routerLinkActive="active">Featured</a></li>
+      <li><a routerLink="/contact"  routerLinkActive="active">Contact</a></li>
         </ul>
     </div>

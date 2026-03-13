@@ -10,6 +10,7 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'checkout', component: CheckoutComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'favorites', component: FavoritesComponent }
+      { path: 'favorites', component: FavoritesComponent },
+      { path: 'contact', component: ContactComponent }
     ]
   },
   { path: 'login', component: LoginComponent},

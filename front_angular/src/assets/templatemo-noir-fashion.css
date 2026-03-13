@@ -878,7 +878,9 @@ nav.scrolled {
 .grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	gap: 25px;
+	gap: 25px;         
+	
+
 }
 
 .collection-card {
@@ -1922,6 +1924,11 @@ color:#ff3366;
 display:flex;
 align-items:center;
 gap:20px;
+
+}
+.nav-icons a{
+  color: white;
+  text-decoration: none;
 }
 
 /* SEARCH */
