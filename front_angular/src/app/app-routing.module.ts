@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,10 @@ const routes: Routes = [
       { path: 'checkout', component: CheckoutComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'favorites', component: FavoritesComponent },
-      { path: 'contact', component: ContactComponent }
+      { path: 'contact', component: ContactComponent },
+      { path: 'edit-profile',component: EditProfileComponent
+      }
+
     ]
   },
   { path: 'login', component: LoginComponent},

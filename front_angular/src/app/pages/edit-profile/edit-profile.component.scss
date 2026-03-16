@@ -1,0 +1,158 @@
+/* SECTION */
+
+.profile-section{
+display:flex;
+justify-content:center;
+align-items:center;
+padding:100px 20px;
+background:#f4f6fb;
+min-height:100vh;
+}
+
+/* PROFILE BOX */
+
+.profile-box{
+width:100%;
+max-width:1200px;
+background:linear-gradient(135deg,#434343,#000000);
+border-radius:12px;
+padding:30px;
+color:white;
+box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+
+
+
+.profile-header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.profile-header h2{
+font-size:28px;
+margin-top:10px;
+letter-spacing:1px;
+}
+
+
+
+.avatar{
+width:110px;
+height:110px;
+border-radius:50%;
+border:4px solid white;
+margin-bottom:15px;
+object-fit:cover;
+}
+
+
+
+.profile-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+
+
+.info{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:8px;
+backdrop-filter:blur(10px);
+}
+
+
+
+.info h4{
+font-size:13px;
+letter-spacing:1px;
+text-transform:uppercase;
+opacity:0.8;
+margin-bottom:8px;
+}
+
+
+
+.info input{
+width:100%;
+padding:12px 15px;
+border-radius:6px;
+border:1px solid rgba(255,255,255,0.3);
+background:rgba(255,255,255,0.1);
+color:white;
+font-size:15px;
+outline:none;
+transition:all 0.3s ease;
+}
+
+
+
+.info input::placeholder{
+color:rgba(255,255,255,0.6);
+}
+
+
+
+.info input:focus{
+border-color:white;
+background:rgba(255,255,255,0.2);
+box-shadow:0 0 8px rgba(255,255,255,0.2);
+}
+
+
+
+.profile-buttons{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+
+
+.edit{
+padding:12px 35px;
+border:none;
+background:white;
+color:#333;
+border-radius:30px;
+cursor:pointer;
+font-weight:600;
+transition:all 0.3s ease;
+}
+
+.edit:hover{
+transform:translateY(-2px);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.logout{
+padding:12px 35px;
+border:none;
+background:#ff4b5c;
+color:white;
+border-radius:30px;
+cursor:pointer;
+font-weight:600;
+transition:all 0.3s ease;
+}
+
+.logout:hover{
+background:#ff2e44;
+transform:translateY(-2px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.profile-content{
+grid-template-columns:1fr;
+}
+
+.profile-box{
+padding:30px;
+}
+
+}
