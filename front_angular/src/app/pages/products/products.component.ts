@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -6,162 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  products = [
+  products:any[] = [];
 
-    {
-      id: 1,
-      name: "Urban Edge",
-      price: 299,
-      category: "Women",
-      oldPrice: 399,
-      badge: "sale",
-      stock: 10,
-      image: "assets/images/urban-edge.avif"
-    },
+  constructor(private productService:ProductService){}
 
-    {
-      id: 2,
-      name: "Neo Classic",
-      price: 399,
-      category: "Men",
-      badge: "bestseller",
-      stock: 5,
-      image: "assets/images/neo-classic.avif"
-    },
-
-    {
-      id: 3,
-      name: "Minimal Chic",
-      price: 89,
-      category: "Men",
-      badge: "new",
-      stock: 3,
-      image: "assets/images/minimal-chic.avif"
-    },
-
-    {
-      id: 4,
-      name: "Street Rebel",
-      price: 199,
-      category: "kids",
-      badge: "trending",
-      stock: 0,
-      image: "assets/images/street-rebel.avif"
-    },
-    {
-      id: 5,
-      name: "Urban Edge",
-      price: 299,
-      category: "women",
-      oldPrice: 399,
-      badge: "sale",
-      stock: 10,
-      image: "assets/images/urban-edge.avif"
-    },
-
-    {
-      id: 6,
-      name: "Neo Classic",
-      price: 399,
-      category: "Men",
-      badge: "bestseller",
-      stock: 5,
-      image: "assets/images/neo-classic.avif"
-    },
-
-    {
-      id: 7,
-      name: "Minimal Chic",
-      price: 89,
-      category: "kids",
-      badge: "new",
-      stock: 3,
-      image: "assets/images/minimal-chic.avif"
-    },
-
-    {
-      id: 8,
-      name: "Street Rebel",
-      price: 199,
-      badge: "trending",
-      stock: 0,
-      image: "assets/images/street-rebel.avif"
-    },
-
-    {
-      id: 9,
-      name: "Urban Edge",
-      price: 299,
-      oldPrice: 399,
-      badge: "sale",
-      stock: 10,
-      image: "assets/images/urban-edge.avif"
-    },
-
-    {
-      id: 10,
-      name: "Neo Classic",
-      price: 399,
-      badge: "bestseller",
-      stock: 5,
-      image: "assets/images/neo-classic.avif"
-    },
-
-    {
-      id: 11,
-      name: "Minimal Chic",
-      price: 89,
-      badge: "new",
-      stock: 3,
-      image: "assets/images/minimal-chic.avif"
-    },
-
-    {
-      id: 12,
-      name: "Street Rebel",
-      price: 199,
-      badge: "trending",
-      stock: 0,
-      image: "assets/images/street-rebel.avif"
-    },
-    {
-      id: 13,
-      name: "Urban Edge",
-      price: 299,
-      oldPrice: 399,
-      badge: "sale",
-      stock: 10,
-      image: "assets/images/urban-edge.avif"
-    },
-
-    {
-      id: 14,
-      name: "Neo Classic",
-      price: 399,
-      badge: "bestseller",
-      stock: 5,
-      image: "assets/images/neo-classic.avif"
-    },
-
-    {
-      id: 15,
-      name: "Minimal Chic",
-      price: 89,
-      badge: "new",
-      stock: 3,
-      image: "assets/images/minimal-chic.avif"
-    },
-
-    {
-      id: 16,
-      name: "Street Rebel",
-      price: 199,
-      badge: "trending",
-      stock: 0,
-      image: "assets/images/street-rebel.avif"
-    }
-
-  ];
+  ngOnInit(){
+    this.products = this.productService.getProducts();
+  }
 
   selectedCategory = 'all';
   searchTerm = '';
@@ -171,19 +23,30 @@ export class ProductsComponent {
   priceFilter = { min: this.minPrice, max: this.maxPrice };
   dropdownOpen = false;
 
-  resetSlider() {
-  this.priceFilter.min = this.minPrice;
-  this.priceFilter.max = this.maxPrice;
-}
 
+getProductImage(product: any): string {
+  if (Array.isArray(product.image)) {
+    return product.image[0]; 
+  }
+  return product.image; 
+}
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
-
+  resetSlider() {
+    this.priceFilter.min = this.minPrice;
+    this.priceFilter.max = this.maxPrice;
+  }
   updateSlider() {
+
     if (this.priceFilter.min > this.priceFilter.max) {
-      [this.priceFilter.min, this.priceFilter.max] = [this.priceFilter.max, this.priceFilter.min];
+
+      const temp = this.priceFilter.min;
+      this.priceFilter.min = this.priceFilter.max;
+      this.priceFilter.max = temp;
+
     }
+
   }
   selectCategory(category: string) {
     this.selectedCategory = category;

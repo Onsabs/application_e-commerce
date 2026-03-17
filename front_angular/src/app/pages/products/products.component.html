@@ -9,19 +9,19 @@
 
         <div class="category-tabs">
             <button class="tab-btn" [class.active]="selectedCategory=='all'" (click)="selectCategory('all')">
-                All
+                tous
             </button>
 
             <button class="tab-btn" [class.active]="selectedCategory=='women'" (click)="selectCategory('women')">
-                Women
+                femme
             </button>
 
             <button class="tab-btn" [class.active]="selectedCategory=='men'" (click)="selectCategory('men')">
-                Men
+                homme
             </button>
 
             <button class="tab-btn" [class.active]="selectedCategory=='kids'" (click)="selectCategory('kids')">
-                kids
+                enfant
             </button>
         </div>
 
@@ -31,31 +31,46 @@
         <!-- sort -->
         <div class="custom-dropdown">
             <button class="dropdown-toggle" (click)="toggleDropdown()">
-                Sort by
+              <i class="fa-solid fa-sliders fa-xl"></i> filtrer par
             </button>
-
+            <div class="dropdown-overlay" [class.open]="dropdownOpen" (click)="toggleDropdown()"></div>
             <div class="dropdown-menu" [class.open]="dropdownOpen">
+                <button class="close-btn" (click)="toggleDropdown()">×</button>
                 <!-- Sorting options -->
-                <label>
-                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="" (change)="resetSlider()">
-                    Default
-                </label>
-                <label>
-                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceAsc">
-                    Price: Low → High
-                </label>
-                <label>
-                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceDesc">
-                    Price: High → Low
-                </label>
-                <label>
-                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="az">
-                    A → Z
-                </label>
-                <label>
-                    <input type="radio" name="sort" [(ngModel)]="sortOption" value="za">
-                    Z → A
-                </label>
+                <div class="pink-radio-group">
+                    <label class="pink-option">
+                        <input type="radio" name="sort" [(ngModel)]="sortOption" value="" (change)="resetSlider()"
+                            class="pink-radio-input" checked />
+                        <div class="pink-selector"></div>
+                        Default
+                    </label>
+
+                    <label class="pink-option">
+                        <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceAsc"
+                            class="pink-radio-input" />
+                        <div class="pink-selector"></div>
+                        Price: Low → High
+                    </label>
+
+                    <label class="pink-option">
+                        <input type="radio" name="sort" [(ngModel)]="sortOption" value="priceDesc"
+                            class="pink-radio-input" />
+                        <div class="pink-selector"></div>
+                        Price: High → Low
+                    </label>
+
+                    <label class="pink-option">
+                        <input type="radio" name="sort" [(ngModel)]="sortOption" value="az" class="pink-radio-input" />
+                        <div class="pink-selector"></div>
+                        A → Z
+                    </label>
+
+                    <label class="pink-option">
+                        <input type="radio" name="sort" [(ngModel)]="sortOption" value="za" class="pink-radio-input" />
+                        <div class="pink-selector"></div>
+                        Z → A
+                    </label>
+                </div>
 
                 <hr>
                 <br>
@@ -64,19 +79,21 @@
                     <p class="range-title">Price Range</p>
 
                     <div class="range-slider">
-
-                        <div class="slider-track"></div>
-
                         <div class="price-slider">
+                            <div class="slider-track"></div>
+                            <div class="slider-range" [style.left.%]="(priceFilter.min / maxPrice) * 100"
+                                [style.width.%]="((priceFilter.max - priceFilter.min) / maxPrice) * 100">
+                            </div>
+
                             <input type="range" [min]="minPrice" [max]="maxPrice" [(ngModel)]="priceFilter.min"
-                                (input)="updateSlider()" class="range-min">
+                                (input)="updateSlider()">
 
                             <input type="range" [min]="minPrice" [max]="maxPrice" [(ngModel)]="priceFilter.max"
-                                (input)="updateSlider()" class="range-max">
-                            <br>
-                            <br>
-                            <p>Price: {{ priceFilter.min }} $ - {{ priceFilter.max }} $</p>
+                                (input)="updateSlider()">
+
                         </div>
+
+                        <p>Price: {{ priceFilter.min }} $ - {{ priceFilter.max }} $</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +121,9 @@
 
             <div class="collection-thumbnail">
 
-                <img [src]="product.image" [alt]="product.name">
+                <a [routerLink]="['/product-details', product.id]">
+                    <img [src]="getProductImage(product)">
+                </a>
 
             </div>
 
@@ -136,7 +155,7 @@
                     Only {{product.stock}} left
                 </span>
 
-                <h3 class="card-title" [routerLink]="['/product-details', product.id]">
+                <h3 class="card-title">
                     {{product.name}}
                 </h3>
 
