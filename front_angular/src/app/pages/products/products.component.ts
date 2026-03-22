@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductsComponent {
   products:any[] = [];
 
-  constructor(private productService:ProductService){}
+  constructor(private productService:ProductService,
+      private favService: FavoritesService){}
 
   ngOnInit(){
     this.products = this.productService.getProducts();
@@ -132,4 +134,11 @@ getProductImage(product: any): string {
     if (this.currentPage > 1) this.currentPage--;
   }
 
+  isFavorite(product: any) {
+  return this.favService.isFavorite(product.id);
+}
+
+toggleFavorite(product: any) {
+  this.favService.toggle(product);
+}
 }

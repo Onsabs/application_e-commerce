@@ -6,7 +6,7 @@
 
         <div class="images">
 
-            <img class="main-img" [src]="selectedImage">
+            <img class="main-img" [src]="selectedImage" id="productImage">
 
             <div class="thumbs">
 
@@ -37,21 +37,36 @@
             <!-- wishlist -->
 
             <div class="wishlist-wrapper">
-  <input type="checkbox" id="favorite" [checked]="wishlist" (change)="toggleWishlist()">
-  <label for="favorite" class="container">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" class="feather feather-heart">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-    </svg>
-    <div class="action">
-      <span class="option-1">Add to Favorites</span>
-      <span class="option-2">Added to Favorites</span>
-    </div>
-  </label>
-</div>
+                <input type="checkbox" id="favorite" [checked]="wishlist" (change)="wishlistAnimation($event)">
+                <label for="favorite" class="container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-heart">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <div class="action">
+                        <span class="option-1">Ajouter aux favoris</span>
+                        <span class="option-2">Ajouté aux favoris</span>
+                    </div>
+                </label>
+            </div>
 
+            <!-- size -->
+            <div class="sizes" *ngIf="product.sizes?.length">
 
+                <p class="size-title">Taille</p>
+
+                <div class="size-list">
+
+                    <button *ngFor="let s of product.sizes" (click)="selectSize(s)" [class.active]="selectedSize === s">
+                        {{s}}
+                    </button>
+
+                </div>
+
+            </div>
             <!-- quantity -->
 
             <div class="quantity">
@@ -67,8 +82,8 @@
 
             <!-- add to cart -->
 
-            <button class="add-cart">
-                Add to Cart
+            <button class="add-cart" (click)="addToCartWithAnimation()">
+                <i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier
             </button>
 
         </div>

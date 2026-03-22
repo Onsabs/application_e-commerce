@@ -31,7 +31,7 @@
         <!-- sort -->
         <div class="custom-dropdown">
             <button class="dropdown-toggle" (click)="toggleDropdown()">
-              <i class="fa-solid fa-sliders fa-xl"></i> filtrer par
+                <i class="fa-solid fa-sliders fa-xl"></i> filtrer par
             </button>
             <div class="dropdown-overlay" [class.open]="dropdownOpen" (click)="toggleDropdown()"></div>
             <div class="dropdown-menu" [class.open]="dropdownOpen">
@@ -163,9 +163,28 @@
                     {{product.category}}
                 </p>
 
-                <p class="card-price">
-                    {{product.price}} $
-                </p>
+                <div class="price-row">
+
+                    <div class="price-info">
+                        <p class="card-price">{{product.price}} $</p>
+
+                        <p class="old-price" *ngIf="product.badge === 'sale'">
+                            {{product.oldPrice}} $
+                        </p>
+                    </div>
+
+                    <!-- ❤️ LIKE BUTTON -->
+                    <label class="ui-like">
+                        <input type="checkbox" [checked]="isFavorite(product)" (change)="toggleFavorite(product)">
+                        <div class="like">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z" />
+                            </svg>
+                        </div>
+                    </label>
+
+                </div>
 
             </div>
 

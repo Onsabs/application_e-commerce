@@ -141,7 +141,45 @@ border-radius:6px;
   opacity: 1;
 }
 
+.sizes {
+  margin: 15px 0;
+}
 
+.size-title {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.size-list {
+  display: flex;
+  gap: 10px;
+}
+
+.size-list button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #555;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+/* hover */
+.size-list button:hover {
+  border-color: #ff6690;
+  color: #ff6690;
+}
+
+/* active */
+.size-list button.active {
+  background: #ff6690;
+  border-color: #ff6690;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 102, 144, 0.5);
+}
 
 .related-title{
   margin-top:40px;

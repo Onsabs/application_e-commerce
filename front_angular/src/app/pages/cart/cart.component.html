@@ -1,1 +1,118 @@
-<p>cart works!</p>
+<div class="cart-container">
+
+    <h2>Panier</h2>
+
+    <!-- TABLE -->
+    <table *ngIf="cartItems.length > 0">
+
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of cartItems">
+
+                <!-- Product -->
+                <td class="product-cell">
+                    <img [src]="getImage(item)" />
+                    <span>{{item.name}}</span>
+                </td>
+
+                <!-- Price -->
+                <td>{{item.price}} $</td>
+
+                <!-- Quantity -->
+                <td>
+                    <div class="qty">
+                        <button (click)="decrease(item)">-</button>
+                        <span>{{item.quantity}}</span>
+                        <button (click)="increase(item)">+</button>
+                    </div>
+                </td>
+
+                <!-- Total -->
+                <td>{{item.price * item.quantity}} $</td>
+
+                <!-- Delete -->
+                <td>
+                    <button class="delete" (click)="remove(item.id)">✖</button>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    <!-- EMPTY -->
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+        <i class="fa-solid fa-cart-shopping empty-icon"></i>
+
+        <h2>Votre panier est vide.</h2>
+
+        <p> Il semble que vous n'ayez encore rien ajouté.</p>
+
+        <button class="shop-btn" routerLink="/products">
+            Commencez vos achats
+        </button>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="cart-buttons" *ngIf="cartItems.length > 0">
+
+        <a routerLink="/products"><button class="btn continue"><i class="fa-solid fa-reply"></i> Continuer mes
+                achats</button></a>
+
+        <button class="btn clear" (click)="openModal()"> <i class="fa-solid fa-xmark"></i> Vider le panier</button>
+
+    </div>
+
+    <!-- CART TOTALS -->
+    <div class="cart-totals" *ngIf="cartItems.length > 0">
+
+        <h3>Totaux du panier</h3>
+
+        <div class="totals-row">
+            <span>{{getCount()}} articles</span>
+            <span>{{getTotal()}} $</span>
+        </div>
+
+        <div class="totals-row">
+            <span>Delivery</span>
+            <span>7 $</span>
+        </div>
+
+        <div class="totals-row total">
+            <span>Total</span>
+            <span>{{getTotal() + 7}} $</span>
+        </div>
+
+        <button class="checkout">commander</button>
+
+    </div>
+
+
+
+    <!-- CONFIRM MODAL -->
+    <div class="modal-overlay" *ngIf="showModal">
+
+        <div class="modal-box">
+
+            <h3>Vider la panier</h3>
+            <p>Êtes-vous sûr de vouloir supprimer tous les éléments</p>
+
+            <div class="modal-actions">
+                <button class="cancel" (click)="showModal = false">Annuler</button>
+                <button class="confirm" (click)="confirmClear()">Oui, Vider</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

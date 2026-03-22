@@ -885,7 +885,7 @@ nav.scrolled {
 
 .collection-card {
 	position: relative;
-	background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+	background: linear-gradient(135deg);
 	overflow: hidden;
 	cursor: pointer;
 	transition: all 0.5s ease;

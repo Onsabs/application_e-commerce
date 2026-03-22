@@ -213,6 +213,11 @@
   height: 30px;
   margin-top: 20px;
 }
+.old-price {
+  font-size: 1.2rem;
+  color: #aaa;
+  text-decoration: line-through;
+}
 /* grey track */
 .slider-track{
   position: absolute;
@@ -318,5 +323,137 @@ background:black;
 color:white;
 }
 
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.ui-like {
+  margin-left: 10px;
+}
 
+/* ❤️ LIKE BUTTON UI */
+.ui-like {
+  --icon-size: 22px;
+  --icon-secondary-color: #bbb;
+  --icon-hover-color: #ff99aa;
+  --icon-primary-color: #ff2e63;
+  --icon-circle-border: 1px solid var(--icon-primary-color);
+  --icon-circle-size: 35px;
+  --icon-anmt-duration: 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* hide checkbox */
+.ui-like input {
+  display: none;
+}
+
+/* heart */
+.ui-like .like {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: var(--icon-secondary-color);
+  cursor: pointer;
+  transition: 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  transform-origin: center;
+}
+
+/* sparkle effect */
+.ui-like .like::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  box-shadow:
+    0 25px 0 -4px var(--icon-primary-color),
+    25px 0 0 -4px var(--icon-primary-color),
+    0 -25px 0 -4px var(--icon-primary-color),
+    -25px 0 0 -4px var(--icon-primary-color),
+    -18px 18px 0 -4px var(--icon-primary-color),
+    -18px -18px 0 -4px var(--icon-primary-color),
+    18px -18px 0 -4px var(--icon-primary-color),
+    18px 18px 0 -4px var(--icon-primary-color);
+
+  transform: scale(0);
+}
+
+/* circle animation */
+.ui-like .like::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: var(--icon-circle-border);
+  opacity: 0;
+}
+
+/* hover */
+.ui-like:hover .like {
+  fill: var(--icon-hover-color);
+}
+
+/* checked ❤️ */
+.ui-like input:checked + .like {
+  fill: var(--icon-primary-color);
+  animation: like 0.3s forwards;
+}
+
+/* animation circle */
+.ui-like input:checked + .like::before {
+  animation: circle 0.3s forwards;
+}
+
+/* animation sparkle */
+.ui-like input:checked + .like::after {
+  animation: circles 0.3s forwards;
+  animation-delay: 0.2s;
+}
+
+/* animations */
+@keyframes like {
+  50% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes circle {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  90% {
+    width: var(--icon-circle-size);
+    height: var(--icon-circle-size);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes circles {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}

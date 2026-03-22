@@ -1,1 +1,49 @@
-<p>favorites works!</p>
+<div class="favorites-container">
+
+  <h2>❤️ My Favorites</h2>
+
+  <!-- EMPTY -->
+  <div *ngIf="favorites.length === 0" class="empty-fav">
+    <div class="icon">💔</div>
+    <h3>No favorites yet</h3>
+    <p>Add products you love ❤️</p>
+
+    <a routerLink="/products" class="shop-btn">
+      Start Shopping
+    </a>
+  </div>
+
+  <!-- GRID -->
+  <div class="fav-grid" *ngIf="favorites.length > 0">
+
+    <div class="fav-card" *ngFor="let p of favorites">
+
+      <!-- IMAGE -->
+      <div class="img-box">
+        <a [routerLink]="['/product-details', p.id]">
+          <img [src]="getImage(p)" alt="{{p.name}}">
+        </a>
+
+        <!-- REMOVE ❤️ -->
+        <button class="remove" (click)="remove(p.id)">❤️</button>
+      </div>
+
+      <!-- INFO -->
+      <div class="info">
+        <h4>{{p.name}}</h4>
+        <p>{{p.price}} $</p>
+         <!-- actions -->
+      <div class="actions">
+        <button class="add-cart" (click)="addToCart(p)">
+          🛒 Add to Cart
+        </button>
+      </div>
+      </div>
+
+     
+
+    </div>
+
+  </div>
+
+</div>

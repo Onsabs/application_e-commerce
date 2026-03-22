@@ -14,7 +14,8 @@ export class ProductService {
       oldPrice: 399,
       badge: "sale",
       stock: 10,
-      image: "assets/images/urban-edge.avif"
+      image: "assets/images/urban-edge.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -24,7 +25,8 @@ export class ProductService {
       category: "Men",
       badge: "bestseller",
       stock: 5,
-      image: "assets/images/neo-classic.avif"
+      image: "assets/images/neo-classic.avif",
+      sizes: ['S', 'M', 'L', 'XLL']
     },
 
     {
