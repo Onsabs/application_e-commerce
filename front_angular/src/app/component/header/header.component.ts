@@ -7,8 +7,27 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
 cartCount = 0;
 animateCart = false;
+
+  isMenuOpen = false;
+
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
+
+closeMenu() {
+  this.isMenuOpen = false;
+}
+
+logout() {
+  console.log("Logout...");
+  this.closeMenu();
+
+}
+
+
 
 constructor(private cartService: CartService) {}
 

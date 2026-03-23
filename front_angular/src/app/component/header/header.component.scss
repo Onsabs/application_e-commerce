@@ -1,5 +1,6 @@
 
 
+
 .cart.bump {
   animation: bump 0.4s ease;
 }
@@ -11,3 +12,48 @@
   100% { transform: scale(1); }
 }
 
+
+.profile-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 20px; 
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 180px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+  z-index: 999;
+}
+
+
+/* Links */
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background: #ff4d4d;
+  padding-left: 20px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

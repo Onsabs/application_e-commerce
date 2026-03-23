@@ -8,16 +8,17 @@
 
     <!-- Menu -->
     <ul class="nav-links">
-      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/products" routerLinkActive="active">Collections</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active">Featured</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active"(click)="closeMenu()">Featured</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active"(click)="closeMenu()">Contact</a></li>
     </ul>
 
     <!-- Icons -->
     <div class="nav-icons">
 
       <!-- Wishlist -->
+
       <div class="icon-btn" id="wishlistIcon">
         <a a routerLink="/favorites">
           <i class="fa fa-heart"></i></a>
@@ -30,33 +31,45 @@
           <span class="cart-count" *ngIf="cartCount > 0">
             {{cartCount}}
           </span>
+
         </a>
       </div>
 
       <!-- Account -->
-      <div class="icon-btn">
-        <a a routerLink="/profile">
-          <i class="fa fa-user"></i></a>
+
+      
+
+      <div class="icon-btn profile-menu">
+
+      
+        <i class="fa fa-user" (click)="toggleMenu()"></i>
+
+        <!-- Dropdown -->
+        <div class="dropdown-menu" *ngIf="isMenuOpen">
+
+          <a routerLink="/profile" (click)="closeMenu()">Voir Profil</a>
+          <a routerLink="/edit-profile" (click)="closeMenu()">Modifier Profil</a>
+          <a routerLink="/historique" (click)="closeMenu()">Historique</a>
+          <a (click)="logout()">Logout</a>
+
+        </div>
+
+
       </div>
 
-    </div>
-
-    <!-- Mobile menu -->
-    <div class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
+    
+ </div>
   </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-links">
+      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active"(click)="closeMenu()">Featured</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active"(click)="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+
 </nav>
 
-
-<div class="mobile-nav" id="mobileNav">
-  <ul class="mobile-nav-links">
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/products" routerLinkActive="active">Collections</a></li>
-    <li><a routerLink="/profile" routerLinkActive="active">Featured</a></li>
-    <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
-  </ul>
-</div>

@@ -1,0 +1,49 @@
+<body>
+    
+
+<div class="history-container">
+
+  <h2 class="title">My History</h2>
+
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Action</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of history">
+        
+        <!-- IMAGE + NAME -->
+        <td class="product-cell">
+          <img [src]="item.image" alt="product" class="product-img">
+          <span class="product-name">{{ item.name }}</span>
+        </td>
+
+        <!-- ACTION -->
+        <td>
+          <span 
+            class="badge"
+            [ngClass]="{
+              'cart': item.action_type === 'CART',
+              'fav': item.action_type === 'FAVORITE'
+            }">
+            {{ item.action_type }}
+          </span>
+        </td>
+
+        <!-- DATE -->
+        <td>
+          {{ item.action_date | date:'medium' }}
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+</body>

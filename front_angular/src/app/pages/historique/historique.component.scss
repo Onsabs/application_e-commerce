@@ -1,0 +1,86 @@
+
+body {
+  background-color: #ffffff; 
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+.history-container {
+  width: 90%;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #141313; 
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* TABLE */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffffcc;
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.history-table th {
+  background: #111;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+.history-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* PRODUCT CELL */
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-name {
+  font-weight: 500;
+}
+
+/* BADGES */
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+}
+
+.badge.cart {
+  background-color: #007bff;
+}
+
+.badge.fav {
+  background-color: #e91e63;
+}
+
+/* HOVER */
+.history-table tbody tr:hover {
+  background-color: #f5f5f5;
+  transition: 0.3s;
+}

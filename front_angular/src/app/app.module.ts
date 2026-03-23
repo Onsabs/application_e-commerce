@@ -18,6 +18,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { HistoriqueComponent } from './pages/historique/historique.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
     FavoritesComponent,
     LayoutComponent,
     ContactComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    HistoriqueComponent
   ],
   imports: [
     BrowserModule,

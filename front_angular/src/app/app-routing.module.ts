@@ -12,6 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { HistoriqueComponent } from './pages/historique/historique.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,8 @@ const routes: Routes = [
       { path: 'favorites', component: FavoritesComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'edit-profile',component: EditProfileComponent
+      },
+      { path: 'historique',component: HistoriqueComponent
       }
 
     ]
