@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class CartComponent {
 
   cartItems: any[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.cartItems = this.cartService.getCart();
@@ -46,18 +49,27 @@ export class CartComponent {
 
   showModal = false;
 
-openModal() {
-  this.showModal = true;
-}
+  openModal() {
+    this.showModal = true;
+  }
 
-confirmClear() {
-  this.cartService.clearCart();
-  this.cartItems = [];
-  this.showModal = false;
-}
+  confirmClear() {
+    this.cartService.clearCart();
+    this.cartItems = [];
+    this.showModal = false;
+  }
 
   clearCart() {
     this.cartService.clearCart();
     this.cartItems = [];
+  }
+
+  goToCheckout() {
+    if (this.cartItems.length === 0) {
+      alert("Panier vide ❌");
+      return;
+    }
+
+    this.router.navigate(['/checkout']);
   }
 }

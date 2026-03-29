@@ -36,7 +36,8 @@ export class ProductService {
       category: "Men",
       badge: "new",
       stock: 3,
-      image: "assets/images/minimal-chic.avif"
+      image: "assets/images/minimal-chic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -46,7 +47,8 @@ export class ProductService {
       category: "kids",
       badge: "trending",
       stock: 0,
-      image: "assets/images/street-rebel.avif"
+      image: "assets/images/street-rebel.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
     {
       id: 5,
@@ -56,7 +58,8 @@ export class ProductService {
       oldPrice: 399,
       badge: "sale",
       stock: 10,
-      image: "assets/images/urban-edge.avif"
+      image: "assets/images/urban-edge.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -66,7 +69,8 @@ export class ProductService {
       category: "Men",
       badge: "bestseller",
       stock: 5,
-      image: "assets/images/neo-classic.avif"
+      image: "assets/images/neo-classic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -82,7 +86,8 @@ export class ProductService {
               "assets/images/street-rebel.avif",
               "assets/images/minimal-chic.avif",
               "assets/images/minimal-chic.avif"
-            ]
+            ],
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -91,7 +96,8 @@ export class ProductService {
       price: 199,
       badge: "trending",
       stock: 0,
-      image: "assets/images/street-rebel.avif"
+      image: "assets/images/street-rebel.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -102,7 +108,8 @@ export class ProductService {
       category: "women",
       badge: "sale",
       stock: 10,
-      image: "assets/images/urban-edge.avif"
+      image: "assets/images/urban-edge.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -111,7 +118,8 @@ export class ProductService {
       price: 399,
       badge: "bestseller",
       stock: 5,
-      image: "assets/images/neo-classic.avif"
+      image: "assets/images/neo-classic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -120,7 +128,8 @@ export class ProductService {
       price: 89,
       badge: "new",
       stock: 3,
-      image: "assets/images/minimal-chic.avif"
+      image: "assets/images/minimal-chic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -129,7 +138,8 @@ export class ProductService {
       price: 199,
       badge: "trending",
       stock: 0,
-      image: "assets/images/street-rebel.avif"
+      image: "assets/images/street-rebel.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
     {
       id: 13,
@@ -138,7 +148,8 @@ export class ProductService {
       oldPrice: 399,
       badge: "sale",
       stock: 10,
-      image: "assets/images/urban-edge.avif"
+      image: "assets/images/urban-edge.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -147,7 +158,8 @@ export class ProductService {
       price: 399,
       badge: "bestseller",
       stock: 5,
-      image: "assets/images/neo-classic.avif"
+      image: "assets/images/neo-classic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -156,7 +168,8 @@ export class ProductService {
       price: 89,
       badge: "new",
       stock: 3,
-      image: "assets/images/minimal-chic.avif"
+      image: "assets/images/minimal-chic.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     },
 
     {
@@ -165,7 +178,8 @@ export class ProductService {
       price: 199,
       badge: "trending",
       stock: 0,
-      image: "assets/images/street-rebel.avif"
+      image: "assets/images/street-rebel.avif",
+      sizes: ['S', 'M', 'L', 'XL']
     }
 
   ];

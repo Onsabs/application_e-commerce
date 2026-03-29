@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { HistoriqueComponent } from './pages/historique/historique.component';
+import { OrderSuccessComponent } from './pages/order-success/order-success.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,13 @@ import { HistoriqueComponent } from './pages/historique/historique.component';
     LayoutComponent,
     ContactComponent,
     EditProfileComponent,
-    HistoriqueComponent
+    HistoriqueComponent,
+    OrderSuccessComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

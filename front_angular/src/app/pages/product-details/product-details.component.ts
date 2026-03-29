@@ -75,6 +75,7 @@ export class ProductDetailsComponent {
   }
 
   addToCartWithAnimation() {
+    //if (this.stock==0){}
     if (!this.selectedSize) {
       alert('Please select a size');
       return;

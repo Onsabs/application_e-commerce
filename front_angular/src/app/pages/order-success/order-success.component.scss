@@ -1,0 +1,19 @@
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.box {
+  text-align: center;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #e6005c;
+  color: white;
+  cursor: pointer;
+}

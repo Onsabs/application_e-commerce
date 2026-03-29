@@ -8,12 +8,12 @@ import { FavoritesService } from 'src/app/services/favorites.service';
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent {
-  
+
   favorites: any[] = [];
 
   constructor(private favService: FavoritesService,
-              private cartService: CartService
-  ) {}
+    private cartService: CartService
+  ) { }
 
   ngOnInit() {
     this.favorites = this.favService.getFavorites();
@@ -29,7 +29,7 @@ export class FavoritesComponent {
   }
 
   addToCart(product: any) {
-  this.cartService.addToCart(product, 1);
-}
+    this.cartService.addToCart(product, 1);
+  }
 
 }
