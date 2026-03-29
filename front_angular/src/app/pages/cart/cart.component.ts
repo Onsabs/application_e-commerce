@@ -21,6 +21,8 @@ export class CartComponent {
 
   increase(item: any) {
     this.cartService.updateQuantity(item.id, item.quantity + 1);
+    
+
   }
 
   decrease(item: any) {

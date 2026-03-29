@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  showPassword: boolean = false;
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

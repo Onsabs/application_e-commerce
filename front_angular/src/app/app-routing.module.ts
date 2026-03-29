@@ -13,7 +13,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { HistoriqueComponent } from './pages/historique/historique.component';
+
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
+
+import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
 
 const routes: Routes = [
   {
@@ -28,9 +31,15 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'edit-profile',component: EditProfileComponent},
-      { path: 'historique',component: HistoriqueComponent},
-      { path: 'order-success', component: OrderSuccessComponent }
+
+      { path: 'order-success', component: OrderSuccessComponent },
+
+      { path: 'edit-profile',component: EditProfileComponent
+      },
+      { path: 'historique',component: HistoriqueComponent
+      }
+      ,{ path: 'history-details',component: HistoryDetailsComponent
+      }
 
     ]
   },

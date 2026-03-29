@@ -15,11 +15,13 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { LayoutComponent } from './layout/layout.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { HistoriqueComponent } from './pages/historique/historique.component';
+
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
+import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,17 @@ import { OrderSuccessComponent } from './pages/order-success/order-success.compo
     ContactComponent,
     EditProfileComponent,
     HistoriqueComponent,
-    OrderSuccessComponent
+
+    OrderSuccessComponent,
+    HistoryDetailsComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

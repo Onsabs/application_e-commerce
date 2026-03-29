@@ -1,0 +1,51 @@
+<section class="profile-section">
+    <div class="details-container">
+
+    <!-- TITLE -->
+    <h2>Détails de la commande</h2>
+
+    <!-- PAYMENT -->
+    <div class="payment">
+        <p><strong>Moyen de paiement :</strong> </p>
+    </div>
+
+    <!-- FACTURE -->
+    <div class="invoice">
+        <a href="#" download>
+            Télécharger votre facture (PDF)
+        </a>
+    </div>
+
+    <!-- PRODUITS -->
+    <div class="products">
+
+        <h3>Produits</h3>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of items">
+
+                    <td>{{item.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.price}} $</td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</section>

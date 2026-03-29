@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="login-page">
+
+  <div class="form-container">
+    <h2>Connexion</h2>
+    <p class="subtitle">Accédez à votre compte</p>
+
+    <form>
+      <!-- EMAIL -->
+      <div class="input-box">
+        <input type="email" required>
+        <label>Email</label>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="input-box">
+        <input [type]="showPassword ? 'text' : 'password'" required>
+        <label>Mot de passe</label>
+
+        <!-- eye icon compatible FA5 -->
+       <span class="toggle-password" (click)="togglePassword()">
+         {{ showPassword ? '🙈' : '👀' }}
+</span>
+
+      </div>
+
+      <!-- OPTIONS -->
+      <div class="options">
+        <label><input type="checkbox"> Se souvenir</label>
+        <a href="#">Mot de passe oublié ?</a>
+      </div>
+
+      <!-- BUTTON -->
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <p class="register">
+      Pas de compte ? <a routerLink="/register">Créer un compte</a>
+    </p>
+  </div>
+
+</div>

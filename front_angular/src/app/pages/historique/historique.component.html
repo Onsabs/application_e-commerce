@@ -1,49 +1,46 @@
-<body>
-    
-
+<section class="profile-section">
 <div class="history-container">
 
-  <h2 class="title">My History</h2>
+    <h2>Historique de vos commandes</h2>
 
-  <table class="history-table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Action</th>
-        <th>Date</th>
-      </tr>
-    </thead>
+    <p class="subtitle">
+        Vous trouverez ici vos commandes passées depuis la création de votre compte
+    </p>
 
-    <tbody>
-      <tr *ngFor="let item of history">
-        
-        <!-- IMAGE + NAME -->
-        <td class="product-cell">
-          <img [src]="item.image" alt="product" class="product-img">
-          <span class="product-name">{{ item.name }}</span>
-        </td>
+    <table *ngIf="cartItems.length > 0">
 
-        <!-- ACTION -->
-        <td>
-          <span 
-            class="badge"
-            [ngClass]="{
-              'cart': item.action_type === 'CART',
-              'fav': item.action_type === 'FAVORITE'
-            }">
-            {{ item.action_type }}
-          </span>
-        </td>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
 
-        <!-- DATE -->
-        <td>
-          {{ item.action_date | date:'medium' }}
-        </td>
+        <tbody>
+            <tr *ngFor="let item of cartItems">
 
-      </tr>
-    </tbody>
-  </table>
+                <!-- Nom produit -->
+                <td>{{item.name}}</td>
+
+                <!-- Total -->
+                <td>{{getTotal(item)}} $</td>
+
+                <!-- Détails -->
+                <td>
+                    <button (click)="viewDetails(item)" routerLink="/history-details">
+                        Voir détails
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div *ngIf="cartItems.length === 0" class="empty">
+        <p>Aucun produit dans le panier</p>
+    </div>
 
 </div>
-
-</body>
+</section>

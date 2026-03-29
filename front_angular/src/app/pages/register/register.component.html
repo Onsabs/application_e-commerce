@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="register-page">
+  <div class="form-container">
+    <h2>Création de compte </h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="input-box">
+        <i class="fa fa-user"></i>
+        <input type="text" formControlName="nom" placeholder=" ">
+        <label>Nom</label>
+      </div>
+
+      <div class="input-box">
+        <i class="fa fa-user"></i>
+        <input type="text" formControlName="prenom" placeholder=" ">
+        <label>Prénom</label>
+      </div>
+
+      <div class="input-box">
+        <i class="fa fa-calendar"></i>
+        <input type="date" formControlName="dateNaissance" placeholder=" ">
+        <label>Date de naissance</label>
+      </div>
+
+      <div class="input-box">
+      <i class="fa fa-lock"></i>
+      <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder=" ">
+      <label>Mot de passe</label>
+      <span class="toggle-password" (click)="showPassword = !showPassword">
+        {{ showPassword ? '🙈' : '👁️' }}
+    </span>
+
+  <!-- Password strength bar -->
+  <div class="password-strength">
+    <span [ngStyle]="{'width.%': passwordStrength, 'background-color': passwordColor}"></span>
+  </div>
+</div>
+
+
+      <div class="input-box">
+        <i class="fa fa-lock"></i>
+        <input [type]="showConfirm ? 'text' : 'password'" formControlName="confirmPassword" placeholder=" ">
+        <label>Confirmer mot de passe</label>
+        <span class="toggle-password" (click)="showConfirm = !showConfirm">
+          {{ showConfirm ? '🙈' : '👁️' }}
+        </span>
+      </div>
+
+      <button type="submit">Créer un compte</button>
+    </form>
+
+   
+  </div>
+</div>

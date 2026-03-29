@@ -6,34 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./historique.component.scss']
 })
 export class HistoriqueComponent {
-  history = [
-  {
-    name: 'Chemise Femme',
-    image: "assets/images/blog-03.jpg",
-    action_type: 'CART',
-    action_date: new Date()
-  },
-  {
-    name: 'Pull Homme',
-    image: "assets/images/blog-02.jpg",
-    action_type: 'FAVORITE',
-    action_date: new Date()
-  }, {
-    name: 'Chemise Femme',
-    image: "assets/images/blog-03.jpg",
-    action_type: 'CART',
-    action_date: new Date()
-  } ,{
-    name: 'Chemise Femme',
-    image: "assets/images/blog-03.jpg",
-    action_type: 'CART',
-    action_date: new Date()
-  } ,{
-    name: 'Chemise Femme',
-    image: "assets/images/blog-03.jpg",
-    action_type: 'CART',
-    action_date: new Date()
+
+  cartItems: any[] = [];
+
+  ngOnInit() {
+    const data = localStorage.getItem('cart');
+
+    if (data) {
+      this.cartItems = JSON.parse(data);
+    }
   }
-];
+
+  getTotal(item: any) {
+    return item.price * item.quantity;
+  }
+
+  viewDetails(item: any) {
+   
+  }
 
 }
