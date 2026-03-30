@@ -2,16 +2,20 @@
   <div class="nav-container">
 
     <!-- Logo -->
-    <a href="#home" class="logo-link">
+    <a href="home" class="logo-link">
       <span class="logo-text">NOIR</span>
     </a>
+    <button class="theme-btn" (click)="toggleTheme()">
+      {{ isDark ? '☀️ Light' : '🌙 Dark' }}
+    </button>
+
 
     <!-- Menu -->
     <ul class="nav-links">
       <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
       <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active"(click)="closeMenu()">Featured</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active"(click)="closeMenu()">Contact</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
     </ul>
 
     <!-- Icons -->
@@ -20,13 +24,13 @@
       <!-- Wishlist -->
 
       <div class="icon-btn" id="wishlistIcon">
-        <a a routerLink="/favorites">
+        <a routerLink="/favorites">
           <i class="fa fa-heart"></i></a>
       </div>
 
       <!-- Cart -->
       <div class="icon-btn cart" [class.bump]="animateCart" id="cartIcon">
-        <a a routerLink="/cart">
+        <a routerLink="/cart">
           <i class="fa fa-shopping-cart"></i>
           <span class="cart-count" *ngIf="cartCount > 0">
             {{cartCount}}
@@ -37,11 +41,11 @@
 
       <!-- Account -->
 
-      
+
 
       <div class="icon-btn profile-menu">
 
-      
+
         <i class="fa fa-user" (click)="toggleMenu()"></i>
 
         <!-- Dropdown -->
@@ -57,8 +61,8 @@
 
       </div>
 
-    
- </div>
+
+    </div>
   </div>
 
   <!-- Mobile menu -->
@@ -66,10 +70,9 @@
     <ul class="mobile-nav-links">
       <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
       <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active"(click)="closeMenu()">Featured</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active"(click)="closeMenu()">Contact</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
     </ul>
   </div>
 
 </nav>
-

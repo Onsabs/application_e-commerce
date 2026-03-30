@@ -65,10 +65,12 @@
     <!-- ACTION BUTTONS -->
     <div class="cart-buttons" *ngIf="cartItems.length > 0">
 
-        <a routerLink="/products"><button class="btn continue"><i class="fa-solid fa-reply"></i> 
+        <a routerLink="/products"><button class="btn continue">
+            <i class="fa-solid fa-reply"></i> 
             Continuer mes achats</button></a>
 
-        <button class="btn clear" (click)="openModal()"> <i class="fa-solid fa-xmark"></i> Vider le panier</button>
+        <button class="btn clear" (click)="openModal()"> 
+            <i class="fa-solid fa-xmark"></i> Vider le panier</button>
 
     </div>
 

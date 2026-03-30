@@ -1,37 +1,34 @@
-.checkout {
-  background-color: #f5f6fa; /* بدل الأبيض pure بخلفية خفيفة */
-  min-height: 100vh;
-}
-
 .checkout-container {
-  max-width: 650px;
+  width: 85%;
   margin: auto;
-  margin-top: 30px;
+  padding-top: 120px;
+  min-height: 80vh;
+  color: var(--cart-text);
 }
 
 /* SECTION */
 .section {
-  border: 1px solid #eee;
+  border: 2px solid var(--cart-border);
   margin-bottom: 12px;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: var(--cart-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* HEADER */
 .header {
   padding: 15px;
-  background: #ffffff;
+  background: var(--bg);
   cursor: pointer;
   font-weight: 600;
-  color: #333;
-  border-bottom: 1px solid #eee;
+  color: var(--cart-text);
+  border-bottom: 1px solid var(--cart-border);
   transition: 0.3s;
 }
 
 .header:hover {
-  background: #f9f9f9;
+  background: var(--cart-bg);
 }
 
 /* CONTENT */
@@ -41,7 +38,7 @@
   flex-direction: column;
   gap: 12px;
   animation: fadeIn 0.3s ease;
-  color: #333;
+  color: var(--cart-text);
   font-size: 14px;
 }
 
@@ -54,17 +51,19 @@
 }
 
 /* INPUTS */
-input, textarea {
+input,
+textarea {
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--cart-border);
   outline: none;
   transition: 0.2s;
 }
 
-input:focus, textarea:focus {
-  border-color: #e6005c;
-  box-shadow: 0 0 0 2px rgba(230,0,92,0.1);
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(230, 0, 92, 0.1);
 }
 
 textarea {
@@ -87,7 +86,7 @@ textarea {
   margin-top: 10px;
   padding: 12px;
   border: none;
-  background: #e6005c;
+  background: var(--accent);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -96,105 +95,110 @@ textarea {
 }
 
 .order-btn:hover {
-  background: #c4004d;
+  background: var(--icon-hover);
 }
 
 /* ANIMATION */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* TABLE */
 table {
-  margin-top: 30px;
   width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* HEADER TABLE */
-thead {
-  background: #ffffff;
-  color: #111;
+    border-collapse: collapse;
+    background: var(--table-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--table-border);
+    transition: 0.3s;
 }
 
 tr {
-  height: 90px;
-  border-bottom: 1px solid #eee;
+    padding: 15px;
+    font-size: 14px;
+    height: 100px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 tr:hover {
-  background: #fafafa;
+    background: var(--table-hover);
 }
 
 td {
-  text-align: center;
-  vertical-align: middle;
-  color: #111;
+    text-align: center;
+    vertical-align: middle;
 }
 
 /* PRODUCT */
 .product-cell {
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .product-cell img {
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-  border-radius: 6px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 /* TOTAL BOX */
 .cart-totals {
   margin-top: 30px;
   margin-left: auto;
-  background: #fff;
+  margin-bottom: 40px;
+  background: var(--bg);
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid var(--cart-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .cart-totals h3 {
   margin-bottom: 15px;
-  color: #333;
+  color: var(--cart-text);
 }
 
 .totals-row {
   display: flex;
   justify-content: space-between;
   margin: 8px 0;
-  color: #555;
+  color: var(--cart-text);
 }
 
 .totals-row.total {
   font-weight: bold;
   font-size: 18px;
-  color: #e6005c;
+  color: var(--accent);
 }
 
 /* BUTTON RETURN */
 .return {
   margin-top: 15px;
   width: 100%;
-  background: #111;
+  background: var(--accent);
+  color: white;
   border: none;
   padding: 10px;
-  color: white;
   cursor: pointer;
   border-radius: 6px;
   transition: 0.3s;
 }
 
 .return:hover {
-  background: #333;
+  background: var(--icon-hover);
 }

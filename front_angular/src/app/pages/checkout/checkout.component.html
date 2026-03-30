@@ -1,134 +1,133 @@
-<div class="checkout">
-<div class="checkout-container">
+    <div class="checkout-container">
 
-    <!-- PERSONAL INFO -->
-    <div class="section">
-        <div class="header" (click)="toggle('info')">
-            <span>1. Informations personnelles</span>
-        </div>
-
-        <div class="content" *ngIf="openSection === 'info'">
-            <input type="text" [(ngModel)]="user.firstName" placeholder="Nom">
-            <input type="text" [(ngModel)]="user.lastName" placeholder="Prénom">
-            <input type="text" [(ngModel)]="user.phone" placeholder="Numéro">
-            <input type="text" [(ngModel)]="user.address" placeholder="Adresse">
-        </div>
-    </div>
-
-    <!-- DELIVERY -->
-    <div class="section">
-        <div class="header" (click)="toggle('delivery')">
-            <span>2. Mode de livraison</span>
-        </div>
-
-        <div class="content" *ngIf="openSection === 'delivery'">
-            <div class="domicile">
-                <label>
-                    <input type="radio" [(ngModel)]="delivery" value="home" >
-                    Livraison à domicile
-                </label>
-                <span class="exp" > Entre 24 et 72 heures </span>
-                <span class="exp"> 7$</span>
+        <!-- PERSONAL INFO -->
+        <div class="section">
+            <div class="header" (click)="toggle('info')">
+                <span>1. Informations personnelles</span>
             </div>
-            <div class="domicile">
-            <label>
-                <input type="radio" [(ngModel)]="delivery" value="store">
-                Retrait en magasin
-            </label>
-            <span class="exp" > Retrait en magasin </span>
-            <span class="exp"> Gratuit</span>
+
+            <div class="content" *ngIf="openSection === 'info'">
+                <input type="text" [(ngModel)]="user.firstName" placeholder="Nom">
+                <input type="text" [(ngModel)]="user.lastName" placeholder="Prénom">
+                <input type="text" [(ngModel)]="user.phone" placeholder="Numéro">
+                <input type="text" [(ngModel)]="user.address" placeholder="Adresse">
+            </div>
         </div>
-            <p class="desc">
-                Si vous voulez nous laisser un message à propos de votre commande, merci de bien vouloir le renseigner
-                dans le champ ci-contre
-            </p>
-            <textarea [(ngModel)]="message" placeholder="Message"></textarea>
+
+        <!-- DELIVERY -->
+        <div class="section">
+            <div class="header" (click)="toggle('delivery')">
+                <span>2. Mode de livraison</span>
+            </div>
+
+            <div class="content" *ngIf="openSection === 'delivery'">
+                <div class="domicile">
+                    <label>
+                        <input type="radio" [(ngModel)]="delivery" value="home">
+                        Livraison à domicile
+                    </label>
+                    <span class="exp"> Entre 24 et 72 heures </span>
+                    <span class="exp"> 7$</span>
+                </div>
+                <div class="domicile">
+                    <label>
+                        <input type="radio" [(ngModel)]="delivery" value="store">
+                        Retrait en magasin
+                    </label>
+                    <span class="exp"> Retrait en magasin </span>
+                    <span class="exp"> Gratuit</span>
+                </div>
+                <p class="desc">
+                    Si vous voulez nous laisser un message à propos de votre commande, merci de bien vouloir le
+                    renseigner
+                    dans le champ ci-contre
+                </p>
+                <textarea [(ngModel)]="message" placeholder="Message"></textarea>
+
+            </div>
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="section">
+            <div class="header" (click)="toggle('payment')">
+                <span>3. Paiement</span>
+            </div>
+
+            <div class="content" *ngIf="openSection === 'payment'">
+
+                <label>
+                    <input type="radio" [(ngModel)]="payment" value="cash">
+                    Payer comptant à la livraison
+                </label>
+
+                <p class="desc">
+                    Vous payez lors de la réception de votre commande.
+                </p>
+
+                <button class="order-btn" (click)="placeOrder()">
+                    COMMANDER
+                </button>
+
+            </div>
+        </div>
+        <div class="cart-totals" *ngIf="cartItems.length > 0">
+
+            <h3>Totaux du panier</h3>
+
+            <table *ngIf="cartItems.length > 0">
+
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of cartItems">
+
+                        <!-- Product -->
+                        <td class="product-cell">
+                            <img [src]="getImage(item)" />
+                            <span>{{item.name}}</span>
+                        </td>
+
+                        <!-- Price -->
+                        <td>{{item.price}} $</td>
+
+                        <!-- Quantity -->
+                        <td>
+                            <div class="qty">
+                                <span>x {{item.quantity}}</span>
+                            </div>
+                        </td>
+
+                        <!-- Total -->
+                        <td>{{item.price * item.quantity}} $</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="totals-row">
+                <span>Sous-total </span>
+                <span>{{getTotal()}} $</span>
+            </div>
+
+            <div class="totals-row">
+                <span>Livraison </span>
+                <span>{{ getDeliveryFee() }} $</span>
+            </div>
+
+            <div class="totals-row total">
+                <span>Total TTC </span>
+                <span>{{ getTotalWithDelivery() }} $</span>
+            </div>
+
+            <button class="return" routerLink="/cart">Afficher et modifier le panier</button>
 
         </div>
+
     </div>
-
-    <!-- PAYMENT -->
-    <div class="section">
-        <div class="header" (click)="toggle('payment')">
-            <span>3. Paiement</span>
-        </div>
-
-        <div class="content" *ngIf="openSection === 'payment'">
-
-            <label>
-                <input type="radio" [(ngModel)]="payment" value="cash">
-                Payer comptant à la livraison
-            </label>
-
-            <p class="desc">
-                Vous payez lors de la réception de votre commande.
-            </p>
-
-            <button class="order-btn" (click)="placeOrder()">
-                COMMANDER
-            </button>
-
-        </div>
-    </div>
-    <div class="cart-totals" *ngIf="cartItems.length > 0">
-
-        <h3>Totaux du panier</h3>
-
-        <table *ngIf="cartItems.length > 0">
-
-            <thead>
-                <tr>
-                    <th>Produit</th>
-                    <th>Prix</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr *ngFor="let item of cartItems">
-
-                    <!-- Product -->
-                    <td class="product-cell">
-                        <img [src]="getImage(item)" />
-                        <span>{{item.name}}</span>
-                    </td>
-
-                    <!-- Price -->
-                    <td>{{item.price}} $</td>
-
-                    <!-- Quantity -->
-                    <td>
-                        <div class="qty">
-                            <span>x {{item.quantity}}</span>
-                        </div>
-                    </td>
-
-                    <!-- Total -->
-                    <td>{{item.price * item.quantity}} $</td>
-
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="totals-row">
-            <span>Sous-total </span>
-            <span>{{getTotal()}} $</span>
-        </div>
-
-        <div class="totals-row">
-            <span>Livraison </span>
-            <span>{{ getDeliveryFee() }} $</span>
-        </div>
-
-        <div class="totals-row total">
-            <span>Total TTC </span>
-            <span>{{ getTotalWithDelivery() }} $</span>
-        </div>
-
-        <button class="return" routerLink="/cart">Afficher et modifier le panier</button>
-
-    </div>
-
-</div>
-</div>

@@ -1,15 +1,15 @@
 <div class="favorites-container">
 
-  <h2>❤️ My Favorites</h2>
+  <h2>❤️ Mes Favorites</h2>
 
   <!-- EMPTY -->
   <div *ngIf="favorites.length === 0" class="empty-fav">
     <div class="icon">💔</div>
-    <h3>No favorites yet</h3>
-    <p>Add products you love ❤️</p>
+    <h3>Aucun favori pour l'instant</h3>
+    <p>Ajoutez vos produits préférés ❤️</p>
 
     <a routerLink="/products" class="shop-btn">
-      Start Shopping
+      Commencer vos achats
     </a>
   </div>
 
@@ -30,17 +30,42 @@
 
       <!-- INFO -->
       <div class="info">
+        <!-- BADGES -->
+
+        <span class="card-badge sale" *ngIf="p.badge=='sale'">
+          SALE
+        </span>
+
+        <span class="card-badge new" *ngIf="p.badge=='new'">
+          NEW
+        </span>
+
+        <span class="card-badge best" *ngIf="p.badge=='bestseller'">
+          BESTSELLER
+        </span>
+
+        <span class="card-badge trend" *ngIf="p.badge=='trending'">
+          TRENDING
+        </span>
+
+        <span class="card-badge stock" *ngIf="p.stock==0">
+          OUT OF STOCK
+        </span>
+
+        <span class="card-badge warning" *ngIf="p.stock>0 && p.stock<5">
+          Only {{p.stock}} left
+        </span>
         <h4>{{p.name}}</h4>
         <p>{{p.price}} $</p>
-         <!-- actions -->
-      <div class="actions">
-        <button class="add-cart" (click)="addToCart(p)">
-          🛒 Add to Cart
-        </button>
-      </div>
+        <!-- actions -->
+        <div class="actions">
+          <button class="add-cart" [routerLink]="['/product-details', p.id]">
+            🛒 Ajouter au panier
+          </button>
+        </div>
       </div>
 
-     
+
 
     </div>
 
