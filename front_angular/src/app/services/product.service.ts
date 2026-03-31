@@ -13,9 +13,13 @@ export class ProductService {
       category: "women",
       oldPrice: 399,
       badge: "sale",
-      stock: 10,
       image: "assets/images/urban-edge.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -24,9 +28,13 @@ export class ProductService {
       price: 399,
       category: "Men",
       badge: "bestseller",
-      stock: 5,
       image: "assets/images/neo-classic.avif",
-      sizes: ['S', 'M', 'L', 'XLL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 0 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:10}
+      ]
     },
 
     {
@@ -35,9 +43,13 @@ export class ProductService {
       price: 89,
       category: "Men",
       badge: "new",
-      stock: 3,
       image: "assets/images/minimal-chic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 0 },
+        { size: 'M', stock: 0 },
+        { size: 'L', stock: 0 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -46,9 +58,13 @@ export class ProductService {
       price: 199,
       category: "kids",
       badge: "trending",
-      stock: 0,
       image: "assets/images/street-rebel.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 0 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
     {
       id: 5,
@@ -57,9 +73,13 @@ export class ProductService {
       category: "women",
       oldPrice: 399,
       badge: "sale",
-      stock: 10,
       image: "assets/images/urban-edge.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -68,9 +88,13 @@ export class ProductService {
       price: 399,
       category: "Men",
       badge: "bestseller",
-      stock: 5,
       image: "assets/images/neo-classic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -79,15 +103,19 @@ export class ProductService {
       price: 89,
       category: "kids",
       badge: "new",
-      stock: 3,
-      description:"Comfortable sneakers for everyday use.",
+      description: "Comfortable sneakers for everyday use.",
       image: [
         "assets/images/minimal-chic.avif",
-              "assets/images/street-rebel.avif",
-              "assets/images/minimal-chic.avif",
-              "assets/images/minimal-chic.avif"
-            ],
-      sizes: ['S', 'M', 'L', 'XL']
+        "assets/images/street-rebel.avif",
+        "assets/images/minimal-chic.avif",
+        "assets/images/minimal-chic.avif"
+      ],
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -95,9 +123,13 @@ export class ProductService {
       name: "Street Rebel",
       price: 199,
       badge: "trending",
-      stock: 0,
       image: "assets/images/street-rebel.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -107,9 +139,13 @@ export class ProductService {
       oldPrice: 399,
       category: "women",
       badge: "sale",
-      stock: 10,
       image: "assets/images/urban-edge.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -117,9 +153,13 @@ export class ProductService {
       name: "Neo Classic",
       price: 399,
       badge: "bestseller",
-      stock: 5,
       image: "assets/images/neo-classic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -127,9 +167,13 @@ export class ProductService {
       name: "Minimal Chic",
       price: 89,
       badge: "new",
-      stock: 3,
       image: "assets/images/minimal-chic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -137,9 +181,13 @@ export class ProductService {
       name: "Street Rebel",
       price: 199,
       badge: "trending",
-      stock: 0,
       image: "assets/images/street-rebel.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
     {
       id: 13,
@@ -147,9 +195,13 @@ export class ProductService {
       price: 299,
       oldPrice: 399,
       badge: "sale",
-      stock: 10,
       image: "assets/images/urban-edge.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -157,9 +209,13 @@ export class ProductService {
       name: "Neo Classic",
       price: 399,
       badge: "bestseller",
-      stock: 5,
       image: "assets/images/neo-classic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -167,9 +223,13 @@ export class ProductService {
       name: "Minimal Chic",
       price: 89,
       badge: "new",
-      stock: 3,
       image: "assets/images/minimal-chic.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     },
 
     {
@@ -177,26 +237,30 @@ export class ProductService {
       name: "Street Rebel",
       price: 199,
       badge: "trending",
-      stock: 0,
       image: "assets/images/street-rebel.avif",
-      sizes: ['S', 'M', 'L', 'XL']
+      sizes: [
+        { size: 'S', stock: 3 },
+        { size: 'M', stock: 5 },
+        { size: 'L', stock: 2 },
+        { size: 'XL', stock:0}
+      ]
     }
 
   ];
-   getProducts(){
+  getProducts() {
     return this.products;
   }
 
-  getProductById(id:number){
+  getProductById(id: number) {
     return this.products.find(p => p.id === id);
   }
 
-  getRelatedProducts(category:string, id:number){
+  getRelatedProducts(category: string, id: number) {
 
-  return this.products.filter(
-    p => p.category === category && p.id !== id
-  );
+    return this.products.filter(
+      p => p.category === category && p.id !== id
+    );
 
-}
+  }
 
 }

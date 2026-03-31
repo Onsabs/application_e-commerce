@@ -8,12 +8,12 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  products:any[] = [];
+  products: any[] = [];
 
-  constructor(private productService:ProductService,
-      private favService: FavoritesService){}
+  constructor(private productService: ProductService,
+    private favService: FavoritesService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.products = this.productService.getProducts();
   }
 
@@ -25,13 +25,21 @@ export class ProductsComponent {
   priceFilter = { min: this.minPrice, max: this.maxPrice };
   dropdownOpen = false;
 
+  getTotalStock(product: any): number {
 
-getProductImage(product: any): string {
-  if (Array.isArray(product.image)) {
-    return product.image[0]; 
+    if (!product.sizes || typeof product.sizes[0] === 'string') {
+      return product.stock ?? 0;
+    }
+
+    return product.sizes.reduce((total: number, s: any) => total + s.stock, 0);
   }
-  return product.image; 
-}
+
+  getProductImage(product: any): string {
+    if (Array.isArray(product.image)) {
+      return product.image[0];
+    }
+    return product.image;
+  }
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
@@ -135,10 +143,10 @@ getProductImage(product: any): string {
   }
 
   isFavorite(product: any) {
-  return this.favService.isFavorite(product.id);
-}
+    return this.favService.isFavorite(product.id);
+  }
 
-toggleFavorite(product: any) {
-  this.favService.toggle(product);
-}
+  toggleFavorite(product: any) {
+    this.favService.toggle(product);
+  }
 }

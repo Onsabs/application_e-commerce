@@ -22,9 +22,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+
+import { HistoriqueComponent } from './pages/historique/historique.component';
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
-import { HistoriqueComponent } from './pages/historique/historique.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { HistoriqueComponent } from './pages/historique/historique.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

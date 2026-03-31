@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>Produit</th>
+                <th>Taille</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
@@ -23,7 +24,7 @@
                     <img [src]="getImage(item)" />
                     <span>{{item.name}}</span>
                 </td>
-
+                <td>{{item.size}}</td>
                 <!-- Price -->
                 <td>{{item.price}} $</td>
 
@@ -41,7 +42,7 @@
 
                 <!-- Delete -->
                 <td>
-                    <button class="delete" (click)="remove(item.id)">✖</button>
+                    <button class="delete" (click)="remove(item)">✖</button>
                 </td>
 
             </tr>

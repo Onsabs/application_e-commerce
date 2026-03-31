@@ -3,7 +3,7 @@
   padding: 8px 14px;
   border-radius: 20px;
   cursor: pointer;
-  background: #ff3366;
+  background: var(--accent);
   color: #fff;
   font-weight: 500;
   transition: 0.3s;
@@ -17,7 +17,19 @@
   animation: bump 0.4s ease;
 }
 .cart-count{
-  color: white;
+  position: absolute;
+	top: -8px;
+	right: -10px;
+	background: var(--accent);
+	color: white;
+	font-size: 10px;
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	border-radius: 50%;
 }
 
 @keyframes bump {

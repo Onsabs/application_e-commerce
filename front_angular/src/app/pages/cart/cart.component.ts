@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -11,30 +12,49 @@ export class CartComponent {
 
   cartItems: any[] = [];
 
-  constructor(private cartService: CartService,
-    private router: Router
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.cartItems = this.cartService.getCart();
   }
 
-  increase(item: any) {
-    this.cartService.updateQuantity(item.id, item.quantity + 1);
-    
+  showToast(message: string, type: 'success' | 'error' = 'success') {
+    this.snackBar.open(message, 'Fermer', {
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: type
+    });
+  }
 
+  increase(item: any) {
+    const result = this.cartService.updateQuantity(item.id, item.size, item.quantity + 1);
+
+    if (!result.success) {
+      this.showToast(result.message!, 'error');
+    }
   }
 
   decrease(item: any) {
     if (item.quantity > 1) {
-      this.cartService.updateQuantity(item.id, item.quantity - 1);
+      const result = this.cartService.updateQuantity(item.id, item.size, item.quantity - 1);
+
+      if (!result.success) {
+        this.showToast(result.message!, 'error');
+      }
     }
   }
 
-  remove(id: number) {
-    this.cartService.removeItem(id);
-    this.cartItems = this.cartService.getCart();
-  }
+  remove(item: any) {
+  this.cartService.removeItem(item.id, item.size);
+  this.cartItems = this.cartService.getCart();
+
+  this.showToast(`"${item.name}" (${item.size}) retiré 🗑️`, 'success');
+}
 
 
   getTotal() {
@@ -59,6 +79,8 @@ export class CartComponent {
     this.cartService.clearCart();
     this.cartItems = [];
     this.showModal = false;
+
+    this.showToast('Panier vidé 🧹', 'success');
   }
 
   clearCart() {
@@ -68,7 +90,7 @@ export class CartComponent {
 
   goToCheckout() {
     if (this.cartItems.length === 0) {
-      alert("Panier vide ❌");
+      this.showToast('❌ Panier vide', 'error');
       return;
     }
 

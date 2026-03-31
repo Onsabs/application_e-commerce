@@ -32,4 +32,13 @@ export class FavoritesComponent {
     this.cartService.addToCart(product, 1);
   }
 
+  getTotalStock(product: any): number {
+
+    if (!product.sizes || typeof product.sizes[0] === 'string') {
+      return product.stock ?? 0;
+    }
+
+    return product.sizes.reduce((total: number, s: any) => total + s.stock, 0);
+  }
+
 }

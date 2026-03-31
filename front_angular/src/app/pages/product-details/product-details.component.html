@@ -1,26 +1,16 @@
 <div class="product-details" *ngIf="product">
-
     <div class="product-container">
-
         <!-- images -->
-
         <div class="images">
-
             <img class="main-img" [src]="selectedImage" id="productImage">
-
             <div class="thumbs">
-
                 <img *ngFor="let img of product.image" [src]="img" (click)="selectImage(img)">
-
             </div>
-
         </div>
-
 
         <!-- info -->
 
         <div class="info">
-            
 
             <h2>{{product.name}}</h2>
 
@@ -38,7 +28,7 @@
             <!-- wishlist -->
 
             <div class="wishlist-wrapper">
-                <input type="checkbox" id="favorite" [checked]="wishlist" (change)="wishlistAnimation($event)">
+                <input type="checkbox" id="favorite" [checked]="wishlist" (change)="toggleWishlist()">
                 <label for="favorite" class="container">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -61,8 +51,9 @@
 
                 <div class="size-list">
 
-                    <button *ngFor="let s of product.sizes" (click)="selectSize(s)" [class.active]="selectedSize === s">
-                        {{s}}
+                    <button *ngFor="let s of product.sizes" (click)="selectSize(s)"
+                        [class.active]="selectedSize?.size === s.size">
+                        {{s.size}}
                     </button>
 
                 </div>
@@ -79,42 +70,38 @@
                 <button (click)="increase()">+</button>
 
             </div>
-
-
             <!-- add to cart -->
 
-            <button class="add-cart" (click)="addToCartWithAnimation()">
+            <button class="add-cart" (click)="addToCart()">
                 <i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier
             </button>
-
-            
 
         </div>
         <!-- BADGES -->
 
-            <span class="card-badge sale" *ngIf="product.badge=='sale'">
-                SALE
-            </span>
+        <span class="card-badge sale" *ngIf="product.badge=='sale'">
+            SALE
+        </span>
 
-            <span class="card-badge new" *ngIf="product.badge=='new'">
-                NEW
-            </span>
+        <span class="card-badge new" *ngIf="product.badge=='new'">
+            NEW
+        </span>
 
-            <span class="card-badge best" *ngIf="product.badge=='bestseller'">
-                BESTSELLER
-            </span>
+        <span class="card-badge best" *ngIf="product.badge=='bestseller'">
+            BESTSELLER
+        </span>
 
-            <span class="card-badge trend" *ngIf="product.badge=='trending'">
-                TRENDING
-            </span>
+        <span class="card-badge trend" *ngIf="product.badge=='trending'">
+            TRENDING
+        </span>
 
-            <span class="card-badge stock" *ngIf="product.stock==0">
-                OUT OF STOCK
-            </span>
+        <span class="card-badge stock" *ngIf="getTotalStock(product) === 0">
+            OUT OF STOCK
+        </span>
 
-            <span class="card-badge warning" *ngIf="product.stock>0 && product.stock<5">
-                Only {{product.stock}} left
-            </span>
+        <span class="card-badge warning" *ngIf="getTotalStock(product) > 0 && getTotalStock(product) <= 5">
+            Only {{ getTotalStock(product) }} left
+        </span>
 
     </div>
 

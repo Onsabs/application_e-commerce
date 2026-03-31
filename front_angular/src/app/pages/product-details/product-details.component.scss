@@ -311,3 +311,13 @@
   object-fit: cover;
   margin-bottom: 10px;
 }
+
+.success {
+  background-color: #4caf50;  // vert
+  color: white;
+}
+
+.error {
+  background-color: #f44336;  // rouge
+  color: white;
+}

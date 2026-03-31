@@ -147,12 +147,12 @@
                     TRENDING
                 </span>
 
-                <span class="card-badge stock" *ngIf="product.stock==0">
+                <span class="card-badge stock" *ngIf="getTotalStock(product) === 0">
                     OUT OF STOCK
                 </span>
 
-                <span class="card-badge warning" *ngIf="product.stock>0 && product.stock<5">
-                    Only {{product.stock}} left
+                <span class="card-badge warning" *ngIf="getTotalStock(product) > 0 && getTotalStock(product) <= 5">
+                    Only {{ getTotalStock(product) }} left
                 </span>
 
                 <h3 class="card-title">

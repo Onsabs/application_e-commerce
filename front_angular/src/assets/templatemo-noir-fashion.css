@@ -1999,10 +1999,15 @@ footer {
 	position: absolute;
 	top: -8px;
 	right: -10px;
-	background: #ff3366;
-	color: var(--text-light);
+	background: var(--accent);
+	color: white;
 	font-size: 10px;
-	padding: 2px 6px;
+	width: 18px;
+	height: 18px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 50%;
 }
 
