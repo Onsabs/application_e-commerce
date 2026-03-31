@@ -1,46 +1,30 @@
 <section class="profile-section">
-<div class="history-container">
+  <div class="history-container">
 
     <h2>Historique de vos commandes</h2>
 
-    <p class="subtitle">
-        Vous trouverez ici vos commandes passées depuis la création de votre compte
-    </p>
-
-    <table *ngIf="cartItems.length > 0">
-
-        <thead>
-            <tr>
-                <th>Produit</th>
-                <th>Total</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr *ngFor="let item of cartItems">
-
-                <!-- Nom produit -->
-                <td>{{item.name}}</td>
-
-                <!-- Total -->
-                <td>{{getTotal(item)}} $</td>
-
-                <!-- Détails -->
-                <td>
-                    <button (click)="viewDetails(item)" routerLink="/history-details">
-                        Voir détails
-                    </button>
-                </td>
-
-            </tr>
-        </tbody>
-
+    <table *ngIf="orders.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Produits</th>
+          <th>Date</th>
+          <th>Détails</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ getProductNames(order.items) }}</td>
+          <td>{{ order.date | date:'short' }}</td>
+          <td><button (click)="viewDetails(order)">Voir détails</button></td>
+        </tr>
+      </tbody>
     </table>
 
-    <div *ngIf="cartItems.length === 0" class="empty">
-        <p>Aucun produit dans le panier</p>
+    <div *ngIf="orders.length === 0" class="empty">
+      <p>Aucune commande trouvée</p>
     </div>
 
-</div>
+  </div>
 </section>

@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+// COMPONENTS
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { LayoutComponent } from './layout/layout.component';
+
+// PAGES
 import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -14,20 +20,22 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
-import { LayoutComponent } from './layout/layout.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
-import { HistoriqueComponent } from './pages/historique/historique.component';
-
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
+import { HistoriqueComponent } from './pages/historique/historique.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    // layout
     HeaderComponent,
     FooterComponent,
+    LayoutComponent,
+
+    // pages
     HomeComponent,
     CartComponent,
     ProductsComponent,
@@ -37,21 +45,17 @@ import { HistoryDetailsComponent } from './pages/history-details/history-details
     CheckoutComponent,
     ProfileComponent,
     FavoritesComponent,
-    LayoutComponent,
     ContactComponent,
     EditProfileComponent,
-    HistoriqueComponent,
-
     OrderSuccessComponent,
+    HistoriqueComponent,
     HistoryDetailsComponent
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

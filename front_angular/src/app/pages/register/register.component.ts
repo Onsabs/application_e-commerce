@@ -17,9 +17,12 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, 
-    private registerService: RegisterService 
-    ,private router: Router) {
+    constructor(
+    private fb: FormBuilder,
+    private registerService: RegisterService,
+    private router: Router
+  ) {
+
     this.registerForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],

@@ -1,91 +1,71 @@
+/* Container général */
 .history-container {
-    width: 85%;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff; /* fond blanc */
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.profile-section{
-
-background:#f4f6fb;
-
+  padding: 20px;
+  background-color: #fff; /* fond blanc */
+  color: #000; /* texte noir par défaut */
+  font-family: Arial, sans-serif;
 }
 
-/* TITRE */
-h2 {
-    text-align: center;
-    color: #000;
-    margin-bottom: 10px;
+.history-container h2 {
+  color: #0a0a0a;   
+  margin-top: 20px;       
+  font-size: 28px;          
+  font-weight: 700;         
+  text-align: center;        
+  margin-bottom: 20px;
+  letter-spacing: 1px;      
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
 }
 
-/* SUBTITLE */
-.subtitle {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
+
+/* Subtitle */
+.history-container .subtitle {
+  color: #000;
+  margin-bottom: 20px;
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
+/* Table */
+.history-container table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000; /* texte noir */
 }
 
-/* HEADER */
-th {
-    background: #f5f5f5;
-    color: #000;
-    padding: 12px;
-    font-weight: 600;
-    border-bottom: 2px solid #ddd;
+/* Entête */
+.history-container th {
+  text-align: left;
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: #000;
+  border-bottom: 2px solid #ddd;
 }
 
-/* CELLS */
-td {
-    padding: 12px;
-    text-align: center;
-    color: #000;
-    border-bottom: 1px solid #eee;
+/* Lignes du tableau */
+.history-container td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
 }
 
-/* HOVER ROW */
-tr:hover {
-    background: #fafafa;
+/* Bouton détails */
+.history-container button {
+  padding: 5px 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-/* BUTTON DETAILS */
-button {
-    padding: 6px 12px;
-    border: none;
-    background: #000;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+/* Bouton hover */
+.history-container button:hover {
+  background-color: #333;
 }
 
-button:hover {
-    background: #333;
+/* Message si tableau vide */
+.history-container .empty p {
+  color: #000;
+  font-style: italic;
+  margin-top: 15px;
 }
 
-/* EMPTY */
-.empty {
-    text-align: center;
-    margin-top: 30px;
-    color: #000;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .history-container {
-        width: 95%;
-        padding: 15px;
-    }
-
-    th, td {
-        font-size: 14px;
-        padding: 8px;
-    }
-}

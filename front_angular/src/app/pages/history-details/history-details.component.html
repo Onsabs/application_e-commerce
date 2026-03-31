@@ -1,51 +1,63 @@
 <section class="profile-section">
-    <div class="details-container">
+  <div class="details-container">
 
     <!-- TITLE -->
     <h2>Détails de la commande</h2>
 
-    <!-- PAYMENT -->
-    <div class="payment">
-        <p><strong>Moyen de paiement :</strong> </p>
+    <!-- INFO COMMANDE -->
+    <div class="order-info" *ngIf="order">
+      <p><strong>ID de commande :</strong> {{ order.id }}</p>
+      <p><strong>Date :</strong> {{ order.date | date:'short' }}</p>
+      
+      <p><strong>Nom :</strong> {{ order.user.firstName }} {{ order.user.lastName }}</p>
+      <p><strong>Adresse :</strong> {{ order.user.address }}</p>
+      <p><strong>Téléphone :</strong> {{ order.user.phone }}</p>
+      
+      <p><strong>Total :</strong> {{ order.total }} $</p>
+      <p><strong>Moyen de paiement :</strong> {{ order.payment }}</p>
+      <p><strong>Mode de livraison :</strong> {{ order.delivery }}</p>
+      
+      <p><strong>Message :</strong> {{ order.message || 'Aucun message' }}</p>
     </div>
 
-    <!-- FACTURE -->
-    <div class="invoice">
-        <a href="#" download>
-            Télécharger votre facture (PDF)
-        </a>
-    </div>
+   
 
     <!-- PRODUITS -->
-    <div class="products">
-
-        <h3>Produits</h3>
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Produit</th>
-                    <th>Quantité</th>
-                    <th>Prix</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr *ngFor="let item of items">
-
-                    <td>{{item.name}}</td>
-                    <td>{{item.quantity}}</td>
-                    <td>{{item.price}} $</td>
-
-                </tr>
-            </tbody>
-
-        </table>
-
+    <div class="products" *ngIf="items.length > 0">
+      <h3>Produits</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+             <td>
+        <img [src]="getImage(item)" alt="product" class="product-img">
+      </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }} $</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+    <div *ngIf="!items.length">
+      <p>Aucun produit dans cette commande.</p>
+    </div>
+   <div class="invoice">
+  <button (click)="generatePDF()">
+    Télécharger la facture
+  </button>
 </div>
 
 
+  </div>
+  
 </section>
