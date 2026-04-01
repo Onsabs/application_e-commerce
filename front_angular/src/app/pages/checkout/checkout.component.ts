@@ -79,7 +79,14 @@ export class CheckoutComponent {
 
     const order = {
       user: this.user,
-      items: this.cartItems,
+      items: this.cartItems.map(item => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        size: item.size,
+        image: item.image,
+        quantity: item.quantity
+      })),
       delivery: this.delivery,
       payment: this.payment,
       message: this.message,
@@ -96,4 +103,5 @@ export class CheckoutComponent {
 
     this.router.navigate(['/order-success']);
   }
+  
 }
