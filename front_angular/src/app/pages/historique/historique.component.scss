@@ -1,13 +1,18 @@
 /* Container général */
 .history-container {
-  padding: 20px;
-  background-color: #fff; /* fond blanc */
-  color: #000; /* texte noir par défaut */
-  font-family: Arial, sans-serif;
+  /*padding: 20px;
+  background-color: #fff; 
+  color: #000;
+  font-family: Arial, sans-serif;*/
+  width: 85%;
+  margin: auto;
+  padding-top: 120px;
+  min-height: 80vh;
+  color: var(--cart-text);
 }
 
 .history-container h2 {
-  color: #0a0a0a;   
+  color: var(--cart-text);   
   margin-top: 20px;       
   font-size: 28px;          
   font-weight: 700;         
@@ -20,37 +25,16 @@
 
 /* Subtitle */
 .history-container .subtitle {
-  color: #000;
+  color: var(--cart-text);
   margin-bottom: 20px;
 }
 
-/* Table */
-.history-container table {
-  width: 100%;
-  border-collapse: collapse;
-  color: #000; /* texte noir */
-}
 
-/* Entête */
-.history-container th {
-  text-align: left;
-  padding: 10px;
-  background-color: #f2f2f2;
-  color: #000;
-  border-bottom: 2px solid #ddd;
-}
-
-/* Lignes du tableau */
-.history-container td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  color: #000;
-}
 
 /* Bouton détails */
 .history-container button {
   padding: 5px 10px;
-  background-color: #000;
+  background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -59,13 +43,60 @@
 
 /* Bouton hover */
 .history-container button:hover {
-  background-color: #333;
+  background-color: var(--cart-muted);
 }
 
 /* Message si tableau vide */
 .history-container .empty p {
-  color: #000;
+  color: var(--cart-text);
   font-style: italic;
   margin-top: 15px;
 }
 
+/* TABLE */
+table {
+  width: 100%;
+    border-collapse: collapse;
+    background: var(--table-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--table-border);
+    transition: 0.3s;
+}
+
+tr {
+    padding: 15px;
+    font-size: 14px;
+    height: 70px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+tr:hover {
+    background: var(--table-hover);
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*
+.history-container table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000; 
+}
+
+.history-container th {
+  text-align: left;
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: #000;
+  border-bottom: 2px solid #ddd;
+}
+
+.history-container td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
+}*/

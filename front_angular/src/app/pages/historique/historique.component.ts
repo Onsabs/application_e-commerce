@@ -57,11 +57,10 @@ export class HistoriqueComponent implements OnInit {
 
 }
 
-
-  getProductNames(items: OrderItem[]): string {
+  /*getProductNames(items: OrderItem[]): string {
     if(!items || items.length === 0) return 'Aucun produit';
     return items.map(p => p.name).join(', ');
-  }
+  }*/
 
   viewDetails(order: Order): void {
     localStorage.setItem('selectedOrder', JSON.stringify(order));

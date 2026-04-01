@@ -55,6 +55,8 @@ body.light-mode {
 	--table-bg: #ffffff;
 	--table-border: #e5e5e5;
 	--table-hover: rgba(0, 0, 0, 0.03);
+	--card-bg: #ebebeb;
+	--card-muted: #ffffff;
 
 
 	--footer-bg: #f8f8f8;
@@ -103,6 +105,8 @@ body.dark-mode {
 	--table-bg: rgba(0, 0, 0, 0.08);
 	--table-border: rgba(255, 255, 255, 0.15);
 	--table-hover: rgba(255, 255, 255, 0.1);
+	--card-bg: #0c0c0c;
+	--card-muted: #e6e3e3;
 
 	--footer-bg: rgba(0, 0, 0, 0.95);
 	--footer-text: #ffffff;
@@ -168,7 +172,7 @@ nav.scrolled {
 	font-weight: 900;
 	letter-spacing: -2px;
 	background: linear-gradient(135deg, var(--text), var(--accent));
-	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
@@ -1564,7 +1568,7 @@ nav.scrolled {
 .info-item {
 	margin-bottom: 50px;
 	display: flex;
-	align-items: start;
+	align-items: flex-start;
 	gap: 20px;
 	transition: all 0.3s ease;
 }
@@ -1666,7 +1670,7 @@ footer {
 	font-size: 32px;
 	margin-bottom: 20px;
 	background: linear-gradient(135deg, var(--footer-text), var(--accent));
-	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 

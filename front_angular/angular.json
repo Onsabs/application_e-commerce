@@ -37,6 +37,13 @@
             ],
             "scripts": [
               "src/assets/templatemo-noir-scripts.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "canvg",
+              "qrcode",
+              "core-js",
+              "raf",
+              "rgbcolor"
             ]
           },
           "configurations": {

@@ -7,7 +7,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Produits</th>
+          <!--<th>Produits</th>-->
           <th>Date</th>
           <th>Détails</th>
         </tr>
@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let order of orders">
           <td>{{ order.id }}</td>
-          <td>{{ getProductNames(order.items) }}</td>
+          <!--<td>{{ getProductNames(order.items) }}</td>-->
           <td>{{ order.date | date:'short' }}</td>
           <td><button (click)="viewDetails(order)">Voir détails</button></td>
         </tr>
