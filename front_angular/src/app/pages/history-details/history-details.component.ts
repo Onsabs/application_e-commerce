@@ -45,11 +45,10 @@ export class HistoryDetailsComponent implements OnInit {
     doc.text(`ID: ${order.id}`, 14, 20);
     doc.text(`Date: ${new Date(order.date).toLocaleString()}`, 14, 26);
 
-    // ===== QR CODE (🔥 ajouté seulement) =====
-    const qrData = `http://localhost:4200`; // بدلها بدومينك في production
+
+    const qrData = `http://localhost:4200`; 
     const qrImage = await QRCode.toDataURL(qrData);
 
-    // نحطو في اليمين بدون ما نكسر design
     doc.addImage(qrImage, 'PNG', 150, 30, 40, 40);
 
     // ===== LINE =====
