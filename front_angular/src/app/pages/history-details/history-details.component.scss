@@ -179,3 +179,104 @@ tr:hover {
     padding: 25px;
   }
 }
+/* Container général */
+.reclamation-box {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee); /* background doux moderne */
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reclamation-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+}
+
+/* Titre */
+.reclamation-box h3 {
+  text-align: center;
+  color: #ff6f61; /* couleur chaude et moderne */
+  font-size: 24px;
+  margin-bottom: 25px;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+}
+
+/* Select */
+.reclamation-box select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  background: #fff;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.reclamation-box select:focus {
+  border-color: #ff6f61;
+  box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+  outline: none;
+}
+
+/* Textarea */
+.reclamation-box textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.reclamation-box textarea:focus {
+  border-color: #ff6f61;
+  box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+  outline: none;
+}
+
+/* Placeholder du textarea */
+.reclamation-box textarea::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* Bouton */
+.reclamation-box button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff6f61, #ff3b2f);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reclamation-box button:hover {
+  background: linear-gradient(135deg, #ff8360, #ff4c3b);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 111, 97, 0.3);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .reclamation-box {
+    padding: 25px 20px;
+  }
+
+  .reclamation-box h3 {
+    font-size: 22px;
+  }
+}
+

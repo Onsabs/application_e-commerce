@@ -28,43 +28,51 @@ export class CartService {
     if (existing) {
       const remaining = product.stock - existing.quantity;
       if (remaining <= 0) {
-        return { 
-          success: false, 
-          message: `⚠️ Tu as déjà atteint la quantité maximum de "${product.name}"` 
+        return {
+          success: false,
+          message: `⚠️ Tu as déjà atteint la quantité maximum de "${product.name}"`
         };
       }
       if (existing.quantity + quantity > product.stock) {
-        return { 
-          success: false, 
-          message: `⚠️ Tu peux ajouter seulement ${remaining} de "${product.name}"` 
+        return {
+          success: false,
+          message: `⚠️ Tu peux ajouter seulement ${remaining} de "${product.name}"`
         };
       }
       existing.quantity += quantity;
     } else {
       if (quantity > product.stock) {
-        return { 
-          success: false, 
-          message: `⚠️ Tu peux ajouter seulement ${product.stock} de "${product.name}"` 
+        return {
+          success: false,
+          message: `⚠️ Tu peux ajouter seulement ${product.stock} de "${product.name}"`
         };
       }
-      this.cartItems.push({ ...product, quantity });
+      this.cartItems.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        quantity: quantity,
+        stock: product.stock
+      });
     }
 
     this.updateCount();
     return { success: true };
   }
 
-  updateQuantity(id: number,size: string, quantity: number) {
+  updateQuantity(id: number, size: string, quantity: number) {
     const item = this.cartItems.find(p => p.id === id && p.size === size);
     if (!item) return { success: false, message: 'Produit non trouvé' };
 
     const remaining = item.stock - quantity;
 
     if (quantity > item.stock) {
-      return { 
-        success: false, 
-        message: remaining > 0 
-          ? `⚠️ Tu peux ajouter seulement ${remaining} de "${item.name}"` 
+      return {
+        success: false,
+        message: remaining > 0
+          ? `⚠️ Tu peux ajouter seulement ${remaining} de "${item.name}"`
           : `⚠️ Tu as déjà atteint la quantité maximum de "${item.name}"`
       };
     }
@@ -81,7 +89,7 @@ export class CartService {
 
   removeItem(id: number, size: string) {
     this.cartItems = this.cartItems.filter(
-    p => !(p.id === id && p.size === size));
+      p => !(p.id === id && p.size === size));
     this.updateCount();
   }
 
@@ -109,5 +117,5 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
 
-  
+
 }

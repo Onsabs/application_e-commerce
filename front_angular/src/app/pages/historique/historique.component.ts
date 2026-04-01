@@ -26,6 +26,7 @@ export interface Order {
 // Ajouter export pour OrderItem
 export interface OrderItem {
   name: string;
+  size: string;
   price: number;
   quantity: number;
   image?: string | string[];

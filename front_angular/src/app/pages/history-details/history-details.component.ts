@@ -14,7 +14,8 @@ export class HistoryDetailsComponent implements OnInit {
 
   order: Order | null = null;
   items: OrderItem[] = [];
-
+  selectedProductId: string = '';
+  reclamationMessage: string = '';
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -116,4 +117,30 @@ export class HistoryDetailsComponent implements OnInit {
   getImage(item: any): string {
     return Array.isArray(item.image) ? item.image[0] : item.image;
   }
+  submitReclamation() {
+  if (!this.selectedProductId || !this.reclamationMessage) {
+    alert('Veuillez remplir tous les champs');
+    return;
+  }
+
+  const reclamation = {
+    orderId: this.order?.id,
+    productName: this.selectedProductId,
+    message: this.reclamationMessage,
+    date: new Date()
+  };
+
+  console.log('Réclamation:', reclamation);
+
+  // temporaire
+  const data = JSON.parse(localStorage.getItem('reclamations') || '[]');
+  data.push(reclamation);
+  localStorage.setItem('reclamations', JSON.stringify(data));
+
+  alert('Réclamation envoyée');
+
+  // reset
+  this.selectedProductId = '';
+  this.reclamationMessage = '';
+}
 }

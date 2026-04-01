@@ -19,6 +19,7 @@
       
       <p><strong>Message :</strong> {{ order.message || 'Aucun message' }}</p>
     </div>
+   
 
    
 
@@ -31,6 +32,7 @@
             <th>Image</th>
             <th>Produit</th>
             <th>Quantité</th>
+            <th>taille</th>
             <th>Prix</th>
            
           </tr>
@@ -42,6 +44,7 @@
       </td>
             <td>{{ item.name }}</td>
             <td>{{ item.quantity }}</td>
+            <td>{{ item.size }}</td>
             <td>{{ item.price }} $</td>
           </tr>
         </tbody>
@@ -51,6 +54,29 @@
     <div *ngIf="!items.length">
       <p>Aucun produit dans cette commande.</p>
     </div>
+     <!-- RECLAMATION SIMPLE -->
+<div class="reclamation-box">
+  <h3>Faire une réclamation</h3>
+
+  <!-- SELECT PRODUIT -->
+  <select [(ngModel)]="selectedProductId">
+    <option value="" disabled selected>-- Choisir un produit --</option>
+    <option *ngFor="let item of items" [value]="item.name">
+      {{ item.name }} ({{ item.size }})
+    </option>
+  </select>
+
+  <!-- TEXTAREA -->
+  <textarea
+    [(ngModel)]="reclamationMessage"
+    placeholder="Décrire votre problème..."
+  ></textarea>
+
+  <!-- BUTTON -->
+  <button (click)="submitReclamation()">
+    Envoyer
+  </button>
+</div>
    <div class="invoice">
   <button (click)="generatePDF()">
     Télécharger la facture

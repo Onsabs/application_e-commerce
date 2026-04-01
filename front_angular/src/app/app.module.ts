@@ -12,9 +12,7 @@ import { LayoutComponent } from './layout/layout.component';
 
 // PAGES
 import { HomeComponent } from './pages/home/home.component';
-import { CartComponent } from './pages/cart/cart.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
@@ -28,6 +26,8 @@ import { OrderSuccessComponent } from './pages/order-success/order-success.compo
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CartComponent } from './pages/cart/cart.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 @NgModule({
   declarations: [
