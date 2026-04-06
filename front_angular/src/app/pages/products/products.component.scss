@@ -145,7 +145,7 @@
   outline: none;
   background-color: var(--accent);
   box-shadow: #f3f3f3;
-  color: #fff;
+  color: var(--text);
   width: 100%;
   height: 100%;
   padding: 10px 15px;
@@ -159,7 +159,8 @@
 }
 
 .dropdown-toggle:hover {
-  background-color: var(--icon-hover);
+  background-color: var(--accent-hover);
+  color: var(--trie);
 }
 
 .close-btn {
@@ -333,11 +334,11 @@
 }
 
 .pagination button:hover {
-  background: #f2f2f2;
+  background: var(--accent-hover);
 }
 
 .pagination .active {
-  background: black;
+  background: var(--accent);
   color: white;
 }
 

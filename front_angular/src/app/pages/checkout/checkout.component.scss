@@ -3,7 +3,7 @@
   margin: auto;
   padding-top: 120px;
   min-height: 80vh;
-  color: var(--cart-text);
+  color: var(--text);
 }
 
 /* SECTION */
@@ -22,7 +22,7 @@
   background: var(--bg);
   cursor: pointer;
   font-weight: 600;
-  color: var(--cart-text);
+  color: var(--text);
   border-bottom: 1px solid var(--cart-border);
   transition: 0.3s;
 }
@@ -38,7 +38,7 @@
   flex-direction: column;
   gap: 12px;
   animation: fadeIn 0.3s ease;
-  color: var(--cart-text);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -63,7 +63,7 @@ textarea {
 input:focus,
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(230, 0, 92, 0.1);
+  box-shadow: 0 0 0 2px var(--shadow);
 }
 
 textarea {
@@ -86,8 +86,8 @@ textarea {
   margin-top: 10px;
   padding: 12px;
   border: none;
-  background: var(--accent);
-  color: white;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--text);
   font-weight: bold;
   cursor: pointer;
   border-radius: 6px;
@@ -95,7 +95,9 @@ textarea {
 }
 
 .order-btn:hover {
-  background: var(--icon-hover);
+  color: var(--trie);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px var(--shadow);
 }
 
 /* ANIMATION */
@@ -190,8 +192,8 @@ td {
 .return {
   margin-top: 15px;
   width: 100%;
-  background: var(--accent);
-  color: white;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--text);
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -200,5 +202,8 @@ td {
 }
 
 .return:hover {
-  background: var(--icon-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px var(--shadow);
+  color: var(--trie);
+
 }

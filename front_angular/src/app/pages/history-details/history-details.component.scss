@@ -14,7 +14,7 @@
 /* BIG CARD */
 .details-container {
   width: 95%;
-  max-width: 1000px; /* 🔥 أكبر */
+  max-width: 1000px;
   margin: auto;
   background: var(--card-bg);
   padding: 40px;
@@ -63,19 +63,19 @@
   padding: 18px;
   border-radius: 10px;
   margin-bottom: 25px;
-  line-height: 1.8; /* 🔥 interligne */
+  line-height: 1.8; 
 }
 
 /* FACTURE CONTAINER */
 .invoice {
   display: flex;
-  justify-content: flex-end; /* 🔥 يجي على اليمين */
+  justify-content: flex-end; 
   margin: 25px 0;
 }
 
 .invoice button {
   padding: 12px 22px;
-  background: #4CAF50; /* 🔥 vert doux */
+  background: #4CAF50; 
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -86,7 +86,7 @@
 
 /* hover */
 .invoice button:hover {
-  background: #43a047; /* أغمق شوية */
+  background: #43a047;
   transform: translateY(-2px);
 }
 
@@ -116,7 +116,7 @@
 .products h3 {
   margin-bottom: 20px;
   font-size: 20px;
-  color: var(--cart-text);
+  color: var(--text);
 }
 
 /* TABLE */
@@ -184,7 +184,8 @@ tr:hover {
   max-width: 520px;
   margin: 40px auto;
   padding: 30px 35px;
-  background: linear-gradient(135deg, #fdfbfb, #ebedee); /* background doux moderne */
+  background-color: var(--card-bg);
+  /*background: linear-gradient(135deg, #fdfbfb, #ebedee);*/ 
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.1);
   font-family: 'Poppins', sans-serif;
@@ -199,7 +200,8 @@ tr:hover {
 /* Titre */
 .reclamation-box h3 {
   text-align: center;
-  color: #ff6f61; /* couleur chaude et moderne */
+  color: var(--accent);
+ /* color: #ff6f61; */
   font-size: 24px;
   margin-bottom: 25px;
   letter-spacing: 1.2px;
@@ -219,8 +221,8 @@ tr:hover {
 }
 
 .reclamation-box select:focus {
-  border-color: #ff6f61;
-  box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 10 18px var(--shadow);
   outline: none;
 }
 
@@ -238,8 +240,8 @@ tr:hover {
 }
 
 .reclamation-box textarea:focus {
-  border-color: #ff6f61;
-  box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 10 18px var(--shadow);
   outline: none;
 }
 
@@ -253,7 +255,7 @@ tr:hover {
 .reclamation-box button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #ff6f61, #ff3b2f);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -264,9 +266,8 @@ tr:hover {
 }
 
 .reclamation-box button:hover {
-  background: linear-gradient(135deg, #ff8360, #ff4c3b);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 111, 97, 0.3);
+  box-shadow: 0 10px 25px var(--shadow);
 }
 
 /* Responsive */

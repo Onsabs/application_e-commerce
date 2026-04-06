@@ -46,7 +46,7 @@
 }
 
 .thumbs img:hover {
-  border-color: var(--pd-accent);
+  border-color: var(--accent);
   transform: scale(1.05);
 }
 
@@ -60,7 +60,7 @@
 
 .price {
   font-size: 24px;
-  color: var(--pd-accent);
+  color: var(--accent);
   margin: 10px 0;
 }
 
@@ -130,14 +130,14 @@
 }
 
 .quantity button:hover {
-  background: var(--pd-accent);
+  background: var(--accent);
   color: white;
 }
 
 .add-cart {
   padding: 12px;
   width: 60%;
-  background: var(--pd-accent);
+  background: var(--accent);
   border: none;
   color: white;
   cursor: pointer;
@@ -147,7 +147,7 @@
 
 .add-cart:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 102, 144, 0.4);
+  box-shadow: 0 8px 20px var(--shadow);
 }
 
 .wishlist-wrapper {
@@ -164,7 +164,7 @@
   border-radius: 12px;
   border: 1px solid var(--pd-border);
   background: var(--pd-card);
-  color: var(--pd-text);
+  color: var(--text);
   font-size: 14px;
   width: fit-content;
 
@@ -172,7 +172,7 @@
 }
 
 .wishlist-wrapper label.container:hover {
-  border-color: var(--pd-accent);
+  border-color: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -272,16 +272,16 @@
 
 /* hover */
 .size-list button:hover {
-  border-color: var(--pd-accent);
-  color: var(--pd-accent);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* active */
 .size-list button.active {
-  background: var(--pd-accent);
-  border-color: var(--pd-accent);
+  background: var(--accent);
+  border-color: var(--accent);
   color: white;
-  box-shadow: 0 0 10px rgba(255, 102, 144, 0.5);
+  box-shadow: 0 5px 20px var(--shadow);
 }
 
 .related-title {
@@ -305,6 +305,9 @@
   cursor: pointer;
 }
 
+.related-card:hover{
+  box-shadow: 0 5px 20px var(--shadow);
+}
 .related-card img {
   width: 100%;
   aspect-ratio: 1 / 1;

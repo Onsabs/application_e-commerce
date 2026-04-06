@@ -3,7 +3,7 @@
     margin: auto;
     padding-top: 120px;
     min-height: 80vh;
-    color: var(--cart-text);
+    color: var(--text);
 }
 
 h2 {
@@ -68,7 +68,7 @@ td {
 .qty button {
     width: 28px;
     height: 28px;
-    background: var(--cart-accent);
+    background: var(--accent);
     border: none;
     color: white;
     border-radius: 6px;
@@ -78,6 +78,7 @@ td {
 
 .qty button:hover {
     transform: scale(1.1);
+    background: var(--accent-hover);
 }
 
 /* DELETE */
@@ -101,21 +102,21 @@ td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--cart-muted);
+    color: var(--bg);
     text-align: center;
 }
 
 /* icon */
 .empty-icon {
     font-size: 70px;
-    color: var(--cart-text);
+    color: var(--text);
     margin-bottom: 20px;
     animation: float 2s infinite;
 }
 
 /* title */
 .empty-cart h2 {
-    color: var(--cart-text);
+    color: var(--text);
     margin-bottom: 10px;
 }
 
@@ -128,18 +129,19 @@ td {
 /* button */
 .shop-btn {
     padding: 10px 20px;
-    background: var(--cart-accent);
+    background: var(--accent);
     border: none;
     border-radius: 6px;
-    color: white;
+    color: var(--text);
     cursor: pointer;
     transition: 0.3s;
 }
 
 .shop-btn:hover {
-    background: #e0557d;
+    background: var(--accent-hover);
+    color: var(--trie);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 102, 144, 0.4);
+    box-shadow: 0 15px 25px var(--shadow);
 }
 
 /* animation */
@@ -178,27 +180,28 @@ td {
 
 .continue {
     background: transparent;
-    color: var(--cart-text);
+    color: var(--text);
     position: relative;
     overflow: hidden;
 }
 
 .continue:hover {
-    background: #ff6690;
-    color: white;
-    box-shadow: 0 5px 15px rgba(255, 102, 144, 0.4);
+    background: var(--accent);
+    color: var(--text);
+    box-shadow: 0 5px 15px var(--shadow);
     transform: translateY(-2px);
 }
 
 .clear {
-    background: var(--cart-accent);
-    color: white;
+    background: var(--accent);
+    color: var(--text);
     font-weight: 500;
 }
 
 .clear:hover {
-    background: #e63956;
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+    background: var(--accent-hover);
+    color: var(--trie);
+    box-shadow: 0 15px 25px var(--shadow);
     transform: translateY(-2px);
 }
 
@@ -225,7 +228,7 @@ td {
 /* BOX */
 .modal-box {
     background: var(--cart-bg);
-    color: var(--cart-text);
+    color: var(--text);
     padding: 25px;
     border-radius: 10px;
     text-align: center;
@@ -250,10 +253,10 @@ td {
 }
 
 .confirm {
-    background: var(--cart-accent);
+    background: var(--accent);
     border: none;
     padding: 8px 15px;
-    color: white;
+    color: var(--text);
     cursor: pointer;
 }
 
@@ -318,8 +321,7 @@ td {
     margin-top: 20px;
     width: 100%;
     padding: 14px;
-
-    background: linear-gradient(135deg, #ff6690, #ff3366);
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
     border: none;
     color: white;
     cursor: pointer;
@@ -333,7 +335,7 @@ td {
 
 .checkout:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+    box-shadow: 0 10px 25px var(--shadow);
 }
 
 .checkout:active {

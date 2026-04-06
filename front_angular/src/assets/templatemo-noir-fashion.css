@@ -17,11 +17,15 @@ section {
 
 /* LIGHT (default) */
 body.light-mode {
-	--accent: #ff3366;
+	--accent: #a4c3b2;
+	--accent-hover: #295C57;
 	--bg: #ffffff;
 	--section-bg: #ffffff;
 	--text: #111;
 	--card: #ffffff;
+	--shadow:rgba(41, 92, 87, 0.5);
+	--trie: white;
+	--border: #e5e5e5;
 
 	--nav-bg: rgba(255, 255, 255, 0.95);
 	--nav-bg-scroll: rgba(255, 255, 255, 0.98);
@@ -30,7 +34,7 @@ body.light-mode {
 
 	--icon-color: #111;
 	--icon-bg: rgba(0, 0, 0, 0.05);
-	--icon-hover: #ff1149;
+	--icon-hover: #a4c3b2;
 
 	--pd-bg: #ffffff;
 	--pd-card: #f8f8f8;
@@ -67,11 +71,14 @@ body.light-mode {
 
 /* DARK */
 body.dark-mode {
-	--accent: #ff3366;
+	--accent: #295C57;
+	--accent-hover: #a4c3b2;
 	--bg: #000000;
 	--section-bg: #0a0a0a;
 	--text: #ffffff;
 	--card: #000000;
+	--shadow:rgba(41, 92, 87, 0.5);
+	--trie: black;
 
 	--nav-bg: rgba(0, 0, 0, 0.95);
 	--nav-bg-scroll: rgba(0, 0, 0, 0.98);
@@ -80,7 +87,7 @@ body.dark-mode {
 
 	--icon-color: #fff;
 	--icon-bg: rgba(255, 255, 255, 0.1);
-	--icon-hover: #ff547c;
+	--icon-hover: #295C57;
 
 	--pd-bg: #000000;
 	--pd-card: #111010;
@@ -120,6 +127,7 @@ body {
 	color: var(--text);
 	transition: 0.3s;
 	overflow-x: hidden;
+	
 }
 
 /* Navigation */
@@ -161,14 +169,9 @@ nav.scrolled {
 	transform: scale(1.05);
 }
 
-.logo-svg {
-	width: 40px;
-	height: 40px;
-	margin-right: 10px;
-}
-
 .logo-text {
 	font-size: 28px;
+	padding: 10px 15px;
 	font-weight: 900;
 	letter-spacing: -2px;
 	background: linear-gradient(135deg, var(--text), var(--accent));
@@ -247,7 +250,7 @@ nav.scrolled {
 .nav-cta:hover {
 	background: var(--accent-hover);
 	transform: translateY(-2px);
-	box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+	box-shadow: 0 5px 15px var(--shadow);
 }
 
 .nav-cta::before {
@@ -508,7 +511,7 @@ nav.scrolled {
 .hero-badge {
 	display: inline-block;
 	padding: 8px 20px;
-	background: rgba(255, 51, 102, 0.1);
+	background: var(--shadow);
 	border: 1px solid var(--accent);
 	color: var(--accent);
 	font-size: 11px;
@@ -525,7 +528,7 @@ nav.scrolled {
 	position: absolute;
 	width: 30px;
 	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.5), transparent);
+	background: linear-gradient(90deg, transparent, var(--shadow), transparent);
 	left: -30px;
 	animation: shimmer 3s ease infinite;
 }
@@ -681,7 +684,7 @@ nav.scrolled {
 
 .cta-button.primary:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 20px 40px rgba(255, 51, 102, 0.3);
+	box-shadow: 0 20px 40px var(--shadow);
 }
 
 .cta-button.outline {
@@ -1006,9 +1009,7 @@ nav.scrolled {
 .collection-thumbnail {
 	width: 100%;
 	height: 300px;
-	background:
-		/*linear-gradient(45deg, #2a2a2a, #1a1a1a)*/
-		var(--bg);
+	background:	var(--bg);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1026,7 +1027,7 @@ nav.scrolled {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(45deg, transparent 30%, rgba(255, 51, 102, 0.1) 50%, transparent 70%);
+	background: linear-gradient(45deg, transparent 30%, rgba(41, 92, 87, 0.2) 50%, transparent 70%);
 	transform: translateX(-100%);
 	transition: transform 0.8s ease;
 }
@@ -1048,7 +1049,7 @@ nav.scrolled {
 
 .collection-card:hover {
 	transform: translateY(-5px);
-	box-shadow: 0 15px 30px rgba(255, 51, 102, 0.2);
+	box-shadow: 0 15px 30px var(--shadow);
 }
 
 .card-content {
@@ -1170,7 +1171,7 @@ nav.scrolled {
 .highlight-icon {
 	width: 60px;
 	height: 60px;
-	background: linear-gradient(135deg, var(--accent), #ff6690);
+	background: linear-gradient(135deg, var(--accent));
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -1248,7 +1249,7 @@ nav.scrolled {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(45deg, transparent 30%, rgba(255, 51, 102, 0.1) 50%, transparent 70%);
+	background: linear-gradient(45deg, transparent 30%, var(--shadow) 50%, transparent 70%);
 	transform: translateX(-100%);
 	transition: transform 0.8s ease;
 }
@@ -1274,7 +1275,7 @@ nav.scrolled {
 .feature-cta:hover {
 	background: var(--accent-hover);
 	transform: translateY(-2px);
-	box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+	box-shadow: 0 10px 30px var(--shadow);
 }
 
 /* Testimonials */
@@ -1330,7 +1331,7 @@ nav.scrolled {
 .author-avatar {
 	width: 50px;
 	height: 50px;
-	background: linear-gradient(135deg, var(--accent), #ff6690);
+	background: linear-gradient(135deg, var(--accent));
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -1500,7 +1501,7 @@ nav.scrolled {
 	outline: none;
 	background: rgba(255, 255, 255, 0.08);
 	border-color: var(--accent);
-	box-shadow: 0 0 20px rgba(255, 51, 102, 0.1);
+	box-shadow: 0 0 20px var(--shadow);
 }
 
 .form-group input::placeholder,
@@ -1555,14 +1556,14 @@ nav.scrolled {
 
 .form-submit:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+	box-shadow: 0 10px 30px var(--shadow);
 }
 
 .contact-info {
 	padding: 50px;
-	background: linear-gradient(135deg, rgba(255, 51, 102, 0.08), rgba(255, 51, 102, 0.02));
+	background: linear-gradient(135deg, rgba(42, 80, 49, 0.08), rgba(28, 62, 32, 0.02));
 	border-radius: 10px;
-	border: 1px solid rgba(255, 51, 102, 0.1);
+	border: 1px solid var(--shadow);
 }
 
 .info-item {
@@ -1580,14 +1581,14 @@ nav.scrolled {
 .info-icon {
 	width: 60px;
 	height: 60px;
-	background: linear-gradient(135deg, var(--accent), #ff6690);
+	background: linear-gradient(135deg, var(--accent));
 	border-radius: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 24px;
 	flex-shrink: 0;
-	box-shadow: 0 5px 15px rgba(255, 51, 102, 0.2);
+	box-shadow: 0 5px 15px var(--shadow);
 }
 
 .info-content h3 {
@@ -2085,10 +2086,10 @@ footer {
 
 @keyframes glowText {
 	0% {
-		text-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+		text-shadow: 0 0 5px var(--shadow);
 	}
 
 	100% {
-		text-shadow: 0 0 20px rgba(255, 51, 102, 0.8);
+		text-shadow: 0 0 20px rgba(54, 114, 59, 0.8);
 	}
 }
