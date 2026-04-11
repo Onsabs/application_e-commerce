@@ -2,17 +2,14 @@
   <div class="nav-container">
 
     <!-- Logo -->
-    <a href="home" class="logo-link">
+    <a routerLink="/home" class="logo-link">
+      <img src="assets/images/avatar-01.jpg" alt="logo" class="logo-img">
       <span class="logo-text">NOIR</span>
     </a>
-    <button class="theme-btn" (click)="toggleTheme()">
-      {{ isDark ? '☀️ Light' : '🌙 Dark' }}
-    </button>
-
 
     <!-- Menu -->
     <ul class="nav-links">
-      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/home" routerLinkActive="active"  (click)="closeMenu()">Home</a></li>
       <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
       <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
       <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
@@ -22,57 +19,39 @@
     <div class="nav-icons">
 
       <!-- Wishlist -->
-
-      <div class="icon-btn" id="wishlistIcon">
+      <div class="icon-btn" (click)="closeMenu()">
         <a routerLink="/favorites">
-          <i class="fa fa-heart"></i></a>
-      </div>
-
-      <!-- Cart -->
-      <div class="icon-btn cart" [class.bump]="animateCart" id="cartIcon">
-        <a routerLink="/cart">
-          <i class="fa fa-shopping-cart"></i>
-          <span class="cart-count" *ngIf="cartCount > 0">
-            {{cartCount}}
-          </span>
-
+          <i class="fa fa-heart"></i>
         </a>
       </div>
 
-      <!-- Account -->
-
-
-
-      <div class="icon-btn profile-menu">
-
-
-        <i class="fa fa-user" (click)="toggleMenu()"></i>
-
-        <!-- Dropdown -->
-        <div class="dropdown-menu" *ngIf="isMenuOpen">
-
-          <a routerLink="/profile" (click)="closeMenu()">Voir Profil</a>
-          <a routerLink="/edit-profile" (click)="closeMenu()">Modifier Profil</a>
-          <a routerLink="/historique" (click)="closeMenu()">Historique</a>
-          <a (click)="logout()">Logout</a>
-
-        </div>
-
-
+      <!-- Cart -->
+      <div class="icon-btn cart" [class.bump]="animateCart" (click)="closeMenu()">
+        <a routerLink="/cart">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="cart-count" *ngIf="cartCount > 0">
+            {{ cartCount }}
+          </span>
+        </a>
       </div>
 
+      <!-- Theme -->
+      <div class="icon-btn theme-toggle" (click)="toggleTheme()" (click)="closeMenu()">
+        <i class="fa" [ngClass]="isDark ? 'fa-sun' : 'fa-moon'"></i>
+      </div>
+
+      <!-- Profile -->
+      <div class="icon-btn profile-menu">
+        <i class="fa fa-user" (click)="toggleMenu()"></i>
+
+        <div class="dropdown-menu" *ngIf="isMenuOpen">
+          <a routerLink="/profile">Voir Profil</a>
+          <a routerLink="/edit-profile">Modifier Profil</a>
+          <a routerLink="/historique">Historique</a>
+          <a (click)="logout()">Logout</a>
+        </div>
+      </div>
 
     </div>
   </div>
-
-  <!-- Mobile menu -->
-  <div class="mobile-nav" id="mobileNav">
-    <ul class="mobile-nav-links">
-      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
-      <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
-    </ul>
-  </div>
-
 </nav>
