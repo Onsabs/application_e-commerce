@@ -13,6 +13,7 @@ export class ProductService {
       category: "women",
       oldPrice: 399,
       badge: "sale",
+      description: "High quality streetwear with modern design.",
       image: "assets/images/urban-edge.avif",
       sizes: [
         { size: 'S', stock: 3 },

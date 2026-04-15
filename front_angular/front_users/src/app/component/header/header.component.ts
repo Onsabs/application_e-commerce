@@ -11,14 +11,22 @@ export class HeaderComponent {
   cartCount = 0;
   animateCart = false;
 
-  isMenuOpen = false;
+  isMenuOpen = false;        // mobile menu
+  isProfileOpen = false;     // profile menu
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    this.isProfileOpen = false;
+  }
+
+  toggleProfile() {
+    this.isProfileOpen = !this.isProfileOpen;
+    this.isMenuOpen = false;
   }
 
   closeMenu() {
     this.isMenuOpen = false;
+    this.isProfileOpen = false;
   }
 
   logout() {

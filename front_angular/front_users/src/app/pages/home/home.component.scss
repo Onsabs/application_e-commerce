@@ -12,7 +12,7 @@
     display: flex;
     width: 100%;
     padding-left: 80px;
-    padding-right: 0; /* باش الصورة تخرج */
+    padding-right: 0;
     align-items: center;
 }
 
@@ -30,7 +30,11 @@
     font-size: 65px;
     font-weight: 900;
     line-height: 1.1;
-    color: #6BAF92;
+    /*color: #6BAF92;*/
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
 }
 
@@ -46,18 +50,26 @@
 .cta-button {
     padding: 16px 40px;
     border-radius: 40px;
-    background: #6BAF92;
+    /*background: #6BAF92;*/
     color: white;
     font-weight: 600;
     text-decoration: none;
     width: fit-content;
     transition: 0.4s;
-    box-shadow: 0 10px 25px rgba(107,175,146,0.3);
+    box-shadow: 0 10px 25px rgba(107, 175, 146, 0.3);
 }
 
-.cta-button:hover {
-    background: #4E8F76;
-    transform: translateY(-5px) scale(1.05);
+.cta-button.primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: white;
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+/* hover */
+
+.cta-button.primary:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 /* ===== IMAGE SIDE ===== */
@@ -66,30 +78,28 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-right: -120px; /* image تخرج */
+    margin-right: -120px;
     padding-top: 90px;
 }
 
 /* ===== IMAGE WRAPPER ===== */
 .image-wrapper {
     position: relative;
-    width: 150%; /* 🔥 العرض الكبير */
-    height: 650px; /* نقص الطول */
+    width: 150%;
+    height: 650px;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.25);
 }
 
-/* overlay خفيف */
+/* overlay */
 .image-wrapper::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.15),
-        transparent
-    );
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.15),
+            transparent);
 }
 
 /* ===== IMAGE ===== */
@@ -108,6 +118,7 @@
     from {
         transform: scale(1);
     }
+
     to {
         transform: scale(1.12);
     }
@@ -119,6 +130,7 @@
         transform: translateX(-60px);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;

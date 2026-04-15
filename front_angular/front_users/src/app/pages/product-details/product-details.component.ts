@@ -129,4 +129,9 @@ export class ProductDetailsComponent {
 
     return product.sizes.reduce((total: number, s: any) => total + s.stock, 0);
   }
+  openSection: string | null = null;
+
+  toggleSection(section: string) {
+    this.openSection = this.openSection === section ? null : section;
+  }
 }

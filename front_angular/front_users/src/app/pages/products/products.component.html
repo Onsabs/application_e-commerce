@@ -1,10 +1,32 @@
 <section class="collections" id="collections">
 
- <div class="filter-bar">
+    <div class="filters-container"
+        style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:0px;">
+
+        <div class="category-tabs">
+            <button class="tab-btn" [class.active]="selectedCategory=='all'" (click)="selectCategory('all')">
+                tous
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='women'" (click)="selectCategory('women')">
+                femme
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='men'" (click)="selectCategory('men')">
+                homme
+            </button>
+
+            <button class="tab-btn" [class.active]="selectedCategory=='kids'" (click)="selectCategory('kids')">
+                enfant
+            </button>
+        </div>
+
+    </div>
+    <div class="filter-bar">
         <!-- sort -->
         <div class="custom-dropdown">
             <button class="dropdown-toggle" (click)="toggleDropdown()">
-                <i class="fa-solid fa-sliders fa-xl"></i> filtrer par
+                <i class="fa-solid fa-sliders "></i> <span>filtrer</span>
             </button>
             <div class="dropdown-overlay" [class.open]="dropdownOpen" (click)="toggleDropdown()"></div>
             <div class="dropdown-menu" [class.open]="dropdownOpen">
@@ -88,30 +110,9 @@
 
         </div>
     </div>
-    <div class="filters-container"
-        style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:30px;">
+    
 
-        <div class="category-tabs">
-            <button class="tab-btn" [class.active]="selectedCategory=='all'" (click)="selectCategory('all')">
-                tous
-            </button>
 
-            <button class="tab-btn" [class.active]="selectedCategory=='women'" (click)="selectCategory('women')">
-                femme
-            </button>
-
-            <button class="tab-btn" [class.active]="selectedCategory=='men'" (click)="selectCategory('men')">
-                homme
-            </button>
-
-            <button class="tab-btn" [class.active]="selectedCategory=='kids'" (click)="selectCategory('kids')">
-                enfant
-            </button>
-        </div>
-
-    </div>
-
-   
     <div class="grid">
 
         <div class="collection-card" *ngFor="let product of paginatedProducts">
