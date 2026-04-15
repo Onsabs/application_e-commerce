@@ -94,7 +94,7 @@ export class ProductsComponent {
   }
 
   currentPage = 1;
-  itemsPerPage = 4;
+  itemsPerPage = 8;
 
   get totalPages() {
     return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
