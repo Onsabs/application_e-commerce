@@ -12,25 +12,23 @@ import { ReviewListComponent } from './features/reviews/review-list/review-list.
 import { UserDetailsComponent } from './features/users/user-details/user-details.component';
 import { UserListComponent } from './features/users/user-list/user-list.component';
 import { CategoryListComponent } from './features/categories/category-list/category-list.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ProductFormComponent } from './products/product-form/product-form.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule) },
-      { path: 'users', loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule) },
-      { path: 'orders', loadChildren: () => import('./features/orders/orders.module').then(m => m.OrdersModule) },
-      { path: 'payments', loadChildren: () => import('./features/payments/payments.module').then(m => m.PaymentsModule) },
-      { path: 'livraison', loadChildren: () => import('./features/livraison/livraison.module').then(m => m.LivraisonModule) },
-      { path: 'reviews', loadChildren: () => import('./features/reviews/reviews.module').then(m => m.ReviewsModule) },
-      { path: 'promotions', loadChildren: () => import('./features/promotions/promotions.module').then(m => m.PromotionsModule) },
+      { path:'dashboard', component:DashboardComponent},
       { path:'promotion-form', component:PromotionFormComponent},
       { path:'promotion-list', component:PromotionListComponent},
       { path:'category-form', component:CategoryFormComponent},
       { path:'promotion-list', component:PromotionListComponent},
       { path:'category-list', component:CategoryListComponent},
+      {path:'product-list', component:ProductListComponent},
+      {path:'product-form', component:ProductFormComponent},
 
       { path:'livraison-list', component:LivraisonListComponent},
       { path:'order-details', component:OrderDetailsComponent},
