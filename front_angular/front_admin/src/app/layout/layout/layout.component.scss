@@ -1,0 +1,9 @@
+.content {
+  transition: all 0.3s ease;
+  margin-left: 250px;
+}
+
+/* quand sidebar fermée */
+.content.open {
+  margin-left: 0;
+}

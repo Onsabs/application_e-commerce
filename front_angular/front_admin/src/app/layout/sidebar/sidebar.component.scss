@@ -1,0 +1,38 @@
+details summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary:hover {
+  background: rgba(0,0,0,0.05);
+  border-radius: 6px;
+}
+
+details a.nav-link {
+  font-size: 14px;
+  color: #555;
+
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar {
+  transition: all 0.3s ease;
+}
+
+/* état fermé */
+.sidebar.closed {
+  width: 0 !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+

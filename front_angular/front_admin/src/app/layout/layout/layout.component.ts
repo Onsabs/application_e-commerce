@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
 
+  isSidebarClosed = false;
+
+  toggleSidebar() {
+    this.isSidebarClosed = !this.isSidebarClosed;
+  }
 }

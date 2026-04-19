@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule // 👈 هذا هو الحل
+    RouterModule 
   ]
 })
 export class LayoutModule { }

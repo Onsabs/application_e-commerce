@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  @Output() toggleSidebarEvent = new EventEmitter<void>();
+
+  toggleSidebar(event: Event) {
+    event.preventDefault();
+    this.toggleSidebarEvent.emit();
+  }
 }

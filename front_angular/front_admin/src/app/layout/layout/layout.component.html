@@ -1,8 +1,9 @@
-<app-sidebar></app-sidebar>
+<app-sidebar [isClosed]="isSidebarClosed"></app-sidebar>
 
-<div class="content">
-  <app-navbar></app-navbar>
+<div class="content" [class.open]="isSidebarClosed">
+
+  <app-navbar (toggleSidebarEvent)="toggleSidebar()"></app-navbar>
 
   <router-outlet></router-outlet>
-</div>
 
+</div>
