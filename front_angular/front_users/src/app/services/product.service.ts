@@ -21,9 +21,9 @@ export class ProductService {
         "assets/images/t-shirt 2 (4).jpg",
       ],
       sizes: [
-        { size: 'S', stock: 3 },
-        { size: 'M', stock: 5 },
-        { size: 'L', stock: 2 },
+        { size: 'S', stock: 0 },
+        { size: 'M', stock: 0 },
+        { size: 'L', stock: 0 },
         { size: 'XL', stock: 0 }
       ]
     },
@@ -150,7 +150,8 @@ export class ProductService {
     },
 
     {
-      id: "Robe",
+      id: 8,
+      name: "Robe",
       price: 199,
       category: "women",
       badge: "trending",
@@ -190,7 +191,8 @@ export class ProductService {
     },
 
     {
-      id: "Robe",
+      id: 10,
+      name:"Robe", 
       price: 399,
       category: "women",
       badge: "bestseller",

@@ -33,7 +33,7 @@ export class CheckoutComponent {
   ) { }
 
   showToast(message: string) {
-    this.snackBar.open(message, 'OK', {
+    this.snackBar.open(message, '✕', {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -23,6 +24,7 @@ export class ProductDetailsComponent {
     private productService: ProductService,
     private cartService: CartService,
     private favService: FavoritesService,
+    private authService: AuthService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -33,6 +35,9 @@ export class ProductDetailsComponent {
     });
   }
 
+  isLoggedIn(): boolean {
+  return !!localStorage.getItem('token');
+}
   loadProduct(id: number) {
     this.product = this.productService.getProductById(id);
 
@@ -54,6 +59,10 @@ export class ProductDetailsComponent {
   }
 
   selectSize(sizeObj: any) {
+    if (sizeObj.stock === 0) {
+      this.showToast(`❌ Taille ${sizeObj.size} indisponible`, 'error');
+      return;
+    }
     this.selectedSize = sizeObj;
     this.quantity = 1;
   }
@@ -81,7 +90,7 @@ export class ProductDetailsComponent {
   }
 
   showToast(message: string, type: 'success' | 'error' = 'success') {
-    this.snackBar.open(message, 'Fermer', {
+    this.snackBar.open(message, '✕', {
       duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
@@ -134,4 +143,100 @@ export class ProductDetailsComponent {
   toggleSection(section: string) {
     this.openSection = this.openSection === section ? null : section;
   }
+reviews: any[] = [
+  { id: 1, stars: 5, comment: "Produit excellent 🔥" },
+  { id: 2, stars: 4, comment: "Très bon qualité" }
+];
+
+/* ⭐ ADD */
+newReview = {
+  stars: 0,
+  comment: ''
+};
+
+/* ✏ EDIT */
+editReview = {
+  stars: 0,
+  comment: ''
+};
+
+editingId: number | null = null;
+
+/* ⭐ AVERAGE */
+getAverageRating(): number {
+  if (this.reviews.length === 0) return 0;
+
+  const sum = this.reviews.reduce((acc, r) => acc + r.stars, 0);
+  return +(sum / this.reviews.length).toFixed(1);
+}
+
+/* ⭐ SELECT STAR (ADD) */
+setRating(stars: number) {
+  this.newReview.stars = stars;
+}
+
+/* ⭐ SELECT STAR (EDIT) */
+setEditRating(stars: number) {
+  this.editReview.stars = stars;
+}
+
+/* ➕ ADD REVIEW */
+addReview() {
+  if (this.newReview.stars === 0 || !this.newReview.comment.trim()) return;
+
+  this.reviews.push({
+    id: Date.now(),
+    stars: this.newReview.stars,
+    comment: this.newReview.comment
+  });
+
+  this.newReview = { stars: 0, comment: '' };
+}
+
+/* ✏ START EDIT */
+startEdit(review: any) {
+  this.editingId = review.id;
+
+  this.editReview = {
+    stars: review.stars,
+    comment: review.comment
+  };
+}
+
+/* ✅ UPDATE REVIEW */
+updateReview(id: number) {
+  const index = this.reviews.findIndex(r => r.id === id);
+
+  if (index !== -1) {
+    this.reviews[index] = {
+      id,
+      stars: this.editReview.stars,
+      comment: this.editReview.comment
+    };
+  }
+
+  this.cancelEdit();
+}
+
+/* 🗑 DELETE */
+confirmDeleteId: number | null = null;
+askDelete(id: number) {
+  this.confirmDeleteId = id;
+}
+
+confirmDelete(id: number) {
+  this.reviews = this.reviews.filter(r => r.id !== id);
+  this.confirmDeleteId = null;
+}
+
+cancelDelete() {
+  this.confirmDeleteId = null;
+}
+
+/* ❌ CANCEL */
+cancelEdit() {
+  this.editingId = null;
+  this.editReview = { stars: 0, comment: '' };
+}
+
 }

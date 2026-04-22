@@ -15,6 +15,9 @@ section {
 	scroll-margin-top: 70px;
 }
 
+
+
+
 /* LIGHT (default) */
 body.light-mode {
 	--accent: #a4c3b2;
@@ -119,6 +122,80 @@ body.dark-mode {
 	--footer-text: #ffffff;
 	--footer-muted: #aaa;
 	--footer-border: #222;
+}
+/* ===== TOAST BASE (PRO VERSION) ===== */
+.mat-mdc-snack-bar-container {
+  background: var(--pd-card) !important;
+  color: var(--pd-text) !important;
+  border: 1px solid var(--pd-border);
+  border-radius: 16px !important;
+  padding: 0 !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  overflow: hidden;
+  min-width: 260px;
+  max-width: 340px;
+}
+
+/* SUCCESS */
+.mat-mdc-snack-bar-container.success {
+  border-left: 5px solid #16a34a;
+}
+
+/* ERROR */
+.mat-mdc-snack-bar-container.error {
+  border-left: 5px solid #dc2626;
+}
+
+/* TEXT spacing */
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  padding: 14px 16px;
+  font-weight: 500;
+}
+
+.mat-mdc-snack-bar-container .mdc-button {
+  color: var(--pd-muted) !important;
+  font-weight: 500;
+  margin-right: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+
+  /* new pro style */
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* hover */
+.mat-mdc-snack-bar-container .mdc-button:hover {
+  background: rgba(0,0,0,0.08);
+  color: var(--pd-text) !important;
+  transform: scale(1.1);
+}
+
+/* dark mode hover fix */
+body.dark-mode .mat-mdc-snack-bar-container .mdc-button:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* smooth animation */
+.mat-mdc-snack-bar-container {
+  animation: toastIn 0.25s ease;
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 body {

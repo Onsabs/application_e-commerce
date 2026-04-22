@@ -23,7 +23,7 @@ export class CartComponent {
   }
 
   showToast(message: string, type: 'success' | 'error' = 'success') {
-    this.snackBar.open(message, 'Fermer', {
+    this.snackBar.open(message, '✕', {
       duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
