@@ -1,136 +1,125 @@
 <!-- Sidebar Start -->
-<div class="sidebar pe-4 pb-3" [class.closed]="isClosed">
-  <nav class="navbar navbar-light">
+<div class="sidebar" [class.open]="isSidebarOpen" [class.closed]="!isSidebarOpen">
+
+  <nav class="navbar bg-light navbar-light">
 
     <!-- LOGO -->
     <a routerLink="/dashboard" class="navbar-brand mx-4 mb-3">
       <h3 class="text-primary">
-        <i class="fa fa-hashtag me-2"></i>dashmin
+        <i class="fa fa-hashtag me-2"></i>DASHMIN
       </h3>
     </a>
+
     <!-- USER -->
     <div class="d-flex align-items-center ms-4 mb-4">
       <div class="position-relative">
-        <img class="rounded-circle" src="assets/img/user.jpg"
-             style="width: 40px; height: 40px;">
+        <img class="rounded-circle" [src]="user.image" style="width: 40px; height: 40px;">
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
+
       <div class="ms-3">
-        <h6 class="mb-0">Admin</h6>
-        <span>Ons chaima</span>
+        <h6 class="mb-0">{{ user.name }}</h6>
+        <span>{{ user.role }}</span>
       </div>
     </div>
 
+    <!-- MENU -->
     <div class="navbar-nav w-100">
 
       <!-- DASHBOARD -->
-      <a routerLink="/dashboard" class="nav-item nav-link">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item nav-link">
         <i class="fa fa-tachometer-alt me-2"></i>Dashboard
       </a>
 
-      <!-- ================= PRODUITS ================= -->
-      <details class="nav-item">
-        <summary class="nav-link dropdown-toggle">
+      <!-- PRODUITS -->
+      <div class="nav-item" [class.active]="openMenu === 'products'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('products')">
           <i class="fa fa-box me-2"></i>Produits
-        </summary>
+        </div>
 
-        <a routerLink="/product-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-list me-2"></i>Liste produits
-        </a>
+        <div class="collapse-menu" *ngIf="openMenu === 'products'">
+          <a routerLink="/product-list" routerLinkActive="active" class="nav-link ms-4">Liste produits</a>
+          <a routerLink="/product-form" routerLinkActive="active" class="nav-link ms-4">Ajouter produit</a>
+        </div>
+      </div>
 
-        <a routerLink="/product-form" class="nav-link ms-4 py-1">
-          <i class="fa fa-plus me-2"></i>Ajouter produit
-        </a>
-      </details>
-
-      <!-- ================= CATEGORIES ================= -->
-      <details class="nav-item">
-        <summary class="nav-link dropdown-toggle">
+      <!-- CATEGORIES -->
+      <div class="nav-item" [class.active]="openMenu === 'categories'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('categories')">
           <i class="fa fa-tags me-2"></i>Catégories
-        </summary>
+        </div>
 
-        <a routerLink="/category-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-list me-2"></i>Liste catégories
-        </a>
+        <div class="collapse-menu" *ngIf="openMenu === 'categories'">
+          <a routerLink="/category-list" routerLinkActive="active" class="nav-link ms-4">Liste catégories</a>
+          <a routerLink="/category-form" routerLinkActive="active" class="nav-link ms-4">Ajouter catégorie</a>
+        </div>
+      </div>
 
-        <a routerLink="/category-form" class="nav-link ms-4 py-1">
-          <i class="fa fa-plus me-2"></i>Ajouter catégorie
-        </a>
-      </details>
-
-      <!-- ================= USERS ================= -->
-      <details class="nav-item">
-        <summary class="nav-link dropdown-toggle">
+      <!-- USERS -->
+<div class="nav-item" [class.active]="openMenu === 'users'">
+             <div class="nav-link dropdown-toggle" (click)="toggleMenu('users')">
           <i class="fa fa-users me-2"></i>Utilisateurs
-        </summary>
+        </div>
 
-        <a routerLink="/user-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-user-friends me-2"></i>Liste utilisateurs
-        </a>
+        <div class="collapse-menu" *ngIf="openMenu === 'users'">
+          <a routerLink="/user-list" routerLinkActive="active" class="nav-link ms-4">Liste utilisateurs</a>
+          <a routerLink="/user-details" routerLinkActive="active" class="nav-link ms-4">Détails utilisateur</a>
+        </div>
+      </div>
 
-        <a routerLink="/user-details" class="nav-link ms-4 py-1">
-          <i class="fa fa-user me-2"></i>Détails utilisateur
-        </a>
-      </details>
-
-      <!-- ================= COMMANDES ================= -->
-      <details class="nav-item">
-        <summary class="nav-link  dropdown-toggle">
+      <!-- COMMANDES -->
+      <div class="nav-item" [class.active]="openMenu === 'orders'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('orders')">
           <i class="fa fa-shopping-cart me-2"></i>Commandes
-        </summary>
+        </div>
 
-        <a routerLink="/order-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-list me-2"></i>Liste commandes
-        </a>
+        <div class="collapse-menu" *ngIf="openMenu === 'orders'">
+          <a routerLink="/order-list" routerLinkActive="active" class="nav-link ms-4">Liste commandes</a>
+          <a routerLink="/order-details" routerLinkActive="active" class="nav-link ms-4">Détails commande</a>
+        </div>
+      </div>
 
-        <a routerLink="/order-details" class="nav-link ms-4 py-1">
-          <i class="fa fa-file-alt me-2"></i>Détails commande
-        </a>
-      </details>
-
-      <!-- ================= PAYMENTS ================= -->
-      <details class="nav-item">
-        <summary class="nav-link dropdown-toggle">
+      <!-- PAYMENTS -->
+      <div class="nav-item" [class.active]="openMenu === 'payments'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('payments')">
           <i class="fa fa-credit-card me-2"></i>Paiements
-        </summary>
+        </div>
 
-        <a routerLink="/payment-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-receipt me-2"></i>Liste paiements
-        </a>
-      </details>
+        <div class="collapse-menu" *ngIf="openMenu === 'payments'">
+          <a routerLink="/payment-list" routerLinkActive="active" class="nav-link ms-4">Liste paiements</a>
+        </div>
+      </div>
 
-      <!-- ================= LIVRAISON ================= -->
-      <a routerLink="/livraison-list" class="nav-item nav-link">
+      <!-- AVIS -->
+      <div class="nav-item" [class.active]="openMenu === 'reviews'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('reviews')">
+          <i class="fa fa-star me-2"></i>Avis
+        </div>
+
+        <div class="collapse-menu" *ngIf="openMenu === 'reviews'">
+          <a routerLink="/review-list" routerLinkActive="active" class="nav-link ms-4">Liste avis</a>
+        </div>
+      </div>
+
+      <!-- PROMOTIONS -->
+      <div class="nav-item" [class.active]="openMenu === 'promotions'">
+        <div class="nav-link dropdown-toggle" (click)="toggleMenu('promotions')">
+          <i class="fa fa-bullhorn me-2"></i>Promotions
+        </div>
+
+        <div class="collapse-menu" *ngIf="openMenu === 'promotions'">
+          <a routerLink="/promotion-list" routerLinkActive="active" class="nav-link ms-4">Liste promotions</a>
+          <a routerLink="/promotion-form" routerLinkActive="active" class="nav-link ms-4">Ajouter promotion</a>
+        </div>
+      </div>
+
+      <!-- LIVRAISON -->
+      <a routerLink="/livraison-list" routerLinkActive="active" class="nav-item nav-link">
         <i class="fa fa-truck me-2"></i>Livraison
       </a>
 
-      <!-- ================= AVIS ================= -->
-      <details class="nav-item dropdown-toggle">
-        <summary class="nav-link dropdown-toggle">
-          <i class="fa fa-star me-2"></i>Avis
-        </summary>
-
-        <a routerLink="/review-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-comments me-2"></i>Liste avis
-        </a>
-      </details>
-
-      <!-- ================= PROMOTIONS ================= -->
-      <details class="nav-item">
-        <summary class="nav-link dropdown-toggle">
-          <i class="fa fa-bullhorn me-2"></i>Promotions
-        </summary>
-
-        <a routerLink="/promotion-list" class="nav-link ms-4 py-1">
-          <i class="fa fa-list me-2"></i>Liste promotions
-        </a>
-
-        <a routerLink="/promotion-form" class="nav-link ms-4 py-1">
-          <i class="fa fa-plus me-2"></i>Ajouter promotion
-        </a>
-      </details>
-
     </div>
+
   </nav>
 </div>
 <!-- Sidebar End -->

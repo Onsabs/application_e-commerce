@@ -34,11 +34,12 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/animate.css/animate.min.css",
               "src/styles.scss",
+              "src/assets/css/bootstrap.min.css",
               "src/assets/css/style.css"
-              
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/chart.js/dist/chart.umd.js"
             ]
           },
           "configurations": {

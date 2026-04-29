@@ -1,15 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
-  isSidebarClosed = false;
+  isSidebarOpen = true;
+  isMobileView = false;
+  userToggled = false;
+
+  ngOnInit() {
+    this.checkScreen();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreen();
+  }
+
+  checkScreen() {
+    this.isMobileView = window.innerWidth < 992;
+
+    if (!this.userToggled) {
+      this.isSidebarOpen = !this.isMobileView;
+    }
+
+    // reset toggle when switching to desktop
+    if (!this.isMobileView) {
+      this.userToggled = false;
+    }
+  }
 
   toggleSidebar() {
-    this.isSidebarClosed = !this.isSidebarClosed;
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.userToggled = true;
+  }
+
+  isMobile(): boolean {
+    return this.isMobileView;
   }
 }
