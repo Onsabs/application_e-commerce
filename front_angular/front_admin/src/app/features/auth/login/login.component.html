@@ -1,0 +1,58 @@
+<div class="login-page">
+  <div class="login-box">
+    
+    <div class="login-header">
+      <h2>Admin Login</h2>
+      <p>Connectez-vous à votre espace administrateur</p>
+    </div>
+
+    <form>
+
+      <div class="input-group">
+        
+        <input type="email" placeholder="Email" required>
+      </div>
+
+      <div class="input-group">
+        
+        <input type="password" placeholder="Mot de passe " required>
+      </div>
+
+      <div class="login-options">
+        <label>
+          <input type="checkbox">
+          Se souvenir de moi
+        </label>
+
+        <a (click)="openForgotPassword()">Mot de passe oublié ?</a>
+      </div>
+
+      <button type="submit" class="login-btn">
+        Se connecter
+      </button>
+
+      <div class="register-link">
+        Pas encore de compte ?
+        <a routerLink="/register">Créer un compte</a>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+<div class="overlay" *ngIf="showForgotPassword">
+  <div class="modal-box">
+
+    <h3>Réinitialiser le mot de passe</h3>
+    <p>Entrez votre email pour recevoir le lien</p>
+
+    <input type="email" placeholder="Votre email">
+
+    <button class="login-btn">Envoyer</button>
+
+    <button class="close-btn" (click)="closeForgotPassword()">
+      Fermer
+    </button>
+
+  </div>
+</div>

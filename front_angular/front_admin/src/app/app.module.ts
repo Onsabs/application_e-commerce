@@ -8,12 +8,16 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductFormComponent } from './products/product-form/product-form.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     ProductFormComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

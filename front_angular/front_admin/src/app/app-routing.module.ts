@@ -15,8 +15,13 @@ import { CategoryListComponent } from './features/categories/category-list/categ
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ProductFormComponent } from './products/product-form/product-form.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     component: LayoutComponent,
@@ -37,11 +42,13 @@ const routes: Routes = [
       { path:'review-list', component:ReviewListComponent},
       { path:'user-details', component:UserDetailsComponent},
       { path:'user-list', component:UserListComponent},
+ 
+      
 
      
     ]
   },
-
+       { path: '**', redirectTo: 'login' }
 
 ];
 
