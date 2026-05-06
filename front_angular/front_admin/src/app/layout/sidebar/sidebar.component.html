@@ -37,7 +37,7 @@
           <i class="fa fa-box me-2"></i>Produits
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'products'">
+        <div class="collapse-menu" [class.show]="openMenu === 'products'">
           <a routerLink="/product-list" routerLinkActive="active" class="nav-link ms-4">Liste produits</a>
           <a routerLink="/product-form" routerLinkActive="active" class="nav-link ms-4">Ajouter produit</a>
         </div>
@@ -49,7 +49,7 @@
           <i class="fa fa-tags me-2"></i>Catégories
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'categories'">
+        <div class="collapse-menu" [class.show]="openMenu === 'categories'">
           <a routerLink="/category-list" routerLinkActive="active" class="nav-link ms-4">Liste catégories</a>
           <a routerLink="/category-form" routerLinkActive="active" class="nav-link ms-4">Ajouter catégorie</a>
         </div>
@@ -61,7 +61,7 @@
           <i class="fa fa-users me-2"></i>Utilisateurs
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'users'">
+        <div class="collapse-menu" [class.show]="openMenu === 'users'">
           <a routerLink="/user-list" routerLinkActive="active" class="nav-link ms-4">Liste utilisateurs</a>
           <a routerLink="/user-details" routerLinkActive="active" class="nav-link ms-4">Détails utilisateur</a>
         </div>
@@ -73,7 +73,7 @@
           <i class="fa fa-shopping-cart me-2"></i>Commandes
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'orders'">
+        <div class="collapse-menu" [class.show]="openMenu === 'orders'">
           <a routerLink="/order-list" routerLinkActive="active" class="nav-link ms-4">Liste commandes</a>
           <a routerLink="/order-details" routerLinkActive="active" class="nav-link ms-4">Détails commande</a>
         </div>
@@ -85,7 +85,7 @@
           <i class="fa fa-credit-card me-2"></i>Paiements
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'payments'">
+        <div class="collapse-menu" [class.show]="openMenu === 'payments'">
           <a routerLink="/payment-list" routerLinkActive="active" class="nav-link ms-4">Liste paiements</a>
         </div>
       </div>
@@ -96,7 +96,7 @@
           <i class="fa fa-star me-2"></i>Avis
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'reviews'">
+        <div class="collapse-menu" [class.show]="openMenu === 'reviews'">
           <a routerLink="/review-list" routerLinkActive="active" class="nav-link ms-4">Liste avis</a>
         </div>
       </div>
@@ -107,7 +107,7 @@
           <i class="fa fa-bullhorn me-2"></i>Promotions
         </div>
 
-        <div class="collapse-menu" *ngIf="openMenu === 'promotions'">
+        <div class="collapse-menu" [class.show]="openMenu === 'promotions'">
           <a routerLink="/promotion-list" routerLinkActive="active" class="nav-link ms-4">Liste promotions</a>
           <a routerLink="/promotion-form" routerLinkActive="active" class="nav-link ms-4">Ajouter promotion</a>
         </div>

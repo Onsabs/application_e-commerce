@@ -1,1 +1,134 @@
-<p>product-form works!</p>
+<div class="container">
+
+    <h2>Add Product</h2>
+
+    <form [formGroup]="form">
+
+        <!-- ================= ALERT ================= -->
+        <div *ngIf="alertMessage" class="alert alert-dismissible fade show mt-2" [ngClass]="{
+           'alert-success': alertType === 'success',
+           'alert-danger': alertType === 'error',
+           'alert-warning': alertType === 'warning'
+         }">
+
+            <i *ngIf="alertType === 'success'" class="fa-solid fa-circle-check me-2"></i>
+            <i *ngIf="alertType === 'error'" class="fa-solid fa-circle-exclamation me-2"></i>
+            <i *ngIf="alertType === 'warning'" class="fa-solid fa-triangle-exclamation me-2"></i>
+
+            {{ alertMessage }}
+
+            <button type="button" class="btn-close" (click)="closeAlert()"></button>
+        </div>
+
+        <!-- ================= BASIC ================= -->
+        <input formControlName="name" placeholder="Product name..." class="form-control mb-2"
+            [class.is-invalid]="isInvalid(form.get('name'))">
+
+        <input formControlName="price" type="number" placeholder="Price..." class="form-control mb-2"
+            [class.is-invalid]="isInvalid(form.get('price'))">
+
+        <select formControlName="category" class="form-control mb-2" (change)="onCategoryChange($event)"
+            [class.is-invalid]="isInvalid(form.get('category'))">
+
+            <option value="" disabled>Select category</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="kids">Kids</option>
+        </select>
+
+        <textarea formControlName="description" placeholder="Description..." class="form-control mb-3"></textarea>
+
+        <!-- ================= VARIANTS ================= -->
+        <h5>Variants</h5>
+
+        <div formArrayName="variants">
+
+            <div *ngFor="let v of variants.controls; let i = index" [formGroupName]="i" class="border p-3 mb-3">
+
+                <!-- ================= IMAGES ================= -->
+                <input type="file" multiple class="form-control mb-2" (change)="onVariantImageSelect($event, i)">
+
+                <div class="d-flex gap-2 flex-wrap mb-2">
+
+                    <div *ngFor="let img of getVariantImages(i).controls; let j = index">
+
+                        <img [src]="img.value" width="70">
+
+                        <button type="button" class="btn btn-sm btn-danger" (click)="removeVariantImage(i,j)">
+                            X
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- ================= COLOR ================= -->
+                <input formControlName="colorName" placeholder="Color name" class="form-control mb-2"
+                    [class.is-invalid]="isInvalid(v.get('colorName'))">
+
+                <input type="color" formControlName="colorValue" class="form-control form-control-color mb-2">
+
+                <!-- ================= SIZES ================= -->
+                <h6>Sizes</h6>
+
+                <div formArrayName="sizes">
+
+                    <div *ngFor="let s of getSizes(i).controls; let j = index" [formGroupName]="j"
+                        class="d-flex gap-2 mb-2">
+
+                        <select formControlName="size" class="form-control"
+                            [class.is-invalid]="isInvalid(s.get('size'))">
+
+                            <option value="" disabled hidden>Choose size</option>
+
+                            <option *ngFor="let sz of getAvailableSizesForVariant(i, getSizes(i).at(j).value.size)"
+                                [value]="sz">
+                                {{ sz }}
+                            </option>
+
+                        </select>
+
+                        <input type="number" formControlName="stock" placeholder="Stock" class="form-control"
+                            [class.is-invalid]="isInvalid(s.get('stock'))">
+
+                        <button type="button" class="btn btn-danger" (click)="removeSize(i, j)">
+                            X
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="button" class="btn btn-sm btn-secondary mt-2" [disabled]="!canAddSize(i)"
+                    (click)="addSize(i)">
+                    + Add Size
+                </button>
+
+                <button type="button" class="btn btn-danger mt-3" (click)="removeVariant(i)">
+                    Delete Variant
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ================= ACTIONS ================= -->
+        <button type="button" class="btn btn-secondary mb-3" (click)="addVariant()">
+            + Add Variant
+        </button>
+
+        <div class="d-flex gap-2">
+
+            <button type="button" class="btn btn-primary w-100" (click)="addProduct()">
+                Save Product
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary w-100" (click)="resetForm()">
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

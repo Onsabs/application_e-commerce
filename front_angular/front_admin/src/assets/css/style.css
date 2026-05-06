@@ -283,6 +283,18 @@
     background: #FFFFFF;
     border-left: 3px solid var(--primary);
 }
+/* ===== COLLAPSE MENU ANIMATION ===== */
+.collapse-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s;
+  opacity: 0;
+}
+
+.collapse-menu.show {
+  max-height: 500px;
+  opacity: 1;
+}
 /* parent active */
 .sidebar .nav-item.active > .nav-link {
     color: var(--primary);

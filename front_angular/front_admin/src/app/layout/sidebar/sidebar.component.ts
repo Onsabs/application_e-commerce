@@ -8,19 +8,23 @@ export class SidebarComponent {
 
   @Input() isSidebarOpen = true;
 
-  ngOnInit() {
-  const url = window.location.pathname;
+  constructor(private router: Router) { }
 
-  this.openMenu =
-    url.includes('product') ? 'products' :
-    url.includes('category') ? 'categories' :
-    url.includes('user') ? 'users' :
-    url.includes('order') ? 'orders' :
-    url.includes('payment') ? 'payments' :
-    url.includes('review') ? 'reviews' :
-    url.includes('promotion') ? 'promotions' :
-    null;
-}
+  ngOnInit() {
+    this.router.events.subscribe(() => {
+      const url = this.router.url;
+
+      this.openMenu =
+      url.includes('product') ? 'products' :
+      url.includes('category') ? 'categories' :
+      url.includes('user') ? 'users' :
+      url.includes('order') ? 'orders' :
+      url.includes('payment') ? 'payments' :
+      url.includes('review') ? 'reviews' :
+      url.includes('promotion') ? 'promotions' :
+      null;
+    });
+  }
 
   openMenu: string | null = null;
 
