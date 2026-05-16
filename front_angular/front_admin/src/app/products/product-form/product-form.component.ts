@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './product-form.component.html'
+  templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent {
 
@@ -15,15 +17,18 @@ export class ProductFormComponent {
   alertMessage: string = '';
   alertType: 'success' | 'error' | 'warning' | '' = '';
 
+  editMode = false;
+  productId!: number;
+
   sizeMap: any = {
     men: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     women: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-    kids: ['2Y', '4Y', '6Y', '8Y']
+    kids: ['1Y', '2Y', '3Y', '4Y', '5Y', '6Y', '7Y', '8Y', '9Y', '10Y', '11Y', '12Y', '13Y', '14Y', '15Y', '16Y']
   };
 
   availableSizes: string[] = [];
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router, private route: ActivatedRoute) {
 
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -32,6 +37,90 @@ export class ProductFormComponent {
       description: [''],
       variants: this.fb.array([])
     });
+  }
+
+  ngOnInit(): void {
+
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+
+      this.editMode = true;
+
+      this.productId = +id;
+
+      this.loadProduct(this.productId);
+    }
+  }
+
+  loadProduct(id: number) {
+
+    const product = this.productService.getProductById(id);
+
+    if (!product) return;
+
+    // basic
+    this.form.patchValue({
+      name: product.name,
+      price: product.price,
+      category: product.category,
+      description: product.description
+    });
+
+    this.availableSizes = this.sizeMap[product.category] || [];
+
+    // variants
+    this.variants.clear();
+
+    product.variants.forEach((v: any) => {
+
+      const variantGroup = this.fb.group({
+        colorName: [v.colorName],
+        colorValue: [v.colorValue],
+        images: this.fb.array([]),
+        sizes: this.fb.array([])
+      });
+
+      // images
+      v.images.forEach((img: string) => {
+        (variantGroup.get('images') as FormArray)
+          .push(this.fb.control(img));
+      });
+
+      // sizes
+      v.sizes.forEach((s: any) => {
+
+        (variantGroup.get('sizes') as FormArray)
+          .push(this.fb.group({
+            size: [s.size],
+            stock: [s.stock]
+          }));
+      });
+
+      this.variants.push(variantGroup);
+    });
+  }
+
+  getCategoryLabel(category: string): string {
+
+    switch (category) {
+
+      case 'men':
+        return 'Homme';
+
+      case 'women':
+        return 'Femme';
+
+      case 'kids':
+        return 'Enfants';
+
+      default:
+        return category;
+    }
+  }
+
+  goToList() {
+    this.router.navigate(['/product-list']);
   }
 
   // ================= HELPERS =================
@@ -85,7 +174,7 @@ export class ProductFormComponent {
 
   addVariant() {
     if (!this.availableSizes.length) {
-      this.showAlert('Select category first', 'warning');
+      this.showAlert("Sélectionnez d'abord la catégorie", 'warning');
       return;
     }
 
@@ -162,23 +251,23 @@ export class ProductFormComponent {
 
     // ===== BASIC VALIDATION =====
     if (!this.form.get('name')?.value) {
-      this.showAlert(' Product name is required', 'error');
+      this.showAlert(' Le nom du produit est requis.', 'error');
       return;
     }
 
     if (!this.form.get('price')?.value) {
-      this.showAlert(' Price is required', 'error');
+      this.showAlert(' Le prix est requis', 'error');
       return;
     }
 
     if (!this.form.get('category')?.value) {
-      this.showAlert(' Please select a category', 'error');
+      this.showAlert(' Veuillez sélectionner une catégorie', 'error');
       return;
     }
 
     // ===== VARIANTS =====
     if (!this.variants.length) {
-      this.showAlert(' Add at least one variant', 'error');
+      this.showAlert(' Ajoutez au moins une variante', 'error');
       return;
     }
 
@@ -187,17 +276,12 @@ export class ProductFormComponent {
       const v = this.variants.at(i).value;
 
       if (!v.colorName) {
-        this.showAlert(` Variant ${i + 1}: color is required`, 'error');
+        this.showAlert(`variante ${i + 1}: La couleur est requise `, 'error');
         return;
       }
 
       if (!v.images || v.images.length === 0) {
-        this.showAlert(` Variant ${i + 1}: add at least one image`, 'error');
-        return;
-      }
-
-      if (!v.sizes || v.sizes.length === 0) {
-        this.showAlert(` Variant ${i + 1}: add sizes`, 'error');
+        this.showAlert(` variante${i + 1}: Ajouter au moins une image`, 'error');
         return;
       }
 
@@ -206,27 +290,51 @@ export class ProductFormComponent {
         const s = v.sizes[j];
 
         if (!s.size) {
-          this.showAlert(` Variant ${i + 1}: choose size`, 'error');
+          this.showAlert(` Variante ${i + 1}: choisir la taille`, 'error');
           return;
         }
 
         if (!s.stock || s.stock <= 0) {
-          this.showAlert(` Variant ${i + 1}: stock must be > 0`, 'error');
+          this.showAlert(` Variante ${i + 1}: stock must be > 0`, 'error');
           return;
         }
       }
     }
 
-    // SAVE
-    this.productService.addProduct(this.form.value).subscribe(() => {
+    // ===== SAVE / UPDATE =====
 
-      this.showAlert('Product saved successfully', 'success');
+    const productData = {
+      ...this.form.value,
+      id: this.productId
+    };
 
-      this.form.reset();
-      this.variants.clear();
-      this.availableSizes = [];
-      this.submitted = false;
-    });
+    if (this.editMode) {
+
+      this.productService.updateProduct(productData)
+        .subscribe(() => {
+
+          this.showAlert('Produit mis à jour avec succès', 'success');
+
+          setTimeout(() => {
+            this.router.navigate(['/product-list']);
+          }, 1000);
+
+        });
+
+    } else {
+
+      this.productService.addProduct(this.form.value)
+        .subscribe(() => {
+
+          this.showAlert('Produit enregistré avec succès', 'success');
+
+          this.form.reset();
+          this.variants.clear();
+          this.availableSizes = [];
+          this.submitted = false;
+
+        });
+    }
   }
 
   // ================= RESET =================
@@ -250,5 +358,52 @@ export class ProductFormComponent {
   closeAlert() {
     this.alertMessage = '';
     this.alertType = '';
+  }
+
+  selectCategory(category: string) {
+
+    this.form.patchValue({
+      category: category
+    });
+
+    this.availableSizes = this.sizeMap[category] || [];
+
+    this.variants.controls.forEach((variant: any) => {
+
+      const sizes = variant.get('sizes') as FormArray;
+
+      sizes.clear();
+
+      sizes.push(
+        this.fb.group({
+          size: [''],
+          stock: [null]
+        })
+      );
+
+    });
+
+    if (this.variants.length === 0) {
+      this.addVariant();
+    }
+  }
+
+  selectSize(variantIndex: number, sizeIndex: number, size: string) {
+
+    this.getSizes(variantIndex)
+      .at(sizeIndex)
+      .patchValue({
+        size: size
+      });
+  }
+
+  selectedImage: string | null = null;
+
+  openImage(img: string) {
+    this.selectedImage = img;
+  }
+
+  closeImage() {
+    this.selectedImage = null;
   }
 }

@@ -1,1 +1,224 @@
-<p>product-list works!</p>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="list-header">
+
+        <h2>
+            <i class="fa-solid fa-list me-2"></i>
+            Liste des produits
+        </h2>
+
+        <button class="btn btn-primary add-btn" (click)="goToAddProduct()">
+            <i class="fa-solid fa-plus me-2"></i>
+            ajouter produit
+        </button>
+
+    </div>
+    <div class="toolbar mb-3">
+        <!-- FILTER -->
+        <div class="filter-box mb-3">
+
+            <div class="custom-filter">
+
+                <button class="filter-btn" (click)="toggleFilter()">
+                    <i class="fa-solid fa-filter"></i>
+
+                    {{ selectedCategory || 'Filter' }}
+
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div class="filter-menu" *ngIf="filterOpen">
+
+                    <div class="filter-item" (click)="selectCategory('')">
+                        All
+                    </div>
+
+                    <div class="filter-item" (click)="selectCategory('men')">
+                        <i class="fa-solid fa-person"></i> Homme
+                    </div>
+
+                    <div class="filter-item" (click)="selectCategory('women')">
+                        <i class="fa-solid fa-person-dress"></i> Femme
+                    </div>
+
+                    <div class="filter-item" (click)="selectCategory('kids')">
+                        <i class="fa-solid fa-child"></i> Enfants
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-wrapper">
+
+            <input class="input" type="text" placeholder="Search products..." [(ngModel)]="searchTerm"
+                (input)="applyFilters()" />
+
+            <button class="icon" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="22" width="22">
+
+                    <path stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" />
+
+                    <path stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M22 22L20 20" />
+
+                </svg>
+            </button>
+
+        </div>
+        
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="table-responsive">
+
+        <table class="table custom-table align-middle">
+
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th class="sortable-th" (click)="sortData('price')">
+                        Prix<i class="fa-solid fa-sort"></i>
+                    </th>
+                    <th>Categorie</th>
+                    <th>Variantes</th>
+                    <th>Couleurs</th>
+                    <th>Statut</th>
+                    <th>Total Stock</th>
+                    <th class="sortable-th" (click)="sortData('createdAt')">
+                        Date d’ajout <i class="fa-solid fa-sort"></i>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let p of filteredProducts">
+
+                    <!-- IMAGE -->
+                    <td>
+                        <img class="table-img" [src]="p.variants?.[0]?.images?.[0]" alt="">
+                    </td>
+
+                    <!-- NAME -->
+                    <td>
+                        <strong>{{ p.name }}</strong>
+                    </td>
+
+                    <!-- PRICE -->
+                    <td>
+                        {{ p.price }} DT
+                    </td>
+
+                    <!-- CATEGORY -->
+                    <td>
+                        <span class="category-badge">
+                            {{ getCategoryLabel(p.category) }}
+                        </span>
+                    </td>
+
+                    <!-- VARIANTS -->
+                    <td>
+                        {{ p.variants?.length }}
+                    </td>
+
+                    <!-- colors -->
+                    <td>
+                        <div class="colors">
+                            <div class="color-circle" *ngFor="let v of p.variants" [style.background]="v.colorValue"
+                                [attr.data-name]="v.colorName">
+                            </div>
+                        </div>
+                    </td>
+                    <!-- Statut -->
+                    <td><span *ngIf="getTotalStock(p) > 10" class="status in-stock">
+                            In Stock
+                        </span>
+
+                        <span *ngIf="getTotalStock(p) <= 10 && getTotalStock(p) > 0" class="status low-stock">
+                            Low Stock
+                        </span>
+
+                        <span *ngIf="getTotalStock(p) === 0" class="status out-stock">
+                            Out of Stock
+                        </span>
+                    </td>
+
+                    <!-- TOTAL STOCK -->
+                    <td>
+                        {{ getTotalStock(p) }}
+
+                    </td>
+
+                    <!-- DATE -->
+                    <td>
+                        {{ p.createdAt | date:'dd/MM/yyyy' }}
+                    </td>
+
+                    <!-- ACTIONS -->
+                    <td>
+
+                        <div class="actions">
+
+                            <button class="btn btn-sm btn-outline-primary" (click)="editProduct(p)">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button class="btn btn-sm btn-outline-danger" (click)="openDeleteModal(p.id)">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- DELETE MODAL -->
+
+    <div class="delete-modal-overlay" *ngIf="selectedProductId">
+
+        <div class="delete-modal">
+
+            <div class="modal-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+
+            <h4>Supprimer le produit</h4>
+
+            <p> Êtes-vous sûr de vouloir supprimer ce produit ? </p>
+
+            <div class="modal-actions">
+
+                <button class="btn btn-light" (click)="closeDeleteModal()">
+                    Annuler
+                </button>
+
+                <button class="btn btn-danger" (click)="confirmDelete()">
+                    Supprimer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

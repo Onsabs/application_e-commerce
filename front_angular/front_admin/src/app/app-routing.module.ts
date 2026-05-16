@@ -26,29 +26,27 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path:'dashboard', component:DashboardComponent},
-      { path:'promotion-form', component:PromotionFormComponent},
-      { path:'promotion-list', component:PromotionListComponent},
-      { path:'category-form', component:CategoryFormComponent},
-      { path:'promotion-list', component:PromotionListComponent},
-      { path:'category-list', component:CategoryListComponent},
-      {path:'product-list', component:ProductListComponent},
-      {path:'product-form', component:ProductFormComponent},
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'promotion-form', component: PromotionFormComponent },
+      { path: 'promotion-list', component: PromotionListComponent },
+      { path: 'category-form', component: CategoryFormComponent },
+      { path: 'promotion-list', component: PromotionListComponent },
+      { path: 'category-list', component: CategoryListComponent },
+      { path: 'product-list', component: ProductListComponent },
+      { path: 'product-form', component: ProductFormComponent },
+      {path: 'product-form/:id',component: ProductFormComponent},
 
-      { path:'livraison-list', component:LivraisonListComponent},
-      { path:'order-details', component:OrderDetailsComponent},
-      { path:'order-list', component:OrderListComponent},
-      { path:'payment-list', component:PaymentListComponent},
-      { path:'review-list', component:ReviewListComponent},
-      { path:'user-details', component:UserDetailsComponent},
-      { path:'user-list', component:UserListComponent},
- 
-      
+      { path: 'livraison-list', component: LivraisonListComponent },
+      { path: 'order-details', component: OrderDetailsComponent },
+      { path: 'order-list', component: OrderListComponent },
+      { path: 'payment-list', component: PaymentListComponent },
+      { path: 'review-list', component: ReviewListComponent },
+      { path: 'user-details', component: UserDetailsComponent },
+      { path: 'user-list', component: UserListComponent },
 
-     
     ]
   },
-       { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'login' }
 
 ];
 

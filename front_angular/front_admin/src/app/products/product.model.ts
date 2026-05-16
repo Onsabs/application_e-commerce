@@ -18,4 +18,5 @@ export interface Product {
   description?: string;
 
   variants: Variant[]; // size + color + stock + images
+  createdAt?: Date;
 }

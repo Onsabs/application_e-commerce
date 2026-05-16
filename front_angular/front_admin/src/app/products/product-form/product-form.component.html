@@ -1,6 +1,16 @@
 <div class="container">
 
-    <h2>Add Product</h2>
+    <div class="header-bar">
+        <h2>
+            <i class="fa-solid fa-box-open me-2"></i>
+            Ajouter un produit
+        </h2>
+
+        <button type="button" class="btn btn-outline-dark list-btn" (click)="goToList()">
+            <i class="fa-solid fa-list me-2"></i>
+            Liste des produits
+        </button>
+    </div>
 
     <form [formGroup]="form">
 
@@ -21,41 +31,88 @@
         </div>
 
         <!-- ================= BASIC ================= -->
-        <input formControlName="name" placeholder="Product name..." class="form-control mb-2"
-            [class.is-invalid]="isInvalid(form.get('name'))">
+        <div class="input-icon mb-2">
+            <i class="fa-solid fa-tag"></i>
+            <input formControlName="name" placeholder="Nom du produit..." class="form-control mb-2"
+                [class.is-invalid]="isInvalid(form.get('name'))">
+        </div>
+        <div class="input-icon mb-2">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <input formControlName="price" type="number" placeholder="Prix..." class="form-control mb-2"
+                [class.is-invalid]="isInvalid(form.get('price'))">
+        </div>
 
-        <input formControlName="price" type="number" placeholder="Price..." class="form-control mb-2"
-            [class.is-invalid]="isInvalid(form.get('price'))">
+        <div class="custom-dropdown">
 
-        <select formControlName="category" class="form-control mb-2" (change)="onCategoryChange($event)"
-            [class.is-invalid]="isInvalid(form.get('category'))">
+            <button class="dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <div class="left-content">
+                    <i class="fa-solid fa-layer-group"></i>
 
-            <option value="" disabled>Select category</option>
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="kids">Kids</option>
-        </select>
+                    <span>
+                        {{ getCategoryLabel(form.get('category')?.value) || 'Sélectionner une catégorie' }}
+                    </span>
+                </div>
+            </button>
 
-        <textarea formControlName="description" placeholder="Description..." class="form-control mb-3"></textarea>
+            <ul class="dropdown-menu">
 
+                <li (click)="selectCategory('men')">
+                    <a class="dropdown-item">
+                        <i class="fa-solid fa-person"></i>
+                        Homme
+                    </a>
+                </li>
+
+                <li (click)="selectCategory('women')">
+                    <a class="dropdown-item">
+                        <i class="fa-solid fa-person-dress"></i>
+                        Femme
+                    </a>
+                </li>
+
+                <li (click)="selectCategory('kids')">
+                    <a class="dropdown-item">
+                        <i class="fa-solid fa-child"></i>
+                        Enfants
+                    </a>
+                </li>
+
+            </ul>
+
+
+        </div>
+        <div class="input-icon mb-2">
+            <i class="fa-solid fa-align-left"></i>
+            <textarea formControlName="description" placeholder="Description..." class="form-control mb-3"></textarea>
+        </div>
         <!-- ================= VARIANTS ================= -->
-        <h5>Variants</h5>
+        <h5>Détails du produit</h5>
 
         <div formArrayName="variants">
 
             <div *ngFor="let v of variants.controls; let i = index" [formGroupName]="i" class="border p-3 mb-3">
 
+                <button type="button" class="delete-variant-btn" (click)="removeVariant(i)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
                 <!-- ================= IMAGES ================= -->
-                <input type="file" multiple class="form-control mb-2" (change)="onVariantImageSelect($event, i)">
+                <div class="image-upload mb-2">
 
-                <div class="d-flex gap-2 flex-wrap mb-2">
+                    <input type="file" multiple class="form-control" (change)="onVariantImageSelect($event, i)">
 
-                    <div *ngFor="let img of getVariantImages(i).controls; let j = index">
+                </div>
 
-                        <img [src]="img.value" width="70">
+                <div class="images-preview">
 
-                        <button type="button" class="btn btn-sm btn-danger" (click)="removeVariantImage(i,j)">
-                            X
+                    <div class="image-box" *ngFor="let img of getVariantImages(i).controls; let j = index">
+
+                        <img [src]="img.value" (click)="openImage(img.value)">
+
+                        <button type="button" class="delete-image-btn" (click)="removeVariantImage(i,j)">
+
+                            <i class="fa-solid fa-xmark"></i>
+
                         </button>
 
                     </div>
@@ -63,72 +120,97 @@
                 </div>
 
                 <!-- ================= COLOR ================= -->
-                <input formControlName="colorName" placeholder="Color name" class="form-control mb-2"
-                    [class.is-invalid]="isInvalid(v.get('colorName'))">
-
-                <input type="color" formControlName="colorValue" class="form-control form-control-color mb-2">
-
+                <div class="color-row">
+                    <div class="input-icon mb-2">
+                        <i class="fa-solid fa-palette"></i>
+                        <input formControlName="colorName" placeholder="Nom de la couleur" class="form-control mb-2"
+                            [class.is-invalid]="isInvalid(v.get('colorName'))">
+                    </div>
+                    <input type="color" formControlName="colorValue" class="form-control form-control-color mb-2">
+                </div>
                 <!-- ================= SIZES ================= -->
-                <h6>Sizes</h6>
+                <h6>Sizes & Stock</h6>
 
                 <div formArrayName="sizes">
 
-                    <div *ngFor="let s of getSizes(i).controls; let j = index" [formGroupName]="j"
-                        class="d-flex gap-2 mb-2">
+                    <div *ngFor="let s of getSizes(i).controls; let j = index" [formGroupName]="j" class="size-row">
+                        <div class="custom-dropdown flex-grow-1">
 
-                        <select formControlName="size" class="form-control"
-                            [class.is-invalid]="isInvalid(s.get('size'))">
+                            <button class="dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
 
-                            <option value="" disabled hidden>Choose size</option>
+                                <div class="left-content">
+                                    <i class="fa-solid fa-ruler"></i>
 
-                            <option *ngFor="let sz of getAvailableSizesForVariant(i, getSizes(i).at(j).value.size)"
-                                [value]="sz">
-                                {{ sz }}
-                            </option>
+                                    <span>
+                                        {{ s.get('size')?.value || 'taille' }}
+                                    </span>
+                                </div>
 
-                        </select>
+                            </button>
 
-                        <input type="number" formControlName="stock" placeholder="Stock" class="form-control"
-                            [class.is-invalid]="isInvalid(s.get('stock'))">
+                            <ul class="dropdown-menu">
 
+                                <li *ngFor="let sz of getAvailableSizesForVariant(i, getSizes(i).at(j).value.size)"
+                                    (click)="selectSize(i, j, sz)">
+
+                                    <a class="dropdown-item">
+                                        {{ sz }}
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+                        <div class="input-icon flex-grow-1">
+                            <i class="fa-solid fa-cubes"></i>
+                            <input type="number" formControlName="stock" placeholder="Stock" class="form-control"
+                                [class.is-invalid]="isInvalid(s.get('stock'))">
+                        </div>
                         <button type="button" class="btn btn-danger" (click)="removeSize(i, j)">
-                            X
+                            <i class="fa-solid fa-trash"></i>
                         </button>
 
                     </div>
 
                 </div>
+                <div class="variant-buttons">
+                    <button type="button" class="btn btn-sm btn-secondary mt-2" [disabled]="!canAddSize(i)"
+                        (click)="addSize(i)">
+                        <i class="fa-solid fa-plus me-1"></i> Ajouter taille
+                    </button>
 
-                <button type="button" class="btn btn-sm btn-secondary mt-2" [disabled]="!canAddSize(i)"
-                    (click)="addSize(i)">
-                    + Add Size
-                </button>
-
-                <button type="button" class="btn btn-danger mt-3" (click)="removeVariant(i)">
-                    Delete Variant
-                </button>
-
+                </div>
             </div>
 
         </div>
 
         <!-- ================= ACTIONS ================= -->
-        <button type="button" class="btn btn-secondary mb-3" (click)="addVariant()">
-            + Add Variant
-        </button>
-
-        <div class="d-flex gap-2">
+        <div class="action-buttons">
+            <button type="button" class="btn btn-secondary mb-3" (click)="addVariant()">
+                <i class="fa-solid fa-plus me-2"></i> Ajouter détails du produit
+            </button>
 
             <button type="button" class="btn btn-primary w-100" (click)="addProduct()">
-                Save Product
+                <i class="fa-solid fa-cloud-arrow-down"></i> {{ editMode ? 'Mettre à jour' : 'Enregistrer' }}
             </button>
 
             <button type="button" class="btn btn-outline-secondary w-100" (click)="resetForm()">
-                Reset
+                <i class="fa-solid fa-rotate-left me-2"></i> Annuler
             </button>
 
         </div>
 
     </form>
 
+    <!--show image-->
+    <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+
+        <img [src]="selectedImage" (click)="$event.stopPropagation()">
+
+        <button class="close-btn" (click)="closeImage()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
 </div>

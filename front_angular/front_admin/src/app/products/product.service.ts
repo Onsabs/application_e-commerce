@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from './product.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,24 +8,78 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductService {
 
-  private products: Product[] = [];
+  private storageKey = 'products';
 
-  constructor(private http: HttpClient) {}
+  private productsSubject = new BehaviorSubject<Product[]>(this.getFromStorage());
 
-  getProducts() {
-    return of(this.products);
+  products$ = this.productsSubject.asObservable();
+
+  constructor() { }
+
+  // ===== GET =====
+  getProducts(): Observable<Product[]> {
+    return this.products$;
   }
 
-  /*addProduct(product: Product) {
-    const newProduct = {
-      ...product,
-      id: Date.now()
-    };
+  // ===== ADD =====
+  addProduct(product: Product) {
+    const products = this.getFromStorage();
 
-    this.products.push(newProduct);
-    return of(newProduct);
-  }*/
- addProduct(product: Product) {
-  return this.http.post<Product>('http://localhost:3000/products', product);
-}
+    product.id = Date.now(); 
+
+    product.createdAt = new Date();
+    products.push(product);
+
+    this.saveToStorage(products);
+
+    this.productsSubject.next(products);
+
+    return of(product);
+  }
+
+  // ===== DELETE =====
+  deleteProduct(id: number) {
+    let products = this.getFromStorage();
+
+    products = products.filter(p => p.id !== id);
+
+    this.saveToStorage(products);
+
+    this.productsSubject.next(products);
+
+    return of(true);
+  }
+
+  // ===== STORAGE HELPERS =====
+  private getFromStorage(): Product[] {
+    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+  }
+
+  private saveToStorage(products: Product[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(products));
+  }
+
+  // ===== GET PRODUCT BY ID =====
+  getProductById(id: number): Product | undefined {
+    const products = this.getFromStorage();
+
+    return products.find(p => p.id === id);
+  }
+
+  // ===== UPDATE PRODUCT =====
+  updateProduct(updatedProduct: Product) {
+
+    let products = this.getFromStorage();
+
+    products = products.map(p =>
+      p.id === updatedProduct.id ? updatedProduct : p
+    );
+
+    this.saveToStorage(products);
+
+    this.productsSubject.next(products);
+
+    return of(updatedProduct);
+  }
+
 }
