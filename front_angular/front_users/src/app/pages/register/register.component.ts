@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { RegisterService, User } from 'src/app/services/register.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +9,7 @@ import { RegisterService, User } from 'src/app/services/register.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
   showPassword = false;
   showConfirm = false;
   passwordStrength = 0;
@@ -17,9 +17,9 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
 
-    constructor(
+  constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService,
+    private authService: AuthService,
     private router: Router
   ) {
 
@@ -27,25 +27,27 @@ export class RegisterComponent {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       dateNaissance: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     });
 
-    // Mettre à jour la force du mot de passe et sa couleur
     this.registerForm.get('password')?.valueChanges.subscribe(value => {
       this.passwordStrength = this.calculateStrength(value);
       this.passwordColor = this.getPasswordColor(this.passwordStrength);
     });
   }
 
-  // Calculer la force du mot de passe
+  
   calculateStrength(password: string): number {
     if (!password) return 0;
+
     let strength = 0;
     if (password.length >= 6) strength += 25;
     if (/[A-Z]/.test(password)) strength += 20;
     if (/[0-9]/.test(password)) strength += 20;
     if (/[@$!%*?&]/.test(password)) strength += 35;
+
     return Math.min(strength, 100);
   }
 
@@ -55,16 +57,14 @@ export class RegisterComponent {
     return 'green';
   }
 
-  // Soumettre le formulaire
+ 
   onSubmit() {
+
     if (this.registerForm.invalid) {
       alert("Veuillez remplir tous les champs correctement !");
       return;
     }
 
-    const nom = this.registerForm.get('nom')?.value;
-    const prenom = this.registerForm.get('prenom')?.value;
-    const date = this.registerForm.get('dateNaissance')?.value;
     const password = this.registerForm.get('password')?.value;
     const confirm = this.registerForm.get('confirmPassword')?.value;
 
@@ -78,9 +78,25 @@ export class RegisterComponent {
       return;
     }
 
-    // Créer l'utilisateur et l'enregistrer via le service
-    const user: User & { role: string } = { nom, prenom, dateNaissance: date, password,role: 'user' };
-    this.registerService.saveUser(user);
-    this.router.navigate(['/home']);
+    const user = {
+      nom: this.registerForm.get('nom')?.value,
+      prenom: this.registerForm.get('prenom')?.value,
+      dateNaissance: this.registerForm.get('dateNaissance')?.value,
+      email: this.registerForm.get('email')?.value,
+      password: password
+    };
+
+    
+    this.authService.register(user).subscribe({
+      next: (res) => {
+        console.log("SUCCESS:", res);
+        alert(res.message);
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert(err.error.message || "Erreur lors de l'inscription");
+      }
+    });
   }
 }

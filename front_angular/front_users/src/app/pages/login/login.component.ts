@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -7,10 +11,49 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
-  showPassword: boolean = false;
+  showPassword = false;
+  loginForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
+  onSubmit() {
+
+    if (this.loginForm.invalid) {
+      alert("Veuillez remplir tous les champs !");
+      return;
+    }
+
+    const credentials = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value
+    };
+
+    this.authService.login(credentials).subscribe({
+      next: (res) => {
+        console.log("LOGIN SUCCESS:", res);
+        alert(res.message);
+
+       
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert(err.error.message || "Login failed");
+      }
+    });
+  }
 }

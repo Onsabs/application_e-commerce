@@ -19,6 +19,7 @@ import { OrderSuccessComponent } from './pages/order-success/order-success.compo
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
 
 const routes: Routes = [
+  
   {
     path: '',
     component: LayoutComponent,
