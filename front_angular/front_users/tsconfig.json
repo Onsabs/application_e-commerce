@@ -2,7 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "rootDir": "./src",
     "outDir": "./dist/out-tsc",
+
+    "ignoreDeprecations": "6.0",
 
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -27,9 +30,9 @@
 
     "useDefineForClassFields": false,
 
-    "lib": ["ES2022", "dom"],
+    "skipLibCheck": true,
 
-    "skipLibCheck": true
+    "lib": ["ES2022", "dom"]
   },
 
   "angularCompilerOptions": {
