@@ -16,6 +16,10 @@ export class ProductListComponent implements OnInit {
   selectedProductId: number | null = null;
   selectedCategory: string = '';
   filterOpen = false;
+
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(private productService: ProductService, private router: Router) { };
@@ -142,5 +146,32 @@ export class ProductListComponent implements OnInit {
     return product.variants.reduce((total: number, v: any) => {
       return total + v.sizes.reduce((s: number, size: any) => s + size.stock, 0);
     }, 0);
+  }
+
+  //PAGINATION 
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+  }
+
+  get pages(): number[] {
+    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
+  }
+
+  get paginatedProducts() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredProducts.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) this.currentPage--;
   }
 }
