@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
+
 
 
 @Component({
@@ -44,15 +45,12 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: (res) => {
-        console.log("LOGIN SUCCESS:", res);
-        alert(res.message);
-
-       
+        
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.error(err);
-        alert(err.error.message || "Login failed");
+       
+        alert(err.error.message || "email ou mot de passe est incorrect");
       }
     });
   }

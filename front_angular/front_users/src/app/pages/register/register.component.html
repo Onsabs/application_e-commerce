@@ -1,54 +1,93 @@
 <div class="register-page">
   <div class="form-container">
-    <h2>Création de compte </h2>
+
+    <h2>Création de compte</h2>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
+      <!-- Nom -->
       <div class="input-box">
         <i class="fa fa-user"></i>
         <input type="text" formControlName="nom" placeholder=" ">
         <label>Nom</label>
       </div>
 
+      <!-- Prénom -->
       <div class="input-box">
         <i class="fa fa-user"></i>
         <input type="text" formControlName="prenom" placeholder=" ">
         <label>Prénom</label>
       </div>
 
+      <!-- Date naissance -->
       <div class="input-box">
         <i class="fa fa-calendar"></i>
         <input type="date" formControlName="dateNaissance" placeholder=" ">
-        <label>Date de naissance</label>
       </div>
 
+      <!-- Email -->
       <div class="input-box">
-      <i class="fa fa-lock"></i>
-      <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder=" ">
-      <label>Mot de passe</label>
-      <span class="toggle-password" (click)="showPassword = !showPassword">
-        {{ showPassword ? '🙈' : '👁️' }}
-    </span>
+        <i class="fa fa-envelope"></i>
+        <input type="email" formControlName="email" placeholder=" ">
+        <label>Email</label>
+      </div>
 
-  <!-- Password strength bar -->
-  <div class="password-strength">
-    <span [ngStyle]="{'width.%': passwordStrength, 'background-color': passwordColor}"></span>
-  </div>
-</div>
-
-
+      <!-- Password -->
       <div class="input-box">
         <i class="fa fa-lock"></i>
-        <input [type]="showConfirm ? 'text' : 'password'" formControlName="confirmPassword" placeholder=" ">
+
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder=" "
+        >
+
+        <label>Mot de passe</label>
+
+        <span
+          class="toggle-password"
+          (click)="showPassword = !showPassword"
+        >
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
+
+        <!-- Strength bar -->
+        <div class="password-strength">
+          <span
+            [ngStyle]="{
+              'width.%': passwordStrength,
+              'background-color': passwordColor
+            }"
+          ></span>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="input-box">
+        <i class="fa fa-lock"></i>
+
+        <input
+          [type]="showConfirm ? 'text' : 'password'"
+          formControlName="confirmPassword"
+          placeholder=" "
+        >
+
         <label>Confirmer mot de passe</label>
-        <span class="toggle-password" (click)="showConfirm = !showConfirm">
+
+        <span
+          class="toggle-password"
+          (click)="showConfirm = !showConfirm"
+        >
           {{ showConfirm ? '🙈' : '👁️' }}
         </span>
       </div>
 
-      <button type="submit">Créer un compte</button>
+      <!-- Submit -->
+      <button type="submit">
+        Créer un compte
+      </button>
+
     </form>
 
-   
   </div>
 </div>

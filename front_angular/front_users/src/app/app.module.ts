@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
     EditProfileComponent,
     OrderSuccessComponent,
     HistoriqueComponent,
-    HistoryDetailsComponent
+    HistoryDetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

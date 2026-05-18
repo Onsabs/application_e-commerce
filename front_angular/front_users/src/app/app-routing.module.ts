@@ -1,5 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -13,17 +14,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 import { HistoriqueComponent } from './pages/historique/historique.component';
-
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
-
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
-
 const routes: Routes = [
-  
+
   {
     path: '',
     component: LayoutComponent,
     children: [
+
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+
       { path: 'home', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'product-details/:id', component: ProductDetailsComponent },
@@ -32,20 +33,19 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'contact', component: ContactComponent },
-
       { path: 'order-success', component: OrderSuccessComponent },
-
-      { path: 'edit-profile',component: EditProfileComponent
-      },
-      { path: 'historique',component: HistoriqueComponent
-      }
-      ,{ path: 'history-details',component: HistoryDetailsComponent
-      }
+      { path: 'edit-profile', component: EditProfileComponent },
+      { path: 'historique', component: HistoriqueComponent },
+      { path: 'history-details', component: HistoryDetailsComponent }
 
     ]
   },
-  { path: 'login', component: LoginComponent},
+
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  { path: '**', redirectTo: 'home' }
+
 ];
 
 @NgModule({

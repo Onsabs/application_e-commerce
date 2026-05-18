@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-register',
@@ -33,16 +34,16 @@ export class RegisterComponent {
     });
 
     this.registerForm.get('password')?.valueChanges.subscribe(value => {
-      this.passwordStrength = this.calculateStrength(value);
+      this.passwordStrength = this.calculateStrength(value || '');
       this.passwordColor = this.getPasswordColor(this.passwordStrength);
     });
   }
 
-  
   calculateStrength(password: string): number {
     if (!password) return 0;
 
     let strength = 0;
+
     if (password.length >= 6) strength += 25;
     if (/[A-Z]/.test(password)) strength += 20;
     if (/[0-9]/.test(password)) strength += 20;
@@ -57,7 +58,6 @@ export class RegisterComponent {
     return 'green';
   }
 
- 
   onSubmit() {
 
     if (this.registerForm.invalid) {
@@ -66,14 +66,14 @@ export class RegisterComponent {
     }
 
     const password = this.registerForm.get('password')?.value;
-    const confirm = this.registerForm.get('confirmPassword')?.value;
+    const confirmPassword = this.registerForm.get('confirmPassword')?.value;
 
     if (this.passwordStrength < 40) {
       alert("Mot de passe trop faible !");
       return;
     }
 
-    if (password !== confirm) {
+    if (password !== confirmPassword) {
       alert("Les mots de passe ne correspondent pas !");
       return;
     }
@@ -86,16 +86,15 @@ export class RegisterComponent {
       password: password
     };
 
-    
     this.authService.register(user).subscribe({
       next: (res) => {
         console.log("SUCCESS:", res);
-        alert(res.message);
+        alert(res.message || "Inscription réussie !");
         this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error(err);
-        alert(err.error.message || "Erreur lors de l'inscription");
+        alert(err.error?.message || "Erreur lors de l'inscription");
       }
     });
   }
