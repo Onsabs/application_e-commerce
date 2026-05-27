@@ -54,50 +54,43 @@ export class ProductFormComponent {
   }
 
   loadProduct(id: number) {
+    this.productService.getProductById(id).subscribe(product => {
 
-    const product = this.productService.getProductById(id);
+      if (!product) return;
 
-    if (!product) return;
-
-    // basic
-    this.form.patchValue({
-      name: product.name,
-      price: product.price,
-      category: product.category,
-      description: product.description
-    });
-
-    this.availableSizes = this.sizeMap[product.category] || [];
-
-    // variants
-    this.variants.clear();
-
-    product.variants.forEach((v: any) => {
-
-      const variantGroup = this.fb.group({
-        colorName: [v.colorName],
-        colorValue: [v.colorValue],
-        images: this.fb.array([]),
-        sizes: this.fb.array([])
+      this.form.patchValue({
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        description: product.description
       });
 
-      // images
-      v.images.forEach((img: string) => {
-        (variantGroup.get('images') as FormArray)
-          .push(this.fb.control(img));
-      });
+      this.availableSizes = this.sizeMap[product.category] || [];
 
-      // sizes
-      v.sizes.forEach((s: any) => {
+      this.variants.clear();
 
-        (variantGroup.get('sizes') as FormArray)
-          .push(this.fb.group({
+      product.variants.forEach(v => {
+
+        const variantGroup = this.fb.group({
+          colorName: [v.colorName],
+          colorValue: [v.colorValue],
+          images: this.fb.array([]),
+          sizes: this.fb.array([])
+        });
+
+        v.images.forEach(img => {
+          (variantGroup.get('images') as FormArray).push(this.fb.control(img));
+        });
+
+        v.sizes.forEach(s => {
+          (variantGroup.get('sizes') as FormArray).push(this.fb.group({
             size: [s.size],
             stock: [s.stock]
           }));
-      });
+        });
 
-      this.variants.push(variantGroup);
+        this.variants.push(variantGroup);
+      });
     });
   }
 
@@ -115,7 +108,7 @@ export class ProductFormComponent {
         return 'Enfants';
 
       default:
-        return category;
+        return '';
     }
   }
 
