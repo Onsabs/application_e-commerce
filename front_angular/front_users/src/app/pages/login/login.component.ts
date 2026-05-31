@@ -37,7 +37,6 @@ export class LoginComponent {
       alert("Veuillez remplir tous les champs !");
       return;
     }
-
     const credentials = {
       email: this.loginForm.get('email')?.value,
       password: this.loginForm.get('password')?.value

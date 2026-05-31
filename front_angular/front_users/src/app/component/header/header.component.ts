@@ -1,27 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   cartCount = 0;
   animateCart = false;
 
-  isMenuOpen = false;        // mobile menu
-  isProfileOpen = false;     // profile menu
+  isMenuOpen = false;
+  isProfileOpen = false;
+  isDark = false;
 
+  constructor(
+    private cartService: CartService,
+    public authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+
+    // CART
+    this.cartService.count$.subscribe(count => {
+      this.cartCount = count;
+      this.animateCart = true;
+
+      setTimeout(() => this.animateCart = false, 400);
+    });
+
+    // THEME
+    const savedTheme = localStorage.getItem('theme') || 'light';
+
+    this.isDark = savedTheme === 'dark';
+
+    document.body.classList.toggle('dark-mode', this.isDark);
+    document.body.classList.toggle('light-mode', !this.isDark);
+  }
+
+  // ================= MENU =================
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isProfileOpen = false;
-  }
-
-  toggleProfile() {
-    this.isProfileOpen = !this.isProfileOpen;
-    this.isMenuOpen = false;
   }
 
   closeMenu() {
@@ -29,51 +53,31 @@ export class HeaderComponent {
     this.isProfileOpen = false;
   }
 
-  logout() {
-    console.log("Logout...");
-    this.closeMenu();
-
-  }
-
-  constructor(private cartService: CartService) { }
-
-  ngOnInit() {
-    this.cartService.count$.subscribe(count => {
-      this.cartCount = count;
-      this.animateCart = true;
-
-      setTimeout(() => {
-        this.animateCart = false;
-      }, 400);
-    });
-
-    const savedTheme = localStorage.getItem('theme') || 'light';
-
-    if (savedTheme === 'dark') {
-      this.isDark = true;
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('dark-mode');
-    } else {
-      this.isDark = false;
-      document.body.classList.remove('dark-mode');
-      document.body.classList.add('light-mode');
+  // ================= PROFILE =================
+  toggleProfile() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
     }
+
+    this.isProfileOpen = !this.isProfileOpen;
+    this.isMenuOpen = false;
   }
 
-  isDark = false;
+  // ================= LOGOUT =================
+  logout() {
+    this.authService.logout();
+    this.isProfileOpen = false;
+    this.router.navigate(['/login']);
+  }
 
+  // ================= THEME =================
   toggleTheme() {
     this.isDark = !this.isDark;
 
-    if (this.isDark) {
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-mode');
-      document.body.classList.add('light-mode');
-      localStorage.setItem('theme', 'light');
-    }
-  }
+    document.body.classList.toggle('dark-mode', this.isDark);
+    document.body.classList.toggle('light-mode', !this.isDark);
 
+    localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+  }
 }

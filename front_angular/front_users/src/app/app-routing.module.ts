@@ -16,6 +16,8 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
 import { HistoriqueComponent } from './pages/historique/historique.component';
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
 import { HistoryDetailsComponent } from './pages/history-details/history-details.component';
+import { authGuard } from './guards/auth.guard';
+import { FeaturedComponent } from './pages/featured/featured.component';
 const routes: Routes = [
 
   {
@@ -29,14 +31,15 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'product-details/:id', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'checkout', component: CheckoutComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'checkout', component: CheckoutComponent,canActivate: [authGuard] },
+      { path: 'profile', component: ProfileComponent ,canActivate: [authGuard]},
       { path: 'favorites', component: FavoritesComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'order-success', component: OrderSuccessComponent },
-      { path: 'edit-profile', component: EditProfileComponent },
-      { path: 'historique', component: HistoriqueComponent },
-      { path: 'history-details', component: HistoryDetailsComponent }
+      { path: 'order-success', component: OrderSuccessComponent,canActivate: [authGuard] },
+      { path: 'edit-profile', component: EditProfileComponent ,canActivate: [authGuard]},
+      { path: 'historique', component: HistoriqueComponent,canActivate: [authGuard] },
+      { path: 'history-details', component: HistoryDetailsComponent,canActivate: [authGuard] },
+      {path:  'featured' , component:FeaturedComponent},
 
     ]
   },

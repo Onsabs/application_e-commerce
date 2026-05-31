@@ -29,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FeaturedComponent } from './pages/featured/featured.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     OrderSuccessComponent,
     HistoriqueComponent,
     HistoryDetailsComponent,
+    FeaturedComponent,
     
   ],
   imports: [

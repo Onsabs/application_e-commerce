@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export interface AuthResponse {
   message: string;
@@ -30,13 +30,39 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // ================= REGISTER =================
   register(data: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data);
+    return this.http.post<AuthResponse>(
+      `${this.baseUrl}/register`,
+      data
+    );
   }
 
-  // ================= LOGIN =================
   login(data: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, data);
+    return this.http.post<AuthResponse>(
+      `${this.baseUrl}/login`,
+      data
+    ).pipe(
+      tap((response) => {
+        localStorage.setItem('email', response.email);
+        localStorage.setItem('role', response.role);
+      })
+    );
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('email') !== null;
+  }
+
+  logout(): void {
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  getEmail(): string | null {
+    return localStorage.getItem('email');
   }
 }

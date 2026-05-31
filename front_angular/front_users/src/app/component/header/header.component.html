@@ -1,69 +1,152 @@
 <nav id="navbar">
+
   <div class="nav-container">
-    <div class="menu-toggle" [class.active]="isMenuOpen" (click)="toggleMenu()">
+
+    <!-- ================= MOBILE MENU TOGGLE ================= -->
+    <div class="menu-toggle"
+         [class.active]="isMenuOpen"
+         (click)="toggleMenu()">
+
       <span></span>
       <span></span>
       <span></span>
+
     </div>
-    <!-- Logo -->
-    <a routerLink="/home" class="logo-link">
-      <img src="assets/images/avatar-01.jpg" alt="logo" class="logo-img">
+
+    <!-- ================= LOGO ================= -->
+    <a routerLink="/home" class="logo-link" (click)="closeMenu()">
+      <img src="assets/images/avatar-01.jpg" class="logo-img">
       <span class="logo-text">NOIR</span>
     </a>
 
-    <!-- Menu -->
+    <!-- ================= NAV LINKS ================= -->
     <ul class="nav-links">
-      <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Accueil</a></li>
-      <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
+
+      <li>
+        <a routerLink="/home"
+           routerLinkActive="active"
+           (click)="closeMenu()">Accueil</a>
+      </li>
+
+      <li>
+        <a routerLink="/products"
+           routerLinkActive="active"
+           (click)="closeMenu()">Collections</a>
+      </li>
+
+      <li>
+        <a routerLink="/featured"
+           routerLinkActive="active"
+           (click)="closeMenu()">Détails</a>
+      </li>
+
+      <li>
+        <a routerLink="/contact"
+           routerLinkActive="active"
+           (click)="closeMenu()">Contact</a>
+      </li>
+
     </ul>
 
-    <!-- Icons -->
+    <!-- ================= ICONS ================= -->
     <div class="nav-icons">
 
-      <!-- Wishlist -->
-      <div class="icon-btn" (click)="closeMenu()">
+      <!-- FAVORITES (optional secure) -->
+      <div class="icon-btn" *ngIf="authService.isLoggedIn()">
         <a routerLink="/favorites">
           <i class="fa fa-heart"></i>
         </a>
       </div>
 
-      <!-- Cart -->
-      <div class="icon-btn cart" [class.bump]="animateCart" (click)="closeMenu()">
+      <!-- CART -->
+      <div class="icon-btn cart" [class.bump]="animateCart">
         <a routerLink="/cart">
           <i class="fa fa-shopping-cart"></i>
+
           <span class="cart-count" *ngIf="cartCount > 0">
             {{ cartCount }}
           </span>
+
         </a>
       </div>
 
-      <!-- Theme -->
-      <div class="icon-btn theme-toggle" (click)="toggleTheme(); closeMenu()">
-        <i class="fa-solid" [ngClass]="isDark ? 'fa-sun' : 'fa-moon'"></i>
+      <!-- THEME -->
+      <div class="icon-btn theme-toggle" (click)="toggleTheme()">
+        <i class="fa-solid"
+           [ngClass]="isDark ? 'fa-sun' : 'fa-moon'"></i>
       </div>
 
-      <!-- Profile -->
-      <div class="icon-btn profile-menu">
-        <i class="fa fa-user" (click)="toggleProfile()"></i>
+      <!-- ================= USER CONNECTED ================= -->
+      <div class="icon-btn profile-menu"
+           *ngIf="authService.isLoggedIn()">
+
+        <i class="fa fa-user"
+           (click)="toggleProfile()"></i>
 
         <div class="dropdown-menu" *ngIf="isProfileOpen">
-          <a routerLink="/profile">Voir Profil</a>
-          <a routerLink="/edit-profile">Modifier Profil</a>
-          <a routerLink="/historique">Historique</a>
+
+          <a routerLink="/profile"
+             (click)="closeMenu()">Voir Profil</a>
+
+          <a routerLink="/edit-profile"
+             (click)="closeMenu()">Modifier Profil</a>
+
+          <a routerLink="/historique"
+             (click)="closeMenu()">Historique</a>
+
           <a (click)="logout()">Logout</a>
+
         </div>
       </div>
+
+      <!-- ================= USER NOT CONNECTED ================= -->
+      <div class="icon-btn"
+           *ngIf="!authService.isLoggedIn()">
+
+        <a routerLink="/login">
+          <i class="fa fa-user"></i>
+        </a>
+
+      </div>
+
     </div>
+
   </div>
+
 </nav>
-<div class="overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
-<div class="mobile-nav" id="mobileNav" [class.active]="isMenuOpen">
+
+<!-- ================= OVERLAY MOBILE ================= -->
+<div class="overlay"
+     *ngIf="isMenuOpen"
+     (click)="closeMenu()">
+</div>
+
+<!-- ================= MOBILE NAV ================= -->
+<div class="mobile-nav"
+     [class.active]="isMenuOpen">
+
   <ul class="mobile-nav-links">
-    <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Accueil</a></li>
-    <li><a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Collections</a></li>
-    <li><a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">Featured</a></li>
-    <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
+
+    <li>
+      <a routerLink="/home"
+         (click)="closeMenu()">Accueil</a>
+    </li>
+
+    <li>
+      <a routerLink="/products"
+         (click)="closeMenu()">Collections</a>
+    </li>
+
+    <li>
+      <a routerLink="/profile"
+         (click)="closeMenu()">Featured</a>
+    </li>
+
+    <li>
+      <a routerLink="/contact"
+         (click)="closeMenu()">Contact</a>
+    </li>
+
   </ul>
+
 </div>

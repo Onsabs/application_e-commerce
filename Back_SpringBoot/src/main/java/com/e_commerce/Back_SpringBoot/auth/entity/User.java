@@ -1,5 +1,6 @@
 package com.e_commerce.Back_SpringBoot.auth.entity;
 
+import com.e_commerce.Back_SpringBoot.auth.Enum.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,7 @@ public class User {
     private Long id;
 
     private String nom;
-
     private String prenom;
-
     private LocalDate dateNaissance;
 
     @Column(unique = true)
@@ -31,4 +30,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.OFFLINE;
 }
