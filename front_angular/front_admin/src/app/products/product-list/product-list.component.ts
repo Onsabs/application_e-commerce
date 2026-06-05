@@ -128,19 +128,22 @@ export class ProductListComponent implements OnInit {
   }
 
   confirmDelete() {
+  if (this.selectedProductId == null) return;
 
-    if (this.selectedProductId == null) return;
+  const id = this.selectedProductId;
 
-    this.productService.deleteProduct(this.selectedProductId)
-      .subscribe(() => {
+  this.productService.deleteProduct(id)
+    .subscribe(() => {
 
-        this.products = this.products.filter(
-          p => p.id !== this.selectedProductId
-        );
+      this.products = this.products.filter(p => p.id !== id);
 
-        this.closeDeleteModal();
-      });
-  }
+      this.currentPage = 1;
+      this.applyFilters();
+
+      this.closeDeleteModal();
+      this.selectedProductId = null;
+    });
+}
 
   getTotalStock(product: any): number {
     return product.variants.reduce((total: number, v: any) => {
