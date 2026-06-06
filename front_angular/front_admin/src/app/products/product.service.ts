@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from './product.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -35,6 +35,19 @@ export class ProductService {
   // ===== UPDATE PRODUCT =====
   updateProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.api}/${product.id}`, product);
+  }
+
+  uploadImage(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(
+      'http://localhost:8080/api/files/upload',
+      formData,
+      { responseType: 'text' }
+    ).pipe(
+      map(filename => `http://localhost:8080/uploads/${filename}`)
+    );
   }
 
 }

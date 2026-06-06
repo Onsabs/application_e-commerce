@@ -20,6 +20,8 @@ export class ProductFormComponent {
   editMode = false;
   productId!: number;
 
+  private IMG_BASE = 'http://localhost:8080/uploads/';
+
   sizeMap: any = {
     men: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     women: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
@@ -79,7 +81,8 @@ export class ProductFormComponent {
         });
 
         v.images.forEach(img => {
-          (variantGroup.get('images') as FormArray).push(this.fb.control(img));
+          const cleanImg = img.replace('http://localhost:8080/uploads/', '');
+          (variantGroup.get('images') as FormArray).push(this.fb.control(cleanImg));
         });
 
         v.sizes.forEach(s => {
@@ -202,18 +205,19 @@ export class ProductFormComponent {
   // ================= IMAGES =================
 
   onVariantImageSelect(event: any, i: number) {
+
     const files = event.target.files;
 
     for (let file of files) {
-      const reader = new FileReader();
 
-      reader.onload = (e: any) => {
+      this.productService.uploadImage(file).subscribe(filename => {
+
         this.getVariantImages(i).push(
-          this.fb.control(e.target.result)
+          this.fb.control(filename)
         );
-      };
 
-      reader.readAsDataURL(file);
+      });
+
     }
   }
 
