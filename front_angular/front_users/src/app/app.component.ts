@@ -10,16 +10,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   title = 'front_angular';
 
-  constructor(private wsService: WebsocketService) {}
+  constructor(private wsService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.wsService.connect();
 
     const email = localStorage.getItem('email');
 
-    if (email) {
-      this.wsService.sendOnline(email);
-    }
+    this.wsService.connect();
+
+    setTimeout(() => {
+      if (email) {
+        this.wsService.sendOnline(email);
+      }
+    }, 1500);
   }
 
   ngOnDestroy(): void {

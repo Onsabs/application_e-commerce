@@ -34,17 +34,18 @@ public class SecurityConfig {
 
         return source;
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable()) // 🔥 مهم للتجربة
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 🔥 IMPORTANT FIX
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // 🔥 نخلي كل شيء مفتوح مؤقتًا
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
