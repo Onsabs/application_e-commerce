@@ -129,7 +129,7 @@
 
                 <!-- BADGES -->
 
-                <span class="card-badge sale" *ngIf="product.badge=='sale'">
+                <!--<span class="card-badge sale" *ngIf="product.badge=='sale'">
                     SALE
                 </span>
 
@@ -151,7 +151,7 @@
 
                 <span class="card-badge warning" *ngIf="getTotalStock(product) > 0 && getTotalStock(product) <= 5">
                     Only {{ getTotalStock(product) }} left
-                </span>
+                </span>-->
 
                 <h3 class="card-title">
                     {{product.name}}
@@ -166,9 +166,9 @@
                     <div class="price-info">
                         <p class="card-price">{{product.price}} $</p>
 
-                        <p class="old-price" *ngIf="product.badge === 'sale'">
+                        <!--<p class="old-price" *ngIf="product.badge === 'sale'">
                             {{product.oldPrice}} $
-                        </p>
+                        </p>-->
                     </div>
 
                     <!-- ❤️ LIKE BUTTON -->

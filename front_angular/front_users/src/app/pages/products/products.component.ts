@@ -14,7 +14,23 @@ export class ProductsComponent {
     private favService: FavoritesService) { }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
+    //this.products = this.productService.getProducts();
+    this.productService.getProducts()
+      .subscribe(data => {
+
+        this.products = data;
+
+        // calcul prix max automatiquement
+        if (data.length) {
+
+          this.maxPrice = Math.max(
+            ...data.map((p: any) => p.price)
+          );
+
+          this.priceFilter.max = this.maxPrice;
+        }
+
+      });
   }
 
   selectedCategory = 'all';
@@ -27,18 +43,40 @@ export class ProductsComponent {
 
   getTotalStock(product: any): number {
 
-    if (!product.sizes || typeof product.sizes[0] === 'string') {
+    /*if (!product.sizes || typeof product.sizes[0] === 'string') {
       return product.stock ?? 0;
     }
 
-    return product.sizes.reduce((total: number, s: any) => total + s.stock, 0);
+    return product.sizes.reduce((total: number, s: any) => total + s.stock, 0);*/
+    return product.variants?.reduce(
+      (total: number, variant: any) => {
+
+        return total +
+          variant.sizes?.reduce(
+            (s: number, size: any) => s + size.stock,
+            0
+          );
+
+      },
+      0
+    ) || 0;
   }
 
+  IMG_BASE = 'http://localhost:8080/uploads/';
   getProductImage(product: any): string {
-    if (Array.isArray(product.image)) {
+    /*if (Array.isArray(product.image)) {
       return product.image[0];
     }
-    return product.image;
+    return product.image;*/
+    const img = product?.variants?.[0]?.images?.[0];
+
+    if (!img) {
+      return 'assets/images/no-image.png';
+    }
+
+    return img.startsWith('http')
+      ? img
+      : this.IMG_BASE + img;
   }
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;

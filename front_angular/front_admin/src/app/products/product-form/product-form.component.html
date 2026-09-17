@@ -1,115 +1,267 @@
 <div class="container">
 
     <div class="header-bar">
+
         <h2>
             <i class="fa-solid fa-box-open me-2"></i>
-            Ajouter un produit
+
+            {{ editMode ? 'Modifier un produit' : 'Ajouter un produit' }}
         </h2>
 
-        <button type="button" class="btn btn-outline-dark list-btn" (click)="goToList()">
+        <button
+            type="button"
+            class="btn btn-outline-dark list-btn"
+            (click)="goToList()">
+
             <i class="fa-solid fa-list me-2"></i>
+
             Liste des produits
+
         </button>
+
     </div>
+
 
     <form [formGroup]="form">
 
-        <!-- ================= ALERT ================= -->
-        <div *ngIf="alertMessage" class="alert alert-dismissible fade show mt-2" [ngClass]="{
-           'alert-success': alertType === 'success',
-           'alert-danger': alertType === 'error',
-           'alert-warning': alertType === 'warning'
-         }">
+        <!-- ===================================================== -->
+        <!-- ALERT -->
+        <!-- ===================================================== -->
 
-            <i *ngIf="alertType === 'success'" class="fa-solid fa-circle-check me-2"></i>
-            <i *ngIf="alertType === 'error'" class="fa-solid fa-circle-exclamation me-2"></i>
-            <i *ngIf="alertType === 'warning'" class="fa-solid fa-triangle-exclamation me-2"></i>
+        <div
+            *ngIf="alertMessage"
+            class="alert alert-dismissible fade show mt-2"
+            [ngClass]="{
+                'alert-success': alertType === 'success',
+                'alert-danger': alertType === 'error',
+                'alert-warning': alertType === 'warning'
+            }">
+
+            <i
+                *ngIf="alertType === 'success'"
+                class="fa-solid fa-circle-check me-2">
+            </i>
+
+            <i
+                *ngIf="alertType === 'error'"
+                class="fa-solid fa-circle-exclamation me-2">
+            </i>
+
+            <i
+                *ngIf="alertType === 'warning'"
+                class="fa-solid fa-triangle-exclamation me-2">
+            </i>
 
             {{ alertMessage }}
 
-            <button type="button" class="btn-close" (click)="closeAlert()"></button>
+            <button
+                type="button"
+                class="btn-close"
+                (click)="closeAlert()">
+            </button>
+
         </div>
 
-        <!-- ================= BASIC ================= -->
+
+        <!-- ===================================================== -->
+        <!-- BASIC -->
+        <!-- ===================================================== -->
+
         <div class="input-icon mb-2">
+
             <i class="fa-solid fa-tag"></i>
-            <input formControlName="name" placeholder="Nom du produit..." class="form-control mb-2"
+
+            <input
+                formControlName="name"
+                placeholder="Nom du produit..."
+                class="form-control mb-2"
                 [class.is-invalid]="isInvalid(form.get('name'))">
+
         </div>
+
+
         <div class="input-icon mb-2">
+
             <i class="fa-solid fa-dollar-sign"></i>
-            <input formControlName="price" type="number" placeholder="Prix..." class="form-control mb-2"
+
+            <input
+                formControlName="price"
+                type="number"
+                placeholder="Prix..."
+                class="form-control mb-2"
                 [class.is-invalid]="isInvalid(form.get('price'))">
+
         </div>
+
+
+        <!-- ===================================================== -->
+        <!-- CATEGORY -->
+        <!-- ===================================================== -->
 
         <div class="custom-dropdown">
 
-            <button class="dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <button
+                class="dropdown-btn dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown">
+
                 <div class="left-content">
+
                     <i class="fa-solid fa-layer-group"></i>
 
                     <span>
-                        {{ getCategoryLabel(form.get('category')?.value) || 'Sélectionner une catégorie' }}
+
+                        {{
+                            getCategoryLabel(
+                                form.get('category')?.value
+                            )
+                            ||
+                            'Sélectionner une catégorie'
+                        }}
+
                     </span>
+
                 </div>
+
             </button>
+
 
             <ul class="dropdown-menu">
 
-                <li (click)="selectCategory('men')">
+                <li
+                    (click)="selectCategory('men')">
+
                     <a class="dropdown-item">
+
                         <i class="fa-solid fa-person"></i>
+
                         Homme
+
                     </a>
+
                 </li>
 
-                <li (click)="selectCategory('women')">
+
+                <li
+                    (click)="selectCategory('women')">
+
                     <a class="dropdown-item">
+
                         <i class="fa-solid fa-person-dress"></i>
+
                         Femme
+
                     </a>
+
                 </li>
 
-                <li (click)="selectCategory('kids')">
+
+                <li
+                    (click)="selectCategory('kids')">
+
                     <a class="dropdown-item">
+
                         <i class="fa-solid fa-child"></i>
+
                         Enfants
+
                     </a>
+
                 </li>
 
             </ul>
 
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- DESCRIPTION -->
+        <!-- ===================================================== -->
+
+        <div class="input-icon mb-2">
+
+            <i class="fa-solid fa-align-left"></i>
+
+            <textarea
+                formControlName="description"
+                placeholder="Description..."
+                class="form-control mb-3">
+            </textarea>
 
         </div>
-        <div class="input-icon mb-2">
-            <i class="fa-solid fa-align-left"></i>
-            <textarea formControlName="description" placeholder="Description..." class="form-control mb-3"></textarea>
-        </div>
-        <!-- ================= VARIANTS ================= -->
+
+
+        <!-- ===================================================== -->
+        <!-- VARIANTS -->
+        <!-- ===================================================== -->
+
         <h5>Détails du produit</h5>
+
 
         <div formArrayName="variants">
 
-            <div *ngFor="let v of variants.controls; let i = index" [formGroupName]="i" class="border p-3 mb-3">
+            <div
+                *ngFor="
+                    let v of variants.controls;
+                    let i = index
+                "
+                [formGroupName]="i"
+                class="border p-3 mb-3">
 
-                <button type="button" class="delete-variant-btn" (click)="removeVariant(i)">
+
+                <!-- ================================================= -->
+                <!-- DELETE VARIANT -->
+                <!-- ================================================= -->
+
+                <button
+                    type="button"
+                    class="delete-variant-btn"
+                    (click)="removeVariant(i)">
+
                     <i class="fa-solid fa-xmark"></i>
+
                 </button>
 
-                <!-- ================= IMAGES ================= -->
+
+                <!-- ================================================= -->
+                <!-- IMAGES -->
+                <!-- ================================================= -->
+
                 <div class="image-upload mb-2">
 
-                    <input type="file" multiple class="form-control" (change)="onVariantImageSelect($event, i)">
+                    <input
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        class="form-control"
+                        (change)="onVariantImageSelect($event, i)">
 
                 </div>
 
+
+                <!-- ================================================= -->
+                <!-- IMAGE PREVIEW -->
+                <!-- ================================================= -->
+
                 <div class="images-preview">
 
-                    <div class="image-box" *ngFor="let img of getVariantImages(i).controls; let j = index">
+                    <div
+                        class="image-box"
+                        *ngFor="
+                            let img of getVariantImages(i).controls;
+                            let j = index
+                        ">
 
-                        <img [src]="img.value" (click)="openImage(img.value)">
+                        <img
+                            [src]="getImageUrl(img.value)"
+                            alt="Image produit"
+                            (click)="openImage(img.value)">
 
-                        <button type="button" class="delete-image-btn" (click)="removeVariantImage(i,j)">
+
+                        <button
+                            type="button"
+                            class="delete-image-btn"
+                            (click)="removeVariantImage(i, j)">
 
                             <i class="fa-solid fa-xmark"></i>
 
@@ -119,42 +271,101 @@
 
                 </div>
 
-                <!-- ================= COLOR ================= -->
+
+                <!-- ================================================= -->
+                <!-- COLOR -->
+                <!-- ================================================= -->
+
                 <div class="color-row">
+
                     <div class="input-icon mb-2">
+
                         <i class="fa-solid fa-palette"></i>
-                        <input formControlName="colorName" placeholder="Nom de la couleur" class="form-control mb-2"
-                            [class.is-invalid]="isInvalid(v.get('colorName'))">
+
+                        <input
+                            formControlName="colorName"
+                            placeholder="Nom de la couleur"
+                            class="form-control mb-2"
+                            [class.is-invalid]="
+                                isInvalid(
+                                    v.get('colorName')
+                                )
+                            ">
+
                     </div>
-                    <input type="color" formControlName="colorValue" class="form-control form-control-color mb-2">
+
+
+                    <input
+                        type="color"
+                        formControlName="colorValue"
+                        class="form-control form-control-color mb-2">
+
                 </div>
-                <!-- ================= SIZES ================= -->
+
+
+                <!-- ================================================= -->
+                <!-- SIZES -->
+                <!-- ================================================= -->
+
                 <h6>Sizes & Stock</h6>
+
 
                 <div formArrayName="sizes">
 
-                    <div *ngFor="let s of getSizes(i).controls; let j = index" [formGroupName]="j" class="size-row">
-                        <div class="custom-dropdown flex-grow-1">
+                    <div
+                        *ngFor="
+                            let s of getSizes(i).controls;
+                            let j = index
+                        "
+                        [formGroupName]="j"
+                        class="size-row">
 
-                            <button class="dropdown-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+
+                        <!-- SIZE -->
+
+                        <div
+                            class="custom-dropdown flex-grow-1">
+
+                            <button
+                                class="dropdown-btn dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown">
 
                                 <div class="left-content">
+
                                     <i class="fa-solid fa-ruler"></i>
 
                                     <span>
-                                        {{ s.get('size')?.value || 'taille' }}
+
+                                        {{
+                                            s.get('size')?.value
+                                            ||
+                                            'taille'
+                                        }}
+
                                     </span>
+
                                 </div>
 
                             </button>
 
+
                             <ul class="dropdown-menu">
 
-                                <li *ngFor="let sz of getAvailableSizesForVariant(i, getSizes(i).at(j).value.size)"
+                                <li
+                                    *ngFor="
+                                        let sz of
+                                        getAvailableSizesForVariant(
+                                            i,
+                                            getSizes(i).at(j).value.size
+                                        )
+                                    "
                                     (click)="selectSize(i, j, sz)">
 
                                     <a class="dropdown-item">
+
                                         {{ sz }}
+
                                     </a>
 
                                 </li>
@@ -162,55 +373,144 @@
                             </ul>
 
                         </div>
+
+
+                        <!-- STOCK -->
+
                         <div class="input-icon flex-grow-1">
+
                             <i class="fa-solid fa-cubes"></i>
-                            <input type="number" formControlName="stock" placeholder="Stock" class="form-control"
-                                [class.is-invalid]="isInvalid(s.get('stock'))">
+
+                            <input
+                                type="number"
+                                formControlName="stock"
+                                placeholder="Stock"
+                                class="form-control"
+                                [class.is-invalid]="
+                                    isInvalid(
+                                        s.get('stock')
+                                    )
+                                ">
+
                         </div>
-                        <button type="button" class="btn btn-danger" (click)="removeSize(i, j)">
+
+
+                        <!-- DELETE SIZE -->
+
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            (click)="removeSize(i, j)">
+
                             <i class="fa-solid fa-trash"></i>
+
                         </button>
 
                     </div>
 
                 </div>
+
+
+                <!-- ================================================= -->
+                <!-- ADD SIZE -->
+                <!-- ================================================= -->
+
                 <div class="variant-buttons">
-                    <button type="button" class="btn btn-sm btn-secondary mt-2" [disabled]="!canAddSize(i)"
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-secondary mt-2"
+                        [disabled]="!canAddSize(i)"
                         (click)="addSize(i)">
-                        <i class="fa-solid fa-plus me-1"></i> Ajouter taille
+
+                        <i class="fa-solid fa-plus me-1"></i>
+
+                        Ajouter taille
+
                     </button>
 
                 </div>
+
             </div>
 
         </div>
 
-        <!-- ================= ACTIONS ================= -->
+
+        <!-- ===================================================== -->
+        <!-- ACTIONS -->
+        <!-- ===================================================== -->
+
         <div class="action-buttons">
-            <button type="button" class="btn btn-secondary mb-3" (click)="addVariant()">
-                <i class="fa-solid fa-plus me-2"></i> Ajouter détails du produit
+
+            <button
+                type="button"
+                class="btn btn-secondary mb-3"
+                (click)="addVariant()">
+
+                <i class="fa-solid fa-plus me-2"></i>
+
+                Ajouter détails du produit
+
             </button>
 
-            <button type="button" class="btn btn-primary w-100" (click)="addProduct()">
-                <i class="fa-solid fa-cloud-arrow-down"></i> {{ editMode ? 'Mettre à jour' : 'Enregistrer' }}
+
+            <button
+                type="button"
+                class="btn btn-primary w-100"
+                (click)="addProduct()">
+
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+
+                {{
+                    editMode
+                    ? 'Mettre à jour'
+                    : 'Enregistrer'
+                }}
+
             </button>
 
-            <button type="button" class="btn btn-outline-secondary w-100" (click)="resetForm()">
-                <i class="fa-solid fa-rotate-left me-2"></i> Annuler
+
+            <button
+                type="button"
+                class="btn btn-outline-secondary w-100"
+                (click)="resetForm()">
+
+                <i class="fa-solid fa-rotate-left me-2"></i>
+
+                Annuler
+
             </button>
 
         </div>
 
     </form>
 
-    <!--show image-->
-    <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
 
-        <img [src]="selectedImage" (click)="$event.stopPropagation()">
+    <!-- ========================================================= -->
+    <!-- IMAGE MODAL -->
+    <!-- ========================================================= -->
 
-        <button class="close-btn" (click)="closeImage()">
+    <div
+        class="image-modal"
+        *ngIf="selectedImage"
+        (click)="closeImage()">
+
+
+        <img
+            [src]="getImageUrl(selectedImage)"
+            alt="Image produit"
+            (click)="$event.stopPropagation()">
+
+
+        <button
+            type="button"
+            class="close-btn"
+            (click)="closeImage()">
+
             <i class="fa-solid fa-xmark"></i>
+
         </button>
 
     </div>
+
 </div>

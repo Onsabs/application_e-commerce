@@ -1,181 +1,464 @@
 <div class="product-details" *ngIf="product">
+
     <div class="product-container">
-        <!-- images -->
+
+        <!-- =========================
+             IMAGES
+        ========================== -->
+
         <div class="images">
-            <img class="main-img" [src]="selectedImage" id="productImage">
+
+            <img
+                class="main-img"
+                [src]="selectedImage || 'assets/images/no-image.png'"
+                [alt]="product.name"
+                id="productImage"
+            >
+
             <div class="thumbs">
-                <img *ngFor="let img of product.image" [src]="img" (click)="selectImage(img)">
+
+                <img
+                    *ngFor="let img of selectedVariant?.images || []"
+                    [src]="getImageUrl(img)"
+                    [alt]="product.name"
+                    (click)="selectImage(img)"
+                    [class.active]="selectedImage === getImageUrl(img)"
+                >
+
             </div>
+
         </div>
-        <!-- BADGES -->
-        <div class="badges">
-            <span class="card-badge sale" *ngIf="product.badge=='sale'">SALE</span>
-            <span class="card-badge new" *ngIf="product.badge=='new'">NEW</span>
-            <span class="card-badge best" *ngIf="product.badge=='bestseller'">BESTSELLER</span>
-            <span class="card-badge trend" *ngIf="product.badge=='trending'">TRENDING</span>
-            <span class="card-badge stock" *ngIf="getTotalStock(product) === 0"> OUT OF STOCK </span>
-            <span class="card-badge warning" *ngIf="getTotalStock(product) > 0 && getTotalStock(product) <= 5">
-                Only {{ getTotalStock(product) }} left
-            </span>
-        </div>
-        <!-- info -->
+
+
+        <!-- =========================
+             PRODUCT INFO
+        ========================== -->
 
         <div class="info">
 
-            <h2>{{product.name}}</h2>
+            <h2>
+                {{ product.name }}
+            </h2>
 
             <p class="price">
-                {{product.price}} $
-            </p>
-            <p>
-                <span *ngIf="product.badge === 'sale'" class="old-price">{{product.oldPrice}} $</span>
+                {{ product.price }} $
             </p>
 
-            <!-- wishlist -->
+
+            <!-- =========================
+                 WISHLIST
+            ========================== -->
+
             <div class="wishlist-wrapper">
-                <input type="checkbox" id="favorite" [checked]="wishlist" (change)="toggleWishlist()">
-                <label for="favorite" class="container">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-heart">
+
+                <input
+                    type="checkbox"
+                    id="favorite"
+                    [checked]="wishlist"
+                    (change)="toggleWishlist()"
+                >
+
+                <label
+                    for="favorite"
+                    class="container"
+                >
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-heart"
+                    >
+
                         <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                        </path>
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                        ></path>
+
                     </svg>
+
                     <div class="action">
-                        <span class="option-1">Ajouter aux favoris</span>
-                        <span class="option-2">Ajouté aux favoris</span>
+
+                        <span class="option-1">
+                            Ajouter aux favoris
+                        </span>
+
+                        <span class="option-2">
+                            Ajouté aux favoris
+                        </span>
+
                     </div>
+
                 </label>
+
             </div>
 
-            <!-- size -->
-            <div class="sizes" *ngIf="product.sizes?.length">
 
-                <p class="size-title">Taille</p>
+            <!-- =========================
+                 SIZES
+            ========================== -->
+
+            <div
+                class="sizes"
+                *ngIf="selectedVariant?.sizes?.length"
+            >
+
+                <p class="size-title">
+                    Taille
+                </p>
 
                 <div class="size-list">
 
-                    <button *ngFor="let s of product.sizes" (click)="selectSize(s)"
-                        [class.active]="selectedSize?.size === s.size">
-                        {{s.size}}
+                    <button
+                        type="button"
+                        *ngFor="let s of selectedVariant.sizes"
+                        (click)="selectSize(s)"
+                        [class.active]="selectedSize?.size === s.size"
+                        [disabled]="s.stock <= 0"
+                        [class.out-of-stock]="s.stock <= 0"
+                    >
+
+                        {{ s.size }}
+
                     </button>
 
                 </div>
 
             </div>
-            <!-- quantity -->
+
+
+            <!-- =========================
+                 QUANTITY
+            ========================== -->
 
             <div class="quantity">
 
-                <button (click)="decrease()">-</button>
+                <button
+                    type="button"
+                    (click)="decrease()"
+                    [disabled]="quantity <= 1"
+                >
+                    -
+                </button>
 
-                <span>{{quantity}}</span>
+                <span>
+                    {{ quantity }}
+                </span>
 
-                <button (click)="increase()">+</button>
+                <button
+                    type="button"
+                    (click)="increase()"
+                    [disabled]="!selectedSize || quantity >= selectedSize.stock"
+                >
+                    +
+                </button>
 
             </div>
-            <!-- add to cart -->
 
-            <button class="add-cart" [disabled]="getTotalStock(product) === 0" (click)="addToCart()">
-                <i class="fa-solid fa-cart-arrow-down"></i> Ajouter au panier
+
+            <!-- =========================
+                 COLORS / VARIANTS
+            ========================== -->
+
+            <div
+                class="colors"
+                *ngIf="product.variants?.length"
+            >
+
+                <button
+                    type="button"
+                    *ngFor="let variant of product.variants"
+                    class="color-btn"
+                    [class.active]="variant === selectedVariant"
+                    (click)="selectVariant(variant)"
+                    [style.backgroundColor]="variant.colorValue || '#000000'"
+                    [attr.title]="variant.colorName || 'Couleur'"
+                >
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 ADD TO CART
+            ========================== -->
+
+            <button
+                type="button"
+                class="add-cart"
+                [disabled]="
+                    getTotalStock(product) === 0 ||
+                    !selectedVariant
+                "
+                (click)="addToCart()"
+            >
+
+                <i class="fa-solid fa-cart-arrow-down"></i>
+
+                Ajouter au panier
+
             </button>
 
-            <!-- ACCORDION -->
+
+            <!-- =========================
+                 ACCORDION
+            ========================== -->
 
             <div class="accordion">
 
+
                 <!-- DESCRIPTION -->
+
                 <div class="accordion-item">
 
-                    <div class="accordion-header" (click)="toggleSection('desc')">
+                    <div
+                        class="accordion-header"
+                        (click)="toggleSection('desc')"
+                    >
+
                         Description
-                        <span [class.rotate]="openSection === 'desc'">⌄</span>
+
+                        <span
+                            [class.rotate]="openSection === 'desc'"
+                        >
+                            ⌄
+                        </span>
+
                     </div>
 
-                    <div class="accordion-content" *ngIf="openSection === 'desc'">
-                        <p>{{ product.description || 'No description available.' }}</p>
+
+                    <div
+                        class="accordion-content"
+                        *ngIf="openSection === 'desc'"
+                    >
+
+                        <p>
+                            {{
+                                product.description ||
+                                'No description available.'
+                            }}
+                        </p>
+
                     </div>
 
                 </div>
+
 
                 <!-- DETAILS -->
+
                 <div class="accordion-item">
 
-                    <div class="accordion-header" (click)="toggleSection('details')">
+                    <div
+                        class="accordion-header"
+                        (click)="toggleSection('details')"
+                    >
+
                         Details
-                        <span [class.rotate]="openSection === 'details'">⌄</span>
+
+                        <span
+                            [class.rotate]="openSection === 'details'"
+                        >
+                            ⌄
+                        </span>
+
                     </div>
 
-                    <div class="accordion-content" *ngIf="openSection === 'details'">
+
+                    <div
+                        class="accordion-content"
+                        *ngIf="openSection === 'details'"
+                    >
+
                         <ul>
-                            <li>Category: {{ product.category }}</li>
-                            <li>Price: {{ product.price }} $</li>
-                            <li *ngIf="selectedSize">Selected Size: {{ selectedSize.size }}</li>
+
+                            <li>
+                                Category:
+                                {{ product.category }}
+                            </li>
+
+                            <li>
+                                Price:
+                                {{ product.price }} $
+                            </li>
+
+                            <li *ngIf="selectedVariant">
+                                Couleur:
+                                {{ selectedVariant.colorName }}
+                            </li>
+
+                            <li *ngIf="selectedSize">
+                                Selected Size:
+                                {{ selectedSize.size }}
+                            </li>
+
+                            <li *ngIf="selectedSize">
+                                Stock disponible:
+                                {{ selectedSize.stock }}
+                            </li>
+
                         </ul>
+
                     </div>
 
                 </div>
 
+
                 <!-- REVIEWS -->
+
                 <div class="accordion-item">
 
-                    <div class="accordion-header" (click)="toggleSection('reviews')">
+                    <div
+                        class="accordion-header"
+                        (click)="toggleSection('reviews')"
+                    >
+
                         Avis ({{ reviews.length }})
-                        <span [class.rotate]="openSection === 'reviews'">⌄</span>
+
+                        <span
+                            [class.rotate]="openSection === 'reviews'"
+                        >
+                            ⌄
+                        </span>
+
                     </div>
 
-                    <div class="accordion-content" *ngIf="openSection === 'reviews'">
 
-                        <!-- ⭐ RATING -->
+                    <div
+                        class="accordion-content"
+                        *ngIf="openSection === 'reviews'"
+                    >
+
+                        <!-- RATING -->
+
                         <div class="rating">
-                            <i class="fa fa-star" *ngFor="let s of [1,2,3,4,5]"
-                                [ngClass]="s <= getAverageRating() ? 'active-star' : 'empty-star'">
+
+                            <i
+                                class="fa fa-star"
+                                *ngFor="let s of [1,2,3,4,5]"
+                                [ngClass]="
+                                    s <= getAverageRating()
+                                    ? 'active-star'
+                                    : 'empty-star'
+                                "
+                            >
                             </i>
-                            <span class="rating-value">{{ getAverageRating() }}</span>
+
+                            <span class="rating-value">
+                                {{ getAverageRating() }}
+                            </span>
+
                         </div>
+
 
                         <!-- EMPTY -->
-                        <div *ngIf="reviews.length === 0" class="empty-reviews">
-                            Aucun avis pour l'instant. Soyez le premier ✨
+
+                        <div
+                            *ngIf="reviews.length === 0"
+                            class="empty-reviews"
+                        >
+                            Aucun avis pour l'instant.
+                            Soyez le premier ✨
                         </div>
 
+
                         <!-- REVIEWS LIST -->
-                        <div class="review" *ngFor="let r of reviews" [class.editing]="editingId === r.id">
+
+                        <div
+                            class="review"
+                            *ngFor="let r of reviews"
+                            [class.editing]="editingId === r.id"
+                        >
 
                             <!-- VIEW MODE -->
-                            <ng-container *ngIf="editingId !== r.id">
+
+                            <ng-container
+                                *ngIf="editingId !== r.id"
+                            >
 
                                 <div class="review-stars">
-                                    <i class="fa fa-star" *ngFor="let s of [1,2,3,4,5]"
-                                        [ngClass]="s <= r.stars ? 'active-star' : 'empty-star'">
+
+                                    <i
+                                        class="fa fa-star"
+                                        *ngFor="let s of [1,2,3,4,5]"
+                                        [ngClass]="
+                                            s <= r.stars
+                                            ? 'active-star'
+                                            : 'empty-star'
+                                        "
+                                    >
                                     </i>
+
                                 </div>
 
-                                <p>{{ r.comment }}</p>
+
+                                <p>
+                                    {{ r.comment }}
+                                </p>
+
 
                                 <div class="review-actions">
-                                    <button class="icon-btn edit" (click)="startEdit(r)">
+
+                                    <button
+                                        type="button"
+                                        class="icon-btn edit"
+                                        (click)="startEdit(r)"
+                                    >
+
                                         <i class="fa fa-pen"></i>
+
                                     </button>
 
-                                    <button class="icon-btn delete" (click)="askDelete(r.id)">
+
+                                    <button
+                                        type="button"
+                                        class="icon-btn delete"
+                                        (click)="askDelete(r.id)"
+                                    >
+
                                         <i class="fa fa-trash"></i>
-                                    </button>
-                                </div>
-                                <!-- CONFIRM DELETE INLINE -->
-                                <div class="delete-confirm" *ngIf="confirmDeleteId === r.id">
 
-                                    <span>Supprimer cet avis ?</span>
+                                    </button>
+
+                                </div>
+
+
+                                <!-- DELETE CONFIRM -->
+
+                                <div
+                                    class="delete-confirm"
+                                    *ngIf="confirmDeleteId === r.id"
+                                >
+
+                                    <span>
+                                        Supprimer cet avis ?
+                                    </span>
 
                                     <div class="confirm-actions">
 
-                                        <button class="icon-btn danger" (click)="confirmDelete(r.id)">
+                                        <button
+                                            type="button"
+                                            class="icon-btn danger"
+                                            (click)="confirmDelete(r.id)"
+                                        >
+
                                             <i class="fa fa-check"></i>
+
                                         </button>
 
-                                        <button class="icon-btn secondary" (click)="cancelDelete()">
+
+                                        <button
+                                            type="button"
+                                            class="icon-btn secondary"
+                                            (click)="cancelDelete()"
+                                        >
+
                                             <i class="fa fa-xmark"></i>
+
                                         </button>
 
                                     </div>
@@ -184,26 +467,56 @@
 
                             </ng-container>
 
+
                             <!-- EDIT MODE -->
-                            <ng-container *ngIf="editingId === r.id">
+
+                            <ng-container
+                                *ngIf="editingId === r.id"
+                            >
 
                                 <div class="stars-select">
-                                    <i class="fa fa-star" *ngFor="let s of [1,2,3,4,5]" (click)="setEditRating(s)"
-                                        [class.active-star]="s <= editReview.stars">
+
+                                    <i
+                                        class="fa fa-star"
+                                        *ngFor="let s of [1,2,3,4,5]"
+                                        (click)="setEditRating(s)"
+                                        [class.active-star]="
+                                            s <= editReview.stars
+                                        "
+                                    >
                                     </i>
+
                                 </div>
 
-                                <textarea class="edit-textarea" [(ngModel)]="editReview.comment"
-                                    placeholder="Modifier votre avis..."></textarea>
+
+                                <textarea
+                                    class="edit-textarea"
+                                    [(ngModel)]="editReview.comment"
+                                    placeholder="Modifier votre avis..."
+                                ></textarea>
+
 
                                 <div class="review-actions">
 
-                                    <button class="icon-btn primary" (click)="updateReview(r.id)">
+                                    <button
+                                        type="button"
+                                        class="icon-btn primary"
+                                        (click)="updateReview(r.id)"
+                                    >
+
                                         <i class="fa fa-check"></i>
+
                                     </button>
 
-                                    <button class="icon-btn secondary" (click)="cancelEdit()">
+
+                                    <button
+                                        type="button"
+                                        class="icon-btn secondary"
+                                        (click)="cancelEdit()"
+                                    >
+
                                         <i class="fa fa-xmark"></i>
+
                                     </button>
 
                                 </div>
@@ -212,26 +525,51 @@
 
                         </div>
 
+
                         <!-- ADD REVIEW -->
+
                         <div class="add-review">
 
-                            <h4>Add Review</h4>
+                            <h4>
+                                Add Review
+                            </h4>
+
 
                             <div class="stars-select">
-                                <i class="fa fa-star" *ngFor="let s of [1,2,3,4,5]" (click)="setRating(s)"
-                                    [class.active-star]="s <= newReview.stars">
+
+                                <i
+                                    class="fa fa-star"
+                                    *ngFor="let s of [1,2,3,4,5]"
+                                    (click)="setRating(s)"
+                                    [class.active-star]="
+                                        s <= newReview.stars
+                                    "
+                                >
                                 </i>
+
                             </div>
 
-                            <textarea [(ngModel)]="newReview.comment" placeholder="Votre avis..."></textarea>
 
-                            <button class="icon-btn primary" (click)="addReview()">
+                            <textarea
+                                [(ngModel)]="newReview.comment"
+                                placeholder="Votre avis..."
+                            ></textarea>
+
+
+                            <button
+                                type="button"
+                                class="icon-btn primary"
+                                (click)="addReview()"
+                            >
+
                                 <i class="fa fa-paper-plane"></i>
+
                             </button>
 
                         </div>
 
                     </div>
+
                 </div>
 
             </div>
@@ -240,20 +578,56 @@
 
     </div>
 
-    <!-- Related Products -->
 
-    <h3 class="related-title">Produits connexes</h3>
+    <!-- =========================
+         RELATED PRODUCTS
+    ========================== -->
 
-    <div class="related-grid">
+    <h3 class="related-title">
+        Produits connexes
+    </h3>
 
-        <div class="related-card" *ngFor="let p of relatedProducts">
-            <a [routerLink]="['/product-details', p.id]"><img [src]="getImage(p)" alt="{{p.name}}"></a>
 
-            <h4>{{p.name}}</h4>
+    <div
+        class="related-grid"
+        *ngIf="relatedProducts.length"
+    >
 
-            <p>{{p.price}} $</p>
+        <div
+            class="related-card"
+            *ngFor="let p of relatedProducts"
+        >
+
+            <a
+                [routerLink]="['/product-details', p.id]"
+            >
+
+                <img
+                    [src]="getImage(p)"
+                    [alt]="p.name"
+                >
+
+            </a>
+
+
+            <h4>
+                {{ p.name }}
+            </h4>
+
+            <p>
+                {{ p.price }} $
+            </p>
 
         </div>
 
     </div>
+
+
+    <div
+        class="no-related"
+        *ngIf="!relatedProducts.length"
+    >
+        Aucun produit connexe.
+    </div>
+
 </div>
